@@ -2075,7 +2075,7 @@ function pcShell(role,url,body){
   <div class="pc-main">${body}</div>
  </div>${bModal()}${botCard(role)}`;
 }
-const pcTitle=(crumb,h,meta,right='')=>`<div class="crumb">${crumb}</div><div class="pc-title"><div><h2>${h}</h2>${meta?`<span class="meta" style="margin-top:6px">${meta.map(m=>`<span>${m}</span>`).join('')}</span>`:''}</div>${right}</div>`;
+const pcTitle=(crumb,h,meta,right='')=>`${crumb.includes('›')?`<div class="crumb">${crumb}</div>`:''}<div class="pc-title"><div><h2>${h}</h2>${meta?`<span class="meta" style="margin-top:6px">${meta.map(m=>`<span>${m}</span>`).join('')}</span>`:''}</div>${right}</div>`;
 const kpis=list=>`<div class="kpis">${list.map(([l,v,s])=>`<div class="kpi"><small>${l}</small><b class="num">${v}</b>${s?`<span>${s}</span>`:''}</div>`).join('')}</div>`;
 const tagsOf=(s,hit=[])=>[...s.vibe,...s.feat].map(t=>`<span class="tg ${hit.includes(t)?'hit':''}">${t}</span>`).join('')+(s.popup?'<span class="tg pop">팝업 가능</span>':'');
 const sentProps=()=>S.b.props.filter(p=>p.side==='ip'&&p.dir==='out'&&['wait','countered'].includes(p.status));
