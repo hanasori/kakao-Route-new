@@ -507,7 +507,9 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .keep .res-bar{height:8px;border-radius:4px;background:var(--bg3);overflow:hidden;margin-top:14px}
 .keep .res-bar i{display:block;height:100%;background:var(--ink);transition:width .6s var(--ease),background .3s}
 .keep .res-bar i.ok{background:var(--ok)}
-.keep.voted .res-bar{margin-top:0}
+.keep .two button{display:flex;align-items:center;justify-content:center;gap:6px}
+.keep .two button:disabled{opacity:.45}
+.keep .two button.picked{opacity:1;box-shadow:0 0 0 2px var(--ink) inset}
 .endhero .from{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ink2);margin-bottom:8px}
 .reco{display:flex;gap:10px;overflow-x:auto;padding:12px 16px 4px;scrollbar-width:none}
 .reco::-webkit-scrollbar{display:none}
@@ -1243,7 +1245,7 @@ function fixedFooter(){
 function freeTab(a){
  if(a.id!=='lumin')return `<div class="empty"><div class="e-ic">${ic('pin',24)}</div><b>장소가 아직 적어요</b>${a.agency}가 장소를 3곳 이상 등록하면<br>자유 탐방을 열 수 있어요.</div>`;
  const ord=S.picked;
- const legend=!ord.length?'첫 장소를 누르면 추천 루트를 잡아 드려요':ord.length>1?`누른 순서대로 이어져요 · 도보 약 ${walkMin(ord)}분`:'장소를 더 눌러 이어 주세요';
+ const legend=!ord.length?'첫 장소를 누르면 추천 루트를 잡아 드려요':ord.length>1?`가장 짧은 순서로 이어져요 · 도보 약 ${walkMin(ord)}분`:'장소를 더 눌러 이어 주세요';
  return `<div class="steps"><span class="on"><i>1</i>장소 고르기</span>${ic('chev',14)}<span><i>2</i>날짜 · 겹치는 파티</span></div>
  <div class="mapbox">${mapSVG({all:true,route:ord,pickable:true,label:'장소 지도'})}<span class="legend">${legend}</span></div>
  ${ord.length?`<div class="row" style="justify-content:flex-end;padding:6px 16px 0"><button class="sortbtn" data-act="pickReset">${ic('refresh',15,2)}처음부터 다시</button></div>`:''}
@@ -1252,12 +1254,19 @@ function freeTab(a){
 function freeFooter(a){
  if(a.id!=='lumin')return `<div class="ft"><button class="btn" disabled>자유 탐방 준비 중</button></div>`;
  const n=S.picked.length;
- return `<div class="ft"><p class="hint num">${!n?'첫 장소를 고르면 추천 루트를 잡아 드려요':n<3?`3~6곳을 골라 주세요 · 지금 ${n}곳`:`${n}곳 선택 · 누른 순서대로 루트가 이어져요`}</p><button class="btn" data-act="toParty" ${n<3?'disabled':''}>${n<3?`${3-n}곳 더 골라 주세요`:`${n}곳으로 겹치는 파티 찾기`}</button></div>`;
+ return `<div class="ft"><p class="hint num">${!n?'첫 장소를 고르면 추천 루트를 잡아 드려요':n<3?`3~6곳을 골라 주세요 · 지금 ${n}곳`:`${n}곳 선택 · 가장 짧은 순서로 자동 정렬돼요`}</p><button class="btn" data-act="toParty" ${n<3?'disabled':''}>${n<3?`${3-n}곳 더 골라 주세요`:`${n}곳으로 겹치는 파티 찾기`}</button></div>`;
 }
 function recommendFrom(id,n=4){
  const out=[id],rest=PLACES.filter(p=>p.id!==id);
  while(out.length<n&&rest.length){const l=P(out[out.length-1]);let bi=0,bd=1e9;rest.forEach((p,i)=>{const d=Math.hypot(p.x-l.x,p.y-l.y);if(d<bd){bd=d;bi=i}});out.push(rest.splice(bi,1)[0].id)}
  return out;
+}
+function bestOrder(ids){
+ if(ids.length<3)return ids;
+ const [s,...rest]=ids,len=o=>o.reduce((d,id,i)=>i?d+Math.hypot(P(o[i-1]).x-P(id).x,P(o[i-1]).y-P(id).y):0,0);
+ let best=ids,bd=len(ids);
+ const perm=(arr,acc)=>{if(!arr.length){const o=[s,...acc],d=len(o);if(d<bd){bd=d;best=o}return}arr.forEach((x,i)=>perm(arr.filter((_,j)=>j!==i),[...acc,x]))};
+ perm(rest,[]);return best;
 }
 
 /* 2-b. 자유 탐방: 겹치는 파티 */
@@ -1458,10 +1467,14 @@ function scrEnd(){
   <div class="block"><h4>${ic('image',18,2)}사진 모아보기<small style="font-size:13px;color:var(--sub);font-weight:500">18장</small></h4>
    <div class="photos">${[['#F7A8B8','#8E7CC3'],['#FFD27A','#F0745A'],['#9ED8DB','#4A7FC1'],['#C8E6A0','#3E8E6E'],['#E6D3A3','#A0703A'],['#B9C3FF','#5B4FB8'],['#FFB199','#E85D75'],['#A7D3FF','#4D6BD8']].map((c,i)=>`<i class="${i===7?'more':''}" style="background:${grad(c,i*40)}"></i>`).join('')}</div>
   </div>
-  ${k==null?`<div class="block keep"><h4>${ic('users',18,2)}이 방, 계속 둘까요?<span class="pill neutral">익명</span></h4>
+  <div class="block keep"><h4>${ic('users',18,2)}이 방, 계속 둘까요?<span class="pill neutral">익명</span></h4>
    <p style="font-size:13px;color:var(--sub);margin-top:6px;line-height:1.5">과반이면 일반 그룹채팅으로 바뀌고, 아니면 24시간 뒤에 닫혀요.</p>
-   <div class="two" style="margin-top:14px"><button data-act="keep" data-v="0">닫을래요</button><button class="y" data-act="keep" data-v="1">계속 둘래요</button></div></div>`
-   :`<div class="block keep voted"><div class="res-bar" role="img" aria-label="방 유지 ${yes}/${total}"><i class="${yes>total/2?'ok':''}" style="width:${yes/total*100}%"></i></div></div>`}
+   <div class="two" style="margin-top:14px">
+    <button class="${k===false?'picked':''}" data-act="keep" data-v="0" ${k!=null?'disabled':''} aria-pressed="${k===false}">${k===false?ic('check',16,2.6):''}닫을래요</button>
+    <button class="y ${k===true?'picked':''}" data-act="keep" data-v="1" ${k!=null?'disabled':''} aria-pressed="${k===true}">${k===true?ic('check',16,2.6):''}계속 둘래요</button>
+   </div>
+   ${k!=null?`<div class="res-bar" role="img" aria-label="방 유지 ${yes}/${total}"><i class="${yes>total/2?'ok':''}" style="width:${yes/total*100}%"></i></div>`:''}
+  </div>
   <div class="sec-h" style="padding-bottom:0"><h2>아직 안 가 본 루트</h2></div>
   <div class="reco">${['r2','r3','r4'].map(id=>{const r=R(id);const c=memberOf(r.tags[0])?.c||['#ccc','#999'];return `<button data-act="weekly" data-r="${id}" data-s="${r.sessions.find(s=>s.left>0).id}"><div class="thumb" style="background:${grad(c)}"></div><span class="pill ${r.kind}">${r.kind==='album'?'앨범 순서':'최애 갈림길'}</span><b style="margin-top:8px">${r.name}</b><small>${r.area} · ${nPlaces(r)}곳 · ${r.dur}</small></button>`}).join('')}</div>
   <div style="height:28px"></div>
@@ -1659,14 +1672,14 @@ const NOTES={
  'onboard':['처음 들어오면 좋아하는 카테고리를 여러 개 골라요 (아이돌·드라마·영화·웹툰).','다음 단계에서 고른 카테고리의 인기 IP를 위에 띄우고, 나머지는 검색으로 찾아요.','고른 IP는 바로 팔로잉에 들어가요. 건너뛰어도 홈으로 갈 수 있어요.'],
  'home':['순서: 팔로잉 → 내 루트 → 내가 고른 카테고리 → 인기 IP → 이번 주 회차.','오른쪽 위 설정에서 카테고리를 바꿀 수 있어요.','이번 주 회차는 3개씩 페이지로 넘기고, 정렬 아이콘으로 날짜순·마감 임박순·남은 자리 많은 순을 골라요.'],
  'artist':['처음엔 \'전체\' 칩이 선택되고 루트 카드는 모두 접혀 있어요. 최애는 이름 옆 하트로 표시해요.','카드를 누르면 지도와 장소 목록이 펼쳐져요. 장소를 누르면 지도가 그 장소로 확대돼요.','카드를 고르면 아래 신청 버튼이 켜지고, 날짜·시간은 다음 화면 달력에서 골라요.'],
- 'free':['처음엔 아무 장소도 고르지 않은 상태예요. 첫 장소를 누르면 가까운 곳을 이어 추천 루트 4곳을 잡아 줘요.','그다음부터는 누른 순서대로 루트 끝에 붙거나 빠져요 (자동 재정렬 없음).','지도 핀이나 목록 어느 쪽을 눌러도 골라져요.'],
+ 'free':['처음엔 아무 장소도 고르지 않은 상태예요. 첫 장소를 누르면 가까운 곳을 이어 추천 루트 4곳을 잡아 줘요.','그다음부터는 장소를 더하거나 빼면 1번 출발지는 그대로 두고 최단 순서로 다시 정렬해요.','지도 핀이나 목록 어느 쪽을 눌러도 골라져요.'],
  'freeParty':['위 지도에 내 루트를 그리고, 루트 줄은 잘라서 보여 줘요. 화살표를 누르면 전체 루트가 펼쳐져요.','달력에서 날짜 → 시간을 고르면 장소가 2곳 이상 겹치는 파티만 남아요.','네모 칸은 내 루트 순번이에요. 초록 칸이 겹치는 장소예요. 파티를 고르면 아래 합류 버튼이 켜져요.'],
  'entry':['정해진 루트는 여기서 달력으로 날짜 → 시간을 골라요. 파티 합류는 시간이 정해져 있어 바로 보여 줘요.','닉네임은 자동 {형용사+명사}. 새로고침으로 다시 뽑아요.','선택 동의 설명은 오른쪽 화살표를 눌러야 팝업으로 보여요. 동의하고 입장을 누르면 노쇼 안내 팝업이 떠요.'],
  'room-recruit':['신청하면 바로 입장해요. 5명이 찰 때까지 같은 방이에요.','카나나는 대화를 계속 읽지 않고, 정해진 때와 @카나나로 부를 때만 말해요.','메시지를 보내 보세요. @카나나 칩도 눌러 보세요.'],
  'room-vote':['D-1 참석 확인 카드: 미확인 시 자리가 해제돼요.','루트 순서 바꾸기 투표는 없어요. 정해진 루트는 순서 그대로 걸어요.'],
  'room-settle':['"@카나나 ○○ 8000원 정산"이라고 부르면 1/N 정산 카드를 만들어요.','대상 체크를 풀면 1인 금액이 다시 계산돼요. 요청하면 완료 상태가 하나씩 올라와요.','카카오페이 정산은 수익원이 아니에요 (무료).'],
  'live':['스탬프 대신 아티스트 실루엣을 퍼즐 5조각으로 채워요. 이미지는 HTML 옆의 woni.png를 써요 (없으면 회색 실루엣).','QR 스캔 → 퍼즐 조각 → 카나나 세계관 해설 한 줄.','다 채우면 1회용 완주 인증 QR이 나와요.'],
- 'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 막대만 남고, 과반이면 막대가 초록색으로 바뀌어요.'],
+ 'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.'],
  'b-ipdash':['회차 모집률·참가 팬·노쇼율·진행 중 협업을 한눈에 봐요.','팝업 종료가 30일 안이면 그 장소가 들어간 루트 수와 함께 경고해요.'],
  'b-find':['문장을 조건 칩으로 바꿔요. 검은 칩=태그(순서), 파란 칩=필터(걸러 냄).','칩을 지우거나 더하면 결과가 바로 바뀌어요. 못 알아들은 부분은 숨기지 않고 보여 줘요.','2~3곳을 담으면 도보 동선이 나와요. 다른 문장으로도 검색해 보세요.'],
  'b-space':['IP보유자가 \'루트에 넣을까?\'를 판단하는 화면이에요.','AI 태그는 근거와 함께, 협업 조건은 사장님이 입력한 것만 보여요.','팬 앱 공개 범위를 오른쪽에 같이 보여 줘요.'],
@@ -1803,8 +1816,8 @@ const ACT={
   g.style.transform=`translate(${tx}px,${ty}px) scale(${k})`},
  applyFixed:()=>{const r=R(S.open);ctxFixed(r.id,S.pick[r.id]);S.ctx.from='artist';if(!S.nick)rollNick();S.agree=[false,false,false];go('entry')},
  pick:d=>{if(!d.id)return;
-  if(!S.picked.length){S.picked=recommendFrom(d.id);render();toast(`${esc(P(d.id).name)}에서 출발하는 추천 루트를 잡았어요<br><span style="opacity:.7">이제 장소를 눌러 빼거나 뒤에 더할 수 있어요</span>`);return}
-  const i=S.picked.indexOf(d.id);if(i>=0)S.picked.splice(i,1);else{if(S.picked.length>=6){toast('자유 탐방은 최대 6곳까지 고를 수 있어요');return}S.picked.push(d.id)}render()},
+  if(!S.picked.length){S.picked=bestOrder(recommendFrom(d.id));render();toast(`${esc(P(d.id).name)}에서 출발하는 추천 루트를 잡았어요<br><span style="opacity:.7">장소를 더하거나 빼면 순서를 다시 계산해요</span>`);return}
+  const i=S.picked.indexOf(d.id);if(i>=0)S.picked.splice(i,1);else{if(S.picked.length>=6){toast('자유 탐방은 최대 6곳까지 고를 수 있어요');return}S.picked.push(d.id)}S.picked=bestOrder(S.picked);render()},
  pickReset:()=>{S.picked=[];render()},
  toParty:()=>{S.fdate=null;S.ftime=null;S.fsel=null;S.ovOpen=null;S.routeOpen=false;go('freeParty')},
  fdate:d=>{S.fdate=d.d;S.ftime=null;S.fsel=null;S.ovOpen=null;render()},
