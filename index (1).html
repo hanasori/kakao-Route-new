@@ -1782,7 +1782,7 @@ function jump(key){
   case 'room-recruit':case 'room-vote':case 'room-settle':presetRoom(key.split('-')[1]);S.prev=['home'];S.screen='room';break;
   case 'live':S.live={stamps:2,scanning:false,line:null,pop:-1};S.prev=['home','room'];if(!S.room)presetRoom('vote');S.screen='live';break;
   case 'end':S.keep=null;S.prev=['home'];S.screen='end';break;
-  default:S.screen=key;S.b.modal=null;S.b.editing=null;S.b.bot=null;S.b.rt.view='list';S.b.ipq={text:'',cat:'all',open:false};
+  default:S.screen=key;S.b.modal=null;S.b.editing=null;S.b.bot=null;S.b.rt.view='list';S.b.ipq={text:'',cat:'all'};
  }
  render(true);
 }
@@ -2038,7 +2038,7 @@ const dday=d=>Math.round((new Date(d)-new Date(TODAY))/864e5);
 S.payLink=false;
 S.b={
  text:DEMO_Q,q:parseQuery(DEMO_Q),addOpen:false,modal:null,editing:null,
- published:[],rt:{view:'list',persona:'',recos:null,picks:[],off:[]},botShown:{},ipq:{text:'',cat:'all',open:false},
+ published:[],rt:{view:'list',persona:'',recos:null,picks:[],off:[]},botShown:{},ipq:{text:'',cat:'all'},
  tab:{ip:'in',space:'in'},
  props:[
   {id:'x1',side:'space',dir:'in',who:'NOVA7 · 오비트',ip:'nova',from:'2026-12-01',to:'2026-12-31',cap:6,menu:'NOVA 블루 에이드',ops:['한정 메뉴','포스터 부착'],status:'wait',price:300000,msg:'데뷔 1주년 루트의 첫 장소로 모시고 싶어요. 주말 오후 회차 위주예요.'},
@@ -2211,7 +2211,7 @@ function inboxHTML(side){
  const lbl={in:side==='ip'?'받은 신청':'받은 제안',out:side==='ip'?'보낸 제안':'보낸 신청',active:'진행 중'};
  botDemo(side);
  const waitN=groups.in.filter(p=>p.status==='wait').length;
- return `<div class="tabs" role="tablist">${Object.keys(lbl).map(k=>`<button role="tab" aria-selected="${t===k}" class="${t===k?'on':''}" data-act="btab" data-side="${side}" data-t="${k}">${lbl[k]} <span class="num">${groups[k].length}</span>${k==='in'&&waitN?`<i class="num">${waitN}</i>`:''}</button>`).join('')}</div>
+ return `<div class="tabs" role="tablist">${Object.keys(lbl).map(k=>`<button role="tab" aria-selected="${t===k}" class="${t===k?'on':''}" data-act="btab" data-side="${side}" data-t="${k}">${lbl[k]} ${k==='in'&&waitN?`<i class="num">${waitN}</i>`:`<span class="num">${groups[k].length}</span>`}</button>`).join('')}</div>
  ${groups[t].length?groups[t].map(propCard).join(''):`<div class="empty-b"><b>${lbl[t]} 항목이 없어요</b>${t==='out'?(side==='ip'?'공간찾기에서 협업 제안을 보내 보세요.':'IP 찾기에서 협업을 신청해 보세요.'):''}</div>`}`;
 }
 const scrIpInbox=()=>pcShell('ip','collabs',pcTitle('협업함','협업함',['수락하면 장소 관리에 들어가요','스토리를 쓰면 IP 인증이 끝나요'])+inboxHTML('ip'));
@@ -2615,23 +2615,22 @@ function ipFilterText(){
 }
 function scrIpFind(){
  const f=S.b.ipq,cats=[...new Set(ARTISTS.map(a=>a.cat))];
- const list=ARTISTS.filter(a=>(f.cat==='all'||a.cat===f.cat)&&(!f.open||IPINFO[a.id].open));
+ const list=ARTISTS.filter(a=>f.cat==='all'||a.cat===f.cat);
  const shown=list.filter(a=>ipHit(ipKey(a))).length;
  return pcShell('space','ips',`
  ${pcTitle('IP 찾기','IP 찾기',['소속사가 공개한 정보만 보여요','팝업형 협업으로 처음 성지가 될 수 있어요'])}
  <div class="ipfilter">
   <div class="nlq"><span aria-hidden="true">${ic('search',20)}</span><input id="ipq" value="${esc(f.text)}" aria-label="IP 검색" placeholder="이름, 멤버, 소속사, 장르로 검색"></div>
-  <div class="row" style="flex-wrap:wrap">${['all',...cats].map(c=>`<button class="chip ${f.cat===c?'on':''}" data-act="ipcat" data-v="${c}" aria-pressed="${f.cat===c}">${c==='all'?'전체':catName(c)}</button>`).join('')}
-   <button class="chip ${f.open?'on':''}" data-act="ipopen" aria-pressed="${f.open}">${f.open?ic('check',14,3):''}팝업 협업 받는 중</button></div>
+  <div class="row" style="flex-wrap:wrap">${['all',...cats].map(c=>`<button class="chip ${f.cat===c?'on':''}" data-act="ipcat" data-v="${c}" aria-pressed="${f.cat===c}">${c==='all'?'전체':catName(c)}</button>`).join('')}</div>
  </div>
  <div class="empty-b" id="ipempty" ${shown?'hidden':''}><b>조건에 맞는 IP가 없어요</b></div>
  <div class="ipgrid">${list.map(a=>{const inf=IPINFO[a.id],areas=[...new Set(ROUTES.filter(r=>r.artist===a.id).map(r=>r.area))];
   const ex=S.b.props.find(p=>p.side==='space'&&p.ip===a.id&&p.status!=='declined');
-  return `<article class="ipc" data-k="${esc(ipKey(a))}" ${ipHit(ipKey(a))?'':'hidden'}><div class="top"><span class="av" style="background:${grad(a.c)}">${esc(a.name.slice(0,2))}</span><div><b>${esc(a.name)}</b><div class="meta"><span>${a.agency}</span></div></div>${inf.open?'<span class="pill branch" style="margin-left:auto">팝업 협업 받는 중</span>':''}</div>
+  return `<article class="ipc" data-k="${esc(ipKey(a))}" ${ipHit(ipKey(a))?'':'hidden'}><div class="top"><span class="av" style="background:${grad(a.c)}">${esc(a.name.slice(0,2))}</span><div><b>${esc(a.name)}</b><div class="meta"><span>${a.agency}</span></div></div></div>
    <dl class="kv sm"><dt>장르</dt><dd>${inf.genre}</dd><dt>팬 규모</dt><dd>${inf.band}</dd><dt>루트 지역</dt><dd>${areas.join(', ')||'아직 없음'}</dd><dt>다음 컴백</dt><dd>${inf.comeback||'<span class="no">비공개</span>'}</dd></dl>
    <div class="row" style="margin-top:auto">${!ex?`<button class="btn dark" style="flex:1" data-act="bapply" data-id="${a.id}">협업 신청</button>`
     :ex.status==='active'?'<button class="btn line" style="flex:1" data-act="bgotab" data-to="b-inbox" data-side="space" data-t="active">협업 중</button>'
-    :ex.status==='approved'?`<button class="btn dark" style="flex:1" data-act="licOpen" data-id="${ex.id}">승인됨 · 이용권 구매</button>`
+    :ex.status==='approved'?'<button class="btn dark" style="flex:1" data-act="bgotab" data-to="b-inbox" data-side="space" data-t="out">받은 제안 확인</button>'
     :ex.dir==='out'?'<button class="btn line" style="flex:1" disabled>신청함 · 응답 대기</button>':'<button class="btn line" style="flex:1" data-act="bgotab" data-to="b-inbox" data-side="space" data-t="in">받은 제안 확인</button>'}</div></article>`}).join('')}</div>
  <p class="walk">팬 규모는 구간으로만 보여요 (소속사 의견 확인 중).</p>`);
 }
@@ -2765,7 +2764,6 @@ Object.assign(ACT,{
  baino:d=>{S.b.ai[+d.i].st='no';render();toast('거절한 태그는 다시 분석해도 제안하지 않아요')},
  payLink:()=>{S.payLink=!S.payLink;render()},
  ipcat:d=>{S.b.ipq.cat=d.v;render()},
- ipopen:()=>{S.b.ipq.open=!S.b.ipq.open;render()},
  bplan:d=>{S.b.bill.plan=d.v;render()},
  bcur:d=>{S.b.bill.cur=d.v;render()},
  blang:d=>{S.b.bill.lang=d.v;render()},
