@@ -565,6 +565,7 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .device.desktop .pc-nav a .badge{margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--warn);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
 .device.desktop .side-col{position:sticky;top:16px}
 .device.desktop .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.device.desktop .kpis.k3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .device.desktop .kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
 .device.desktop .kpi small{display:block;font-size:12.5px;color:var(--sub)}
 .device.desktop .kpi b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;margin:6px 0 2px}
@@ -1757,7 +1758,7 @@ const NOTES={
  'b-inbox':['받은 제안을 수락하면 IP 이용권 결제 팝업이 떠요. 결제해야 협업이 시작되고, 팝업을 닫으면 답변 필요로 남아요.','보낸 신청에는 승인됨 · 거절됨이 보여요. 승인된 건은 IP 이용권 구매를 누르면 같은 결제 팝업이 떠요. 가격은 IP사가 승인할 때 정해요.','결제 금액 = IP사 제안가 + 카카오 중개수수료 10% + VAT 10%. 들어오고 3초 뒤 IP사가 신청을 승인하는 카카오톡 알림 데모가 떠요.'],
  'b-edit':['AI 태그 제안은 근거와 함께 보여 주고, 수락한 것만 공개돼요.','수락하면 공간찾기 검색 결과에 바로 반영돼요.'],
  'b-ipfind':['공간에서 IP로 먼저 협업을 신청하는 입구예요 (팝업형). IP사가 승인하면 협업함에서 IP 이용권을 결제해요.','IP 정보는 소속사가 공개한 것만, 팬 규모는 구간으로만 보여요.'],
- 'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액만 측정해요.'],
+ 'b-report':['QR 스캔 뒤 카카오페이로 결제한 금액만 측정 결제로 잡혀요.'],
  'partner':['루트 목록 → 오른쪽 위 루트 만들기 → 장소 선택(체크와 지도로 먼 곳 빼기) → AI 루트 추천 순서예요. 라벨 붙은 장소를 3곳 이상 고르면 다음으로 가요.','라벨이 없는 장소는 고를 수 없어요. 장소 관리에서 먼저 라벨을 붙여요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있고, 카카오 승인 없이 바로 공개돼요.'],
  'b-billing':['캠페인 1개 단위 이용권이에요. 39만 · 99만 · 249만 원(VAT 별도)은 검증 전 시험 가격이에요.','국가를 바꾸면 통화 · 결제수단 · 세금 · 증빙 · 청구 정보 칸이 바뀌고, 해외는 영어로 먼저 보여요. 해외 법인 영세율 0%는 세무 검토가 필요해요.','목업이라 버튼만 눌러도 완료돼요. 실제로는 서버가 PG 결제 상태와 웹훅을 확인한 뒤 캠페인을 활성화해요.'],
 };
@@ -2076,7 +2077,7 @@ function pcShell(role,url,body){
  </div>${bModal()}${botCard(role)}`;
 }
 const pcTitle=(crumb,h,meta,right='')=>`${crumb.includes('›')?`<div class="crumb">${crumb}</div>`:''}<div class="pc-title"><div><h2>${h}</h2>${meta?`<span class="meta" style="margin-top:6px">${meta.map(m=>`<span>${m}</span>`).join('')}</span>`:''}</div>${right}</div>`;
-const kpis=list=>`<div class="kpis">${list.map(([l,v,s])=>`<div class="kpi"><small>${l}</small><b class="num">${v}</b>${s?`<span>${s}</span>`:''}</div>`).join('')}</div>`;
+const kpis=list=>`<div class="kpis${list.length===3?' k3':''}">${list.map(([l,v,s])=>`<div class="kpi"><small>${l}</small><b class="num">${v}</b>${s?`<span>${s}</span>`:''}</div>`).join('')}</div>`;
 const tagsOf=(s,hit=[])=>[...s.vibe,...s.feat].map(t=>`<span class="tg ${hit.includes(t)?'hit':''}">${t}</span>`).join('')+(s.popup?'<span class="tg pop">팝업 가능</span>':'');
 const sentProps=()=>S.b.props.filter(p=>p.side==='ip'&&p.dir==='out'&&['wait','countered'].includes(p.status));
 
