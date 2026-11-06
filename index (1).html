@@ -1356,15 +1356,15 @@ function statusLabel(r){
 function scrRoom(){
  const r=S.room;
  let last=null;
- const msgs=r.msgs.map(m=>{const h=msgHTML(m,last);last=m.from;return h}).join('')+(r.typing?`<div class="m k typing"><span class="av k">K</span><div class="col"><div class="ln"><div class="bub"><i></i><i></i><i></i></div></div></div></div>`:'');
+ const msgs=r.msgs.map(m=>{const h=msgHTML(m,last);last=m.from;return h}).join('')+(r.typing?`<div class="m k typing"><span class="av k">하</span><div class="col"><div class="ln"><div class="bub"><i></i><i></i><i></i></div></div></div></div>`:'');
  return `<section class="scr chat">
  ${hd(`${esc(r.short)}<small class="num">${r.members.length}</small>`,{back:true,right:`<button class="iconbtn" aria-label="검색">${ic('search',22)}</button><button class="iconbtn" aria-label="메뉴" data-act="toast" data-msg="방 정보 · 신고 · 나가기 (목업)">${ic('dots',22)}</button>`})}
  ${r.group?`<div class="pin"><span class="ic grp">${ic('users',18,2)}</span><span class="t"><b>일반 그룹채팅</b><small class="num">${r.when.split(' ')[0]} 루트 함께 완주</small></span><span class="pill neutral">루트 종료</span></div>`
  :`<div class="pin"><span class="ic">${ic('route',18,2)}</span><span class="t"><b class="num">${r.when} ${esc(r.title)}</b><small>${r.status==='recruiting'?`${3-r.members.length>0?3-r.members.length+'명 더 오면 확정':'확정'} · 출발 ${r.start}`:`출발 ${r.start}`}</small></span>${statusLabel(r)}</div>`}
  <div class="bd" id="chatbd">${msgs}</div>
- ${r.group?'':`<div class="suggest">${['@카나나 다음 장소 어디야?','@카나나 포토부스 8000원 정산','@카나나 내일 날씨'].map(t=>`<button data-act="suggest" data-t="${esc(t)}">${esc(t)}</button>`).join('')}${r.status!=='recruiting'?`<button data-act="go" data-to="live">당일 진행 화면 →</button>`:''}</div>`}
+ ${r.group?'':`<div class="suggest">${['@하나 다음 장소 어디야?','@하나 포토부스 8000원 정산','@하나 내일 날씨'].map(t=>`<button data-act="suggest" data-t="${esc(t)}">${esc(t)}</button>`).join('')}${r.status!=='recruiting'?`<button data-act="go" data-to="live">당일 진행 화면 →</button>`:''}</div>`}
  <div class="inbar">${r.group?`<button class="iconbtn" data-act="toast" data-msg="사진 · 파일 보내기 (목업)" aria-label="첨부">${ic('plus',22)}</button>`:`<button class="iconbtn" data-act="mapSheet" aria-label="현재 루트 지도">${ic('map',22)}</button>`}
-  <label class="field"><input id="msg" placeholder="메시지 입력" value="${esc(S.draft)}" autocomplete="off">${r.group?'':'<button class="atk" data-act="atk">@카나나</button>'}</label>
+  <label class="field"><input id="msg" placeholder="메시지 입력" value="${esc(S.draft)}" autocomplete="off">${r.group?'':'<button class="atk" data-act="atk">@하나</button>'}</label>
   <button class="send" data-act="send" aria-label="보내기" ${S.draft.trim()?'':'disabled'}>${ic('send',20,2.4)}</button></div>
  </section>`;
 }
@@ -1380,8 +1380,8 @@ function msgHTML(m,lastFrom){
  const wide=m.t!=='text'?' wide':'';
  if(me)return `<div class="m me${wide}"><div class="col"><div class="ln">${body}<span class="tm">${m.time||''}</span></div></div></div>`;
  const who=k?null:S.room.members.find(x=>x.nick===m.from);
- const av=k?`<span class="av k">K</span>`:`<span class="av" style="${avatarStyle(who?.bias)}">${esc(initial(m.from))}</span>`;
- return `<div class="m ${k?'k':''}${wide}">${cont?'<span class="av ghost"></span>':av}<div class="col">${cont?'':`<span class="nm ${k?'k':''}">${k?'카나나<small>루트 도우미</small>':esc(m.from)}</span>`}<div class="ln">${body}<span class="tm">${m.time||''}</span></div></div></div>`;
+ const av=k?`<span class="av k">하</span>`:`<span class="av" style="${avatarStyle(who?.bias)}">${esc(initial(m.from))}</span>`;
+ return `<div class="m ${k?'k':''}${wide}">${cont?'<span class="av ghost"></span>':av}<div class="col">${cont?'':`<span class="nm ${k?'k':''}">${k?'하나<small>루트 도우미</small>':esc(m.from)}</span>`}<div class="ln">${body}<span class="tm">${m.time||''}</span></div></div></div>`;
 }
 function settleCard(m){
  const s=m.s, on=s.targets.filter(t=>t.on), per=Math.round(s.amount/(on.length+1)/10)*10;
@@ -1472,7 +1472,7 @@ function scrEnd(){
  return `<section class="scr">
  ${hd('',{back:true,right:`<button class="iconbtn" data-act="go" data-to="home" aria-label="닫기">${ic('close',22,2)}</button>`})}
  <div class="bd">
-  <div class="endhero"><span class="from"><span class="mini-av" style="background:${grad(from.c)}"></span>${esc(from.name)}</span><h2>오늘 같이 걸어 줘서 고마워!<br>다음 루트에서 또 만나자</h2><p class="num">11.7(토) · Afterglow 앨범 순서 루트 · 4명</p></div>
+  <div class="endhero"><span class="from"><span class="mini-av" style="background:${grad(from.c)}"></span>${esc(from.name)}</span><h2>오늘 재밌었제?<br>다음에 또 봅시데이~</h2><p class="num">11.7(토) · Afterglow 앨범 순서 루트 · 4명</p></div>
   <div class="stats"><div><b class="num">5/5</b><small>퍼즐</small></div><div><b class="num">3시간 12분</b><small>함께 걸은 시간</small></div><div><b class="num">2건</b><small>정산</small></div></div>
   <div class="block"><h4>${ic('wallet',18,2)}정산 요약<span class="pill warn">미정산 1건</span></h4>
    <div class="ln-it"><span>포토부스 '필름데이'<small>4명 · 1인 2,000원</small></span><span style="text-align:right"><b>8,000원</b><small style="color:var(--ok)">완료 3/3</small></span></div>
@@ -1491,7 +1491,7 @@ function scrEnd(){
    ${k!=null?`<div class="res-bar" role="img" aria-label="방 유지 ${yes}/${total}"><i class="${yes>total/2?'ok':''}" style="width:${yes/total*100}%"></i></div>`:''}
    ${k&&yes>total/2?`<div class="convert">
     <div class="cv-h"><span class="cv-ic">${ic('bubble',18,2.2)}</span><span><b>일반 그룹채팅으로 바뀌었어요</b><small class="num">유지 ${yes}/${total} · 과반</small></span></div>
-    <ul><li>대화와 사진은 그대로 남아요</li><li>카나나·정산·지도 같은 루트 기능은 꺼져요</li><li>닉네임은 그대로, 카톡 프로필은 계속 비공개예요</li></ul>
+    <ul><li>대화와 사진은 그대로 남아요</li><li>하나·정산·지도 같은 루트 기능은 꺼져요</li><li>닉네임은 그대로, 카톡 프로필은 계속 비공개예요</li></ul>
     <button class="btn sm" data-act="openGroup">그룹채팅 열기</button>
    </div>`:''}
   </div>
@@ -1531,7 +1531,7 @@ function sheetHTML(){
   const r=S.room;
   inner=`<h3>${esc(r.title)}</h3><p class="s num">${r.when} · 출발 ${r.start}</p><div class="mapbox" style="margin:16px 0 0">${mapSVG({route:r.route,labels:true})}</div>
   <div class="stops" style="margin-top:12px">${r.route.map((id,i)=>`<div class="stop"><i>${i+1}</i>${esc(P(id).name)}</div>`).join('')}</div>
-  <p style="font-size:12.5px;color:var(--sub);line-height:1.5">${r.kind==='free'?'자유 탐방은 등록된 장소 안에서 추가·삭제할 수 있어요. 바꾸려면 카나나에게 제안을 요청하세요.':'공식 루트는 장소와 순서를 바꿀 수 없어요. 궁금한 점은 카나나에게 물어보세요.'}</p>`;
+  <p style="font-size:12.5px;color:var(--sub);line-height:1.5">${r.kind==='free'?'자유 탐방은 등록된 장소 안에서 추가·삭제할 수 있어요. 바꾸려면 하나에게 제안을 요청하세요.':'공식 루트는 장소와 순서를 바꿀 수 없어요. 궁금한 점은 하나에게 물어보세요.'}</p>`;
  }
  const pop=S.sheet==='noshow'||S.sheet==='payInfo';
  return `<div class="dim-bg" data-act="closeSheet"></div><div class="sheet ${pop?'pop':''}" role="dialog" aria-modal="true">${pop?'':'<div class="grab"></div>'}${inner}</div>`;
@@ -1549,11 +1549,11 @@ function presetRoom(mode){
   S.room=mkRoom({title:'〈Afterglow〉 앨범 순서 루트',short:'Afterglow 루트',when:'11.8(일) 11:00',status:'recruiting',members:[m1,me],msgs:[
    {t:'date',text:'2026년 11월 5일 목요일'},
    {t:'sys',text:`${m1.nick}님이 들어왔어요`},
-   {t:'text',from:'kanana',time:'오후 8:12',text:'Afterglow 루트 동행방이에요.\n11.8(일) 11:00 · 성수 5곳 · 3시간\n\n첫 질문! LUMIN에 입덕한 곡은 뭐였어요?'},
+   {t:'text',from:'kanana',time:'오후 8:12',text:'Afterglow 루트 동행방이에요.\n11.8(일) 11:00 · 성수 5곳 · 3시간\n\n리마인~ 리센느에 입덕하게 된 계기는 뭐에요?'},
    {t:'text',from:m1.nick,time:'오후 8:14',text:'저는 Afterglow요!! 대구에서 KTX 타고 올라가요 ㅎㅎ'},
    {t:'date',text:'2026년 11월 6일 금요일'},
    {t:'sys',text:`${me.nick}님이 들어왔어요`},
-   {t:'text',from:'kanana',time:'오후 2:19',text:'반가워요! 지금 2명이에요. 1명만 더 오면 확정돼요.\n일요일 09:00까지 3명이 안 되면 방이 해산되고 알림을 드려요.'},
+   {t:'text',from:'kanana',time:'오후 2:19',text:'반갑습니데이~ 리마인 맞제?\n한 명만 더 데꼬 온나. 일요일 아침 아홉 시까지 한 명 더 안 오믄 방 없어진다. 그래도 걱정마라 알림 보내줄끼다!'},
   ]});
   S.roomKey='room-recruit';
  } else {
@@ -1561,11 +1561,11 @@ function presetRoom(mode){
   const base=[
    {t:'date',text:'2026년 11월 3일 화요일'},
    {t:'sys',text:'4명이 들어왔어요'},
-   {t:'text',from:'kanana',time:'오후 9:02',text:'확정됐어요! 출발 지점은 성수역 3번 출구 앞이에요.'},
+   {t:'text',from:'kanana',time:'오후 9:02',text:'다 모였나 출발 지점은 성수역 3번 출구니까 조심히 온나'},
    {t:'text',from:m2.nick,time:'오후 9:05',text:'와 확정 ㅠㅠ 저 처음이라 떨려요'},
    {t:'text',from:m1.nick,time:'오후 9:06',text:'저도 처음이에요! 응원봉 들고 갈게요'},
    {t:'date',text:'2026년 11월 6일 금요일'},
-   {t:'text',from:'kanana',time:'오전 10:00',text:'내일이에요! 참석 확인 버튼을 눌러 주세요.\n성수 오후 비 60% · 접는 우산을 챙기세요.'},
+   {t:'text',from:'kanana',time:'오전 10:00',text:'내일 성수 날씨 14도, 15시 전후 비 확률 60%\n리마인, 우산 꼭 챙겨야 하는 거 알제?'},
    {t:'dcheck',from:'kanana',time:'오전 10:00',d:{ok:3,mine:null}},
   ];
   if(mode==='vote'){
@@ -1575,10 +1575,10 @@ function presetRoom(mode){
   } else {
    base[base.length-1].d.mine=1; base[base.length-1].d.ok=4;
    base.push({t:'date',text:'2026년 11월 7일 토요일'});
-   base.push({t:'text',from:'kanana',time:'오후 12:00',text:'1시간 뒤에 만나요. 성수역 3번 출구 앞 파란 간판 아래예요.\n표식: 응원봉을 가방에 걸어 주세요.'});
+   base.push({t:'text',from:'kanana',time:'오후 12:00',text:'성수역 3번 출구에서 만나는거 잊은거 아니지? 늦지않게 온나'});
    base.push({t:'text',from:'kanana',time:'오후 2:31',text:"카페 '오어스' 퍼즐 조각 획득!\n〈Afterglow〉 뮤비 0:42, 하나가 창가에 앉아 있던 그 자리예요."});
    base.push({t:'text',from:m2.nick,time:'오후 3:05',text:'포토부스 제가 먼저 결제했어요!'});
-   base.push({t:'text',from:'me',time:'오후 3:06',text:'@카나나 포토부스 8000원 정산'});
+   base.push({t:'text',from:'me',time:'오후 3:06',text:'@하나 포토부스 8000원 정산'});
    base.push({t:'text',from:'kanana',time:'오후 3:06',text:'4명이 2,000원씩 정산할까요?\n대상에서 뺄 사람이 있으면 체크를 풀어 주세요.'});
    base.push({t:'settle',from:'kanana',time:'오후 3:06',s:{title:"포토부스 '필름데이'",amount:8000,status:'draft',targets:[m1,m2,m3].map(x=>({nick:x.nick,on:true,paid:false}))}});
    S.room=mkRoom({title:'〈Afterglow〉 앨범 순서 루트',short:'Afterglow 루트',when:'11.7(토) 13:00',status:'in_progress',members,msgs:base});
@@ -1599,8 +1599,9 @@ function roomFromCtx(){
  S.room=mkRoom({title:c.title,short:c.short,when:c.when,status:'recruiting',members,msgs,route:c.route,kind:c.kind,start:c.kind==='free'?P(c.route[0]).name+' 앞':'성수역 3번 출구'});
  S.room.msgs.forEach(m=>m.id=++msgId);
  S.roomKey='room-recruit';
- kananaSay(`${c.short} 동행방에 오신 걸 환영해요.\n${c.when} · ${c.area} ${c.route.length}곳 · ${c.dur}\n\n아이스브레이킹! 최애 무대 하나만 꼽는다면?`,700,()=>{
-  if(members.length>=3){S.room.status='confirmed';S.roomKey='room-vote';kananaSay(`확정됐어요! ${members.length}명이 함께 가요.\n출발 지점은 ${S.room.start}이에요.`,1100)}
+ kananaSay(`${c.short} 동행방이에요.\n${c.when} · ${c.area} ${c.route.length}곳 · ${c.dur}\n\n리마인~ 리센느에 입덕하게 된 계기는 뭐에요?`,700,()=>{
+  if(members.length>=3){S.room.status='confirmed';S.roomKey='room-vote';kananaSay(`다 모였나 출발 지점은 ${S.room.start}니까 조심히 온나`,1100)}
+  else{const need=3-members.length;kananaSay(`반갑습니데이~ 리마인 맞제?\n${need===1?'한 명만':need+'명'} 더 데꼬 온나. 일요일 아침 아홉 시까지 ${need===1?'한 명':need+'명'} 더 안 오믄 방 없어진다. 그래도 걱정마라 알림 보내줄끼다!`,1100)}
  });
 }
 function push(m){m.id=++msgId;S.room.msgs.push(m);}
@@ -1617,9 +1618,9 @@ function parseAmount(t){
 function handleSend(){
  const text=S.draft.trim(); if(!text)return;
  S.draft=''; push({t:'text',from:'me',time:now(),text});
- if(S.room.group){if(/@카나나/.test(text))push({t:'sys',text:'카나나는 이 방을 나갔어요. 새 루트 동행방에서 불러 주세요.'});return}
- if(/@카나나/.test(text)){
-  const t=text.replace(/@카나나/g,'').trim();
+ if(S.room.group){if(/@하나/.test(text))push({t:'sys',text:'하나는 이 방을 나갔어요. 새 루트 동행방에서 불러 주세요.'});return}
+ if(/@하나/.test(text)){
+  const t=text.replace(/@하나/g,'').trim();
   const amt=parseAmount(t), n=S.room.members.length;
   if(/정산/.test(t)&&amt){
    const title=t.replace(/(\d[\d,]*(?:\.\d+)?)\s*(만\s*원|만|천\s*원|천|원)?/,'').replace(/정산(해\s*줘|해줘|요청)?/,'').trim()||'공동 지출';
@@ -1627,9 +1628,9 @@ function handleSend(){
    else kananaSay(`${n}명이 ${won(Math.round(amt/n/10)*10)}원씩 정산할까요?\n대상에서 뺄 사람이 있으면 체크를 풀어 주세요.`,900,()=>{
     push({t:'settle',from:'kanana',time:now(),s:{title,amount:amt,status:'draft',targets:S.room.members.filter(x=>!x.me).map(x=>({nick:x.nick,on:true,paid:false}))}});
    });
-  } else if(/정산/.test(t)) kananaSay('금액도 같이 알려 주세요.\n예: @카나나 포토부스 8000원 정산');
-  else if(/날씨|비|우산/.test(t)) kananaSay('내일 성수: 낮 14°, 15시 전후 비 60%.\n접는 우산과 보조배터리를 챙기세요.');
-  else if(/다음|어디|장소/.test(t)){const ids=S.room.route,i=Math.min(S.live.stamps,ids.length-1);kananaSay(`다음은 ${i+1}번 ${P(ids[i]).name}이에요.\n${P(ids[i]).story}`)}
+  } else if(/정산/.test(t)) kananaSay('금액도 같이 알려 주세요.\n예: @하나 포토부스 8000원 정산');
+  else if(/날씨|비|우산/.test(t)) kananaSay('내일 성수 날씨 14도, 15시 전후 비 확률 60%\n리마인, 우산 꼭 챙겨야 하는 거 알제?');
+  else if(/다음|어디|장소/.test(t)){const ids=S.room.route,i=Math.min(S.live.stamps,ids.length-1),p=P(ids[i]);kananaSay(/레코드숍/.test(p.name)?'다음은 레코드숍! 니 기억 안 나나? 팬싸한 곳 아이가. LP코너에 싸인 있으니까 꼭~ 함 봐라!':`다음은 ${i+1}번 ${p.name}이에요.\n${p.story}`)}
   else kananaSay('저는 정해진 때와 부를 때만 말해요.\n이렇게 불러 보세요: 다음 장소, 날씨, "포토부스 8000원 정산"');
  } else if(!S.greeted&&S.room.members.length>1){
   S.greeted=true; const o=S.room.members.find(x=>!x.me);
@@ -1656,11 +1657,11 @@ const NOTES={
  'free':['처음엔 아무 장소도 고르지 않은 상태예요. 첫 장소를 누르면 가까운 곳을 이어 추천 루트 4곳을 잡아 줘요.','그다음부터는 장소를 더하거나 빼면 1번 출발지는 그대로 두고 최단 순서로 다시 정렬해요.','지도 핀이나 목록 어느 쪽을 눌러도 골라져요.'],
  'freeParty':['위 지도에 내 루트를 그리고, 루트 줄은 잘라서 보여 줘요. 화살표를 누르면 전체 루트가 펼쳐져요.','달력에서 날짜 → 시간을 고르면 장소가 2곳 이상 겹치는 파티만 남아요.','네모 칸은 내 루트 순번이에요. 초록 칸이 겹치는 장소예요. 파티를 고르면 아래 합류 버튼이 켜져요.'],
  'entry':['정해진 루트는 여기서 달력으로 날짜 → 시간을 골라요. 파티 합류는 시간이 정해져 있어 바로 보여 줘요.','닉네임은 자동 {형용사+명사}. 새로고침으로 다시 뽑아요.','선택 동의 설명은 오른쪽 화살표를 눌러야 팝업으로 보여요. 동의하고 입장을 누르면 노쇼 안내 팝업이 떠요.'],
- 'room-recruit':['신청하면 바로 입장해요. 5명이 찰 때까지 같은 방이에요.','카나나는 대화를 계속 읽지 않고, 정해진 때와 @카나나로 부를 때만 말해요.','메시지를 보내 보세요. @카나나 칩도 눌러 보세요.'],
+ 'room-recruit':['신청하면 바로 입장해요. 5명이 찰 때까지 같은 방이에요.','하나는 대화를 계속 읽지 않고, 정해진 때와 @하나로 부를 때만 말해요.','메시지를 보내 보세요. @하나 칩도 눌러 보세요.'],
  'room-vote':['D-1 참석 확인 카드: 미확인 시 자리가 해제돼요.','루트 순서 바꾸기 투표는 없어요. 정해진 루트는 순서 그대로 걸어요.'],
- 'room-settle':['"@카나나 ○○ 8000원 정산"이라고 부르면 1/N 정산 카드를 만들어요.','대상 체크를 풀면 1인 금액이 다시 계산돼요. 요청하면 완료 상태가 하나씩 올라와요.','카카오페이 정산은 수익원이 아니에요 (무료).'],
- 'live':['스탬프 대신 리센느 원이 사진을 퍼즐 5조각으로 채워요. 못 채운 칸은 흐린 흑백으로 미리 보여요.','QR 스캔 → 퍼즐 조각 → 카나나 세계관 해설 한 줄.','다 채우면 1회용 완주 인증 QR이 나와요.'],
- 'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.','"계속 둘래요"로 과반이 되면 방이 일반 그룹채팅으로 전환돼요. 대화·사진은 남고, 카나나·정산·지도는 빠지고, 닉네임은 그대로예요.'],
+ 'room-settle':['"@하나 ○○ 8000원 정산"이라고 부르면 1/N 정산 카드를 만들어요.','대상 체크를 풀면 1인 금액이 다시 계산돼요. 요청하면 완료 상태가 하나씩 올라와요.','카카오페이 정산은 수익원이 아니에요 (무료).'],
+ 'live':['스탬프 대신 리센느 원이 사진을 퍼즐 5조각으로 채워요. 못 채운 칸은 흐린 흑백으로 미리 보여요.','QR 스캔 → 퍼즐 조각 → 하나 세계관 해설 한 줄.','다 채우면 1회용 완주 인증 QR이 나와요.'],
+ 'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.','"계속 둘래요"로 과반이 되면 방이 일반 그룹채팅으로 전환돼요. 대화·사진은 남고, 하나·정산·지도는 빠지고, 닉네임은 그대로예요.'],
  'b-ipdash':['회차 모집률·참가 팬·노쇼율·진행 중 협업을 한눈에 봐요.','팝업 종료가 30일 안이면 그 장소가 들어간 루트 수와 함께 경고해요.','루트 관리에서 공개한 루트도 아래 표에 \'공개 중\'으로 들어와요.'],
  'b-find':['문장을 조건 칩으로 바꿔요. 검은 칩=태그(순서), 파란 칩=필터(걸러 냄).','카드를 누르면 공간정보 상세 팝업이 열리고, 팝업 아래 \'협업 제안\'으로 조건을 적어 바로 보내요. 팝업은 X · 바깥 배경 · Esc로 닫혀요.','카드에 마우스를 올리면 지도 핀이 빨갛게, 제안을 보낸 곳은 검은 핀으로 보여요. 오른쪽 목록은 제안을 보낸 공간이에요.'],
  'b-ipinbox':['공간이 먼저 신청한 팝업 협업을 수락하면 장소 관리에 \'스토리 필요\'로 들어가요.','조건 수정을 누르면 그 자리에서 수정 제안을 보낼 수 있어요.','종료 · 거절된 건은 목록에 남기지 않고 카카오톡 챗봇으로 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
@@ -1818,7 +1819,7 @@ const ACT={
  etime:d=>{ctxFixed(S.ctx.rid,d.s);render()},
  enterAsk:()=>{S.sheet='noshow';render()},
  enter:()=>{S.sheet=null;roomFromCtx();S.greeted=false;S.prev=['home'];S.dir=1;S.screen='room';render(true)},
- atk:()=>{const m=document.getElementById('msg');if(!S.draft.includes('@카나나'))S.draft='@카나나 '+S.draft;render();focusMsg()},
+ atk:()=>{const m=document.getElementById('msg');if(!S.draft.includes('@하나'))S.draft='@하나 '+S.draft;render();focusMsg()},
  suggest:d=>{S.draft=d.t;handleSend();render()},
  send:()=>{handleSend();render();focusMsg()},
  mapSheet:()=>{S.sheet='map';render()},
@@ -1836,7 +1837,7 @@ const ACT={
    {t:'text',from:'kanana',time:'오후 6:20',text:'오늘 루트 완주 축하해요! 이 방을 계속 둘지 투표했어요.'},
    {t:'sys',text:'유지 3/4 · 과반이 모여 일반 그룹채팅으로 바뀌었어요'},
    {t:'sys',text:'루트가 끝나서 정산·지도·퍼즐 기능은 꺼졌어요. 대화와 사진은 그대로 남아요.'},
-   {t:'sys',text:'카나나님이 나갔어요'},
+   {t:'sys',text:'하나님이 나갔어요'},
    {t:'text',from:m1.nick,time:'오후 6:24',text:'방 안 없어져서 다행이에요 ㅠㅠ'},
    {t:'text',from:m2.nick,time:'오후 6:25',text:'다음 루트도 이 멤버로 가요!!'}].forEach(push);
   S.roomKey='end';go('room')},
