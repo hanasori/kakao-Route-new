@@ -643,6 +643,9 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .device.desktop .stats small{font-size:12px;color:var(--sub);display:block}
 .device.desktop .stats b{font-size:18px;font-weight:800;display:block;margin-top:4px;color:var(--ink)}
 .device.desktop .stats b svg{color:var(--ok)}
+.device.desktop .story{border-left:3px solid var(--ink);padding:2px 0 2px 12px;font-size:14px;line-height:1.55}
+.device.desktop .story+.story{margin-top:12px}
+.device.desktop .story small{display:block;color:var(--sub);font-size:12px}
 .device.desktop .bdim{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:50;animation:fade .2s ease}
 .device.desktop .bmodal{position:fixed;z-index:51;left:50%;top:24px;max-height:calc(100vh - 48px);overflow-y:auto;overscroll-behavior:contain;width:min(560px,calc(100vw - 32px));transform:translateX(-50%);background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow-2);animation:bpop .22s var(--ease)}
 .device.desktop .bmodal.lg{width:min(1000px,calc(100vw - 48px));background:#FAFAF8;padding:24px 28px 28px}
@@ -1743,8 +1746,8 @@ const NOTES={
  'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.','"계속 둘래요"로 과반이 되면 방이 일반 그룹채팅으로 전환돼요. 대화·사진은 남고, 하나·정산·지도는 빠지고, 닉네임은 그대로예요.'],
  'b-ipdash':['회차 모집률·참가 팬·노쇼율·진행 중 협업을 한눈에 봐요.','팝업 종료가 30일 안이면 그 장소가 들어간 루트 수와 함께 경고해요.','루트 관리에서 공개한 루트도 아래 표에 \'공개 중\'으로 들어와요.'],
  'b-find':['문장을 조건 칩으로 바꿔요. 검은 칩=태그(순서), 파란 칩=필터(걸러 냄).','카드를 누르면 공간정보 상세 팝업이 열리고, 팝업 아래 \'협업 제안\'으로 조건을 적어 바로 보내요. 팝업은 X · 바깥 배경 · Esc로 닫혀요.','카드에 마우스를 올리면 지도 핀이 빨갛게, 제안을 보낸 곳은 검은 핀으로 보여요. 오른쪽 목록은 제안을 보낸 공간이에요.'],
- 'b-ipinbox':['공간이 먼저 신청한 팝업 협업을 수락하면 장소 관리에 \'라벨 필요\'로 들어가요.','조건 수정을 누르면 그 자리에서 수정 제안을 보낼 수 있어요.','종료 · 거절된 건은 목록에 남기지 않고 카카오톡 챗봇으로 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
- 'b-places':['장소마다 IP 라벨(멤버 · 앨범 · 장면)을 붙이는 게 곧 IP 인증이에요.','이 라벨로 루트 관리의 AI 추천이 장소를 묶어요. 라벨 붙은 장소가 3곳 이상이면 추천할 수 있어요.','공공장소는 직접 등록하고 GPS 도착 체크로 스탬프를 줘요 (반경은 정책 미정). 팝업형 장소는 종료 D-day를 경고해요.'],
+ 'b-ipinbox':['공간이 먼저 신청한 팝업 협업을 수락하면 장소 관리에 \'스토리 필요\'로 들어가요.','조건 수정을 누르면 그 자리에서 수정 제안을 보낼 수 있어요.','종료 · 거절된 건은 목록에 남기지 않고 카카오톡 챗봇으로 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
+ 'b-places':['스토리를 쓰는 게 곧 IP 인증이에요.','장소마다 IP 라벨(멤버 · 앨범 · 장면)을 붙이면 루트 관리의 AI 추천이 장소를 묶어요. 라벨 붙은 장소가 3곳 이상이면 추천할 수 있어요.','공공장소는 직접 등록하고 GPS 도착 체크로 스탬프를 줘요 (반경은 정책 미정). 팝업형 장소는 종료 D-day를 경고해요.'],
  'b-spdash':['오늘 도착 타임라인: 루트 동선 기준 도착 예정 시간이에요.','이번 주 도착 예정 인원은 회차 캘린더와 같은 데이터예요.'],
  'b-cal':['칸을 누르면 그 시간대를 막아요 (휴무·대관). 예약이 있는 칸은 막을 수 없어요.','수용 인원을 바꾸면 마감 표시가 바로 다시 계산돼요.'],
  'b-inbox':['받은 제안을 수락·거절하거나 조건을 고쳐 다시 보낼 수 있어요.','진행 중 탭에 지금 협업 중인 IP가 있어요.','종료 · 거절된 건은 카카오톡 챗봇으로만 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
@@ -2032,7 +2035,7 @@ S.b={
   {id:'y2',side:'ip',dir:'out',who:"카페 '그레이룸'",space:'s6',from:'2026-11-20',to:'2027-01-31',cap:10,menu:'하나 시그니처 에이드',ops:['한정 메뉴'],status:'wait'},
   ...[['s1','2026-09-01','2027-02-28',12,'애프터글로우 라떼'],['s5','2026-09-01','2027-02-28',8,'유진 추천 LP 청음'],['s4','2026-10-15','2026-11-30',6,'세라 생일 프레임']].map(([sp,from,to,cap,menu],i)=>({id:'ya'+i,side:'ip',dir:null,who:SP(sp).name,space:sp,from,to,cap,menu,ops:['한정 메뉴'],status:'active'})),
  ],
- places:PLACES.map(p=>({id:p.id,name:p.name,kind:p.id==='p6'?'popup':p.shop?'space':'public',from:p.id==='p6'?'2026-10-01':null,to:p.id==='p6'?'2026-11-30':null,radius:p.shop?null:50})),
+ places:PLACES.map(p=>({id:p.id,name:p.name,kind:p.id==='p6'?'popup':p.shop?'space':'public',story:p.story,from:p.id==='p6'?'2026-10-01':null,to:p.id==='p6'?'2026-11-30':null,radius:p.shop?null:50})),
  ai:[
   {tag:'빈티지',cat:'분위기',ev:['사진 2: 원목 바 테이블과 황동 조명',"리뷰 6건에 '빈티지한 인테리어' 표현"],st:'new'},
   {tag:'포토존',cat:'특성',ev:['사진 5: 통창 앞 역광 자리',"리뷰 14건에 '사진 맛집' 표현"],st:'new'},
@@ -2124,8 +2127,8 @@ function spaceDetail(m){
    <div class="panel"><h3>협업 조건 <small>AI가 추측하지 않는 항목이에요</small></h3>
     <dl class="kv"><dt>한정 메뉴</dt><dd>${yes('한정 메뉴')}</dd><dt>굿즈 비치</dt><dd>${yes('굿즈 비치')}</dd><dt>포토존 설치</dt><dd>${yes('포토존 설치')}</dd><dt>팝업 대관</dt><dd>${s.popup?`<span class="ok">${ic('check',14,2.6)}가능 · 기간 협의</span>`:'<span class="no">—</span>'}</dd><dt>희망 수수료</dt><dd>측정된 카카오페이 결제의 ${FEE*100}%</dd></dl>
    </div>
-   <div class="panel"><h3>연결된 IP</h3>
-    ${st.length?`<div class="tagrow" style="margin:0">${st.map(x=>`<span class="tg">${A(x.ip).name} · ${x.k}</span>`).join('')}</div>`:`<p class="walk" style="margin:0">아직 연결된 IP가 없어요. 협업이 확정되면 장소 관리에서 IP 라벨을 붙여 인증해요.</p>`}
+   <div class="panel"><h3>IP별 스토리 <small>소속사가 써요</small></h3>
+    ${st.length?st.map(x=>`<div class="story"><small>${A(x.ip).name} · ${x.k}</small>${esc(x.t)}</div>`).join(''):`<p class="walk" style="margin:0">아직 연결된 IP 스토리가 없어요. 협업이 확정되면 장소 관리에서 스토리를 써서 IP 인증을 마칠 수 있어요.</p>`}
    </div>
   </div>
   <div>
@@ -2194,7 +2197,7 @@ function licCard(){
   ${r.msg?`<p class="msg">${esc(r.msg)}</p>`:''}
   <div class="acts"><button class="btn line sm" data-act="licDecline">거절</button><button class="btn dark sm" data-act="licApprove">승인 · 가격 제안</button></div><p class="ferr" id="lcperr" role="alert"></p></article>`;
 }
-const scrIpInbox=()=>pcShell('ip','collabs',pcTitle('협업함','협업함',['수락하면 장소 관리에 들어가요','라벨을 붙이면 IP 인증이 끝나요'])+inboxHTML('ip'));
+const scrIpInbox=()=>pcShell('ip','collabs',pcTitle('협업함','협업함',['수락하면 장소 관리에 들어가요','스토리를 쓰면 IP 인증이 끝나요'])+inboxHTML('ip'));
 const scrInbox=()=>pcShell('space','collabs',pcTitle('협업함','협업함',['수락하면 회차 캘린더에 도착 예정 인원이 들어와요'])+inboxHTML('space'));
 
 /* 4-4 IP보유자 대시보드 */
@@ -2208,13 +2211,14 @@ function scrIpDash(){
  const all=Math.round(rs.reduce((a,r)=>a+fill(r),0)/rs.length);
  const ends=S.b.places.filter(p=>p.to&&dday(p.to)>=0&&dday(p.to)<=30);
  const inN=S.b.props.filter(p=>p.side==='ip'&&p.dir==='in'&&p.status==='wait').length;
- const noLabel=S.b.places.filter(p=>!p.label).length;
+ const noStory=S.b.places.filter(p=>!p.story).length,noLabel=S.b.places.filter(p=>!p.label).length;
  return pcShell('ip','dashboard',`
- ${pcTitle('대시보드','LUMIN 대시보드',['11.2 – 11.8 기준','스텔라엔터'],`<button class="btn dark sm" data-act="rtgo" data-v="pick">${ic('plus',16,2.4)}새 루트 만들기</button>`)}
+ ${pcTitle('대시보드','LUMIN 대시보드',['11.2 – 11.8 기준','스텔라엔터'])}
  ${kpis([['회차 모집률',all+'%','열린 회차 기준'],['이번 주 참가 팬','46명','지난주보다 12명 늘었어요'],['노쇼율','4.1%','D-1 확인으로 자리 해제 7건'],['진행 중 협업',S.b.props.filter(p=>p.side==='ip'&&p.status==='active').length+'곳','공공장소 제외']])}
  ${ends.map(p=>{const n=ROUTES.filter(r=>r.places.includes(p.id)).length;return `<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(p.name)} 팝업이 ${fmtD(p.to)}에 끝나요 (D-${dday(p.to)})</b><br>이 장소가 들어간 루트 ${n}개의 이후 회차는 장소를 바꾸거나 회차를 닫아야 해요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">장소 관리</button></div>`}).join('')}
  ${inN?`<div class="alert info">${ic('bubble',18,2)}<div><b>받은 협업 신청 ${inN}건</b><br>공간제공자가 먼저 협업을 신청했어요.</div><button class="btn line sm" data-act="bgotab" data-to="b-ipinbox" data-side="ip" data-t="in">협업함</button></div>`:''}
- ${noLabel?`<div class="alert info">${ic('flag',18,2)}<div><b>라벨을 기다리는 장소 ${noLabel}곳</b><br>라벨을 붙여야 IP 인증이 끝나고 루트 추천에 쓰여요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">라벨 붙이기</button></div>`:''}
+ ${noStory?`<div class="alert info">${ic('pen',18,2)}<div><b>스토리를 기다리는 장소 ${noStory}곳</b><br>스토리를 써야 IP 인증이 끝나요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">스토리 쓰기</button></div>`:''}
+ ${noLabel?`<div class="alert info">${ic('flag',18,2)}<div><b>라벨이 없는 장소 ${noLabel}곳</b><br>라벨을 붙여야 AI 루트 추천에 쓰여요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">라벨 붙이기</button></div>`:''}
  <div class="panel" style="margin-top:6px"><h3>루트 <small>공개 중인 루트</small></h3>${routeTable(rs)}</div>`);
 }
 
@@ -2261,7 +2265,7 @@ function labelModal(m){
  const p=S.b.places.find(x=>x.id===m.id),l=p.label||{members:P(p.id)?.tags||[],albums:[],scenes:[]};
  const grp=(title,name,items)=>`<div class="fld"><label>${title}</label><div class="row" style="flex-wrap:wrap">${items.map(([v,t])=>`<label class="cbx"><input type="checkbox" name="${name}" value="${esc(v)}" ${l[name].includes(v)?'checked':''}>${esc(t)}</label>`).join('')}</div></div>`;
  return `<div class="mhead"><div><h3>${esc(p.name)} · IP 정보</h3><span class="meta" style="margin-top:6px"><span>${kindL[p.kind]}</span><span>${periodOf(p)}</span><span>협업 조건 ${collabOf(p)}</span></span></div><button class="iconbtn mx" data-act="bclose" aria-label="닫기">${ic('close',22,2)}</button></div>
- <div class="panel">
+ <div class="panel">${p.story?`<p class="walk" style="margin:0 0 14px">스토리: ${esc(p.story)}</p>`:''}
   ${grp('관련 멤버','members',A('lumin').members.map(x=>[x.id,x.name]))}
   ${grp('관련 앨범 · 곡','albums',ALBUMS.map(x=>[x,x]))}
   ${grp('장면 종류','scenes',SCENES.map(x=>[x,x]))}
@@ -2319,17 +2323,17 @@ function scrRtReco(){
 /* 장소 관리 */
 function scrPlaces(){
  return pcShell('ip','places',`
- ${pcTitle('장소 관리','장소 관리',['라벨을 붙이면 IP 인증 완료 · AI 루트 추천에 쓰여요','공공장소는 GPS 도착 체크로 스탬프'],`<button class="btn dark sm" data-act="bpublic">${ic('plus',16,2.4)}공공장소 등록</button>`)}
+ ${pcTitle('장소 관리','장소 관리',['스토리를 쓰면 IP 인증 완료','라벨은 AI 루트 추천에 쓰여요','공공장소는 GPS 도착 체크로 스탬프'],`<button class="btn dark sm" data-act="bpublic">${ic('plus',16,2.4)}공공장소 등록</button>`)}
  ${S.b.places.filter(p=>p.to&&dday(p.to)>=0&&dday(p.to)<=30).map(p=>`<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(p.name)} · ${fmtD(p.to)} 종료 (D-${dday(p.to)})</b><br>들어간 루트: ${ROUTES.filter(r=>r.places.includes(p.id)).map(r=>esc(r.short)).join(', ')||'없음'} · 종료 뒤 회차는 수정이 필요해요.</div><button class="btn line sm" data-act="toast" data-msg="공간제공자에게 기간 연장을 요청했어요 (목업)">기간 연장 요청</button></div>`).join('')}
  <div class="panel"><h3>장소 <small class="num">라벨 ${S.b.places.filter(p=>p.label).length}/${S.b.places.length}곳 · 3곳 이상이면 AI 추천 가능</small></h3>
  <table class="ptable"><thead><tr><th>종류</th><th>장소</th><th class="hide-s">기간</th><th>협업 조건</th><th class="hide-s">스탬프</th><th>IP 라벨</th><th></th></tr></thead><tbody>
  ${S.b.places.map(p=>`<tr><td><span class="pill ${p.kind==='popup'?'branch':'neutral'}">${kindL[p.kind]}</span></td>
-  <td><b style="font-weight:600">${esc(p.name)}</b></td>
+  <td><b style="font-weight:600">${esc(p.name)}</b>${p.story?`<div style="font-size:12px;color:var(--sub);margin-top:2px">${esc(p.story.slice(0,30))}…</div>`:'<div class="shop n" style="margin-top:2px">스토리 필요</div>'}</td>
   <td class="hide-s num">${periodOf(p)}</td>
   <td class="num">${collabOf(p)}</td>
   <td class="hide-s">${p.kind==='public'?`GPS · 반경 ${p.radius}m`:'매장 QR'}</td>
   <td>${p.label?`<div class="tagrow" style="margin:0">${labelText(p.label).map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:'<span class="shop n">라벨 필요</span>'}</td>
-  <td><button class="btn ${p.label?'line':'dark'} sm" data-act="rtlabel" data-id="${p.id}">${p.label?'수정':'라벨링'}</button></td></tr>`).join('')}
+  <td><div class="row"><button class="btn ${p.label?'line':'dark'} sm" data-act="rtlabel" data-id="${p.id}">${p.label?'라벨 수정':'라벨링'}</button><button class="btn ${p.story?'line':'dark'} sm" data-act="bstory" data-id="${p.id}">${p.story?'스토리 수정':'스토리 쓰기'}</button></div></td></tr>`).join('')}
  </tbody></table>
  <p class="walk">GPS 반경 50m는 임시 값이에요 (정책 미정). 공공장소는 공간찾기에 나오지 않고 송객 수수료도 없어요.</p></div>`);
 }
@@ -2687,12 +2691,16 @@ function bModal(){
   const s=ME(),a=A(m.id);
   h=`<h3>${esc(a.name)}에 팝업 협업 신청</h3><p class="s">수락되면 기간 동안만 성지로 노출되고, 팬 앱에 '기간 한정' 라벨이 붙어요.</p>${proposeFields(s,true)}`;
  }
+ if(m.t==='story'){const p=S.b.places.find(x=>x.id===m.id);
+  h=`<h3>${esc(p.name)} 스토리</h3><p class="s">이 장소가 LUMIN의 어떤 장면과 이어지는지 써 주세요. 저장하면 IP 인증이 끝나고 팬 앱에 소속사 인증 배지가 붙어요.</p>
+  <div class="fld"><label for="mf-story">스토리</label><textarea id="mf-story" maxlength="120" placeholder="예: 2집 재킷 B버전을 찍은 1층 네온 사인 앞이에요.">${esc(p.story||'')}</textarea><p class="help">10자 이상 · 팬 앱 장소 카드에 그대로 보여요</p></div>`;}
  if(m.t==='public'){
-  h=`<h3>공공장소 등록</h3><p class="s">공원·벽화·계단처럼 주인이 없는 장소예요. 공간 인증 없이 IP 라벨만으로 IP 인증을 하고, 스탬프는 GPS 도착 체크로 줘요.</p>
+  h=`<h3>공공장소 등록</h3><p class="s">공원·벽화·계단처럼 주인이 없는 장소예요. 공간 인증 없이 스토리만으로 IP 인증을 하고, 스탬프는 GPS 도착 체크로 줘요.</p>
   <div class="fld"><label for="mf-name">장소 이름</label><input id="mf-name" placeholder="예: 성수 연무장길 계단"></div>
+  <div class="fld"><label for="mf-story">스토리</label><textarea id="mf-story" maxlength="120" placeholder="예: 〈Afterglow〉 티저에서 멤버들이 앉아 있던 계단이에요."></textarea></div>
   <div class="fld"><label for="mf-rad">GPS 도착 반경</label><select id="mf-rad"><option value="30">30m</option><option value="50" selected>50m</option><option value="100">100m</option></select><p class="help">반경 기준은 아직 정책 미정이에요</p></div>`;}
  return `<div class="bdim" data-act="bclose"></div><div class="bmodal" role="dialog" aria-modal="true" aria-label="${m.t}">${h}<p class="ferr" id="mferr" role="alert"></p>
-  <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="bsend">${{apply:'신청 보내기',public:'등록'}[m.t]}</button></div></div>`;
+  <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="bsend">${{apply:'신청 보내기',story:'저장 · IP 인증',public:'등록'}[m.t]}</button></div></div>`;
 }
 
 Object.assign(SCREENS,{'b-find':scrFind,'b-ipinbox':scrIpInbox,'b-inbox':scrInbox,'b-ipdash':scrIpDash,'b-places':scrPlaces,'b-spdash':scrSpDash,'b-cal':scrCal,'b-edit':scrEdit,'b-ipfind':scrIpFind,'b-report':scrReport,'b-billing':scrBilling,'b-license':scrLicense});
@@ -2723,15 +2731,18 @@ Object.assign(ACT,{
  bopen:d=>{S.b.modal={t:'space',id:d.id,form:false};render();document.querySelector('.bmodal .mx')?.focus()},
  bpropose:()=>{S.b.modal.form=true;render();document.getElementById('mf-from')?.focus()},
  bapply:d=>{S.b.modal={t:'apply',id:d.id};render();document.getElementById('mf-from')?.focus()},
+ bstory:d=>{S.b.modal={t:'story',id:d.id};render();document.getElementById('mf-story')?.focus()},
  bpublic:()=>{S.b.modal={t:'public'};render();document.getElementById('mf-name')?.focus()},
  bclose:()=>{S.b.modal=null;render()},
  bsend:()=>{const m=S.b.modal;
-  if(m.t==='public'){
-   const name=val('mf-name');
-   if(name.length<2)return ferr('mferr','장소 이름을 입력해 주세요');
-   S.b.places.push({id:'u'+Date.now(),name,kind:'public',from:null,to:null,radius:+val('mf-rad')});
+  if(m.t==='story'||m.t==='public'){
+   const story=val('mf-story'),name=m.t==='public'?val('mf-name'):'';
+   if(m.t==='public'&&name.length<2)return ferr('mferr','장소 이름을 입력해 주세요');
+   if(story.length<10)return ferr('mferr','스토리를 10자 이상 써 주세요');
+   if(m.t==='story')S.b.places.find(x=>x.id===m.id).story=story;
+   else S.b.places.push({id:'u'+Date.now(),name,kind:'public',story,from:null,to:null,radius:+val('mf-rad')});
    S.b.modal=null;render();
-   return toast(`${esc(name)}을 공공장소로 등록했어요<br><span style="opacity:.7">라벨링을 눌러 IP 정보를 붙여 주세요</span>`);
+   return toast(m.t==='story'?'스토리를 저장했어요 · IP 인증 완료':`${esc(name)}을 공공장소로 등록했어요<br><span style="opacity:.7">라벨링을 누르면 AI 루트 추천에 쓸 수 있어요</span>`);
   }
   const s=m.t==='space'?SP(m.id):ME(),from=val('mf-from'),to=val('mf-to'),cap=+val('mf-cap');
   if(!from||!to)return ferr('mferr','기간을 입력해 주세요');
@@ -2748,8 +2759,8 @@ Object.assign(ACT,{
  bformx:()=>{S.b.modal.form=false;render()},
  btab:d=>{S.b.tab[d.side]=d.t;S.b.editing=null;render()},
  bacc:d=>{const p=prop(d.id);p.status='active';
-  if(p.side==='ip'&&!S.b.places.some(x=>x.id===p.space))S.b.places.push({id:p.space,name:p.who,kind:p.popup?'popup':'space',from:p.from,to:p.to,radius:null});
-  render();toast(p.side==='ip'?'협업을 시작했어요<br><span style="opacity:.7">장소 관리에서 라벨을 붙이면 IP 인증이 끝나요</span>':'협업을 시작했어요<br><span style="opacity:.7">소속사가 라벨을 붙이고 회차를 열면 캘린더에 도착 예정 인원이 들어와요</span>')},
+  if(p.side==='ip'&&!S.b.places.some(x=>x.id===p.space))S.b.places.push({id:p.space,name:p.who,kind:p.popup?'popup':'space',story:'',from:p.from,to:p.to,radius:null});
+  render();toast(p.side==='ip'?'협업을 시작했어요<br><span style="opacity:.7">장소 관리에서 스토리를 쓰면 IP 인증이 끝나요</span>':'협업을 시작했어요<br><span style="opacity:.7">소속사가 스토리를 쓰고 회차를 열면 캘린더에 도착 예정 인원이 들어와요</span>')},
  bdec:d=>{prop(d.id).status='declined';render();toast('거절했어요')},
  kbotx:()=>{S.b.bot=null;render()},
  bcounter:d=>{S.b.editing=d.id;render();document.getElementById('ce-cap')?.focus()},
