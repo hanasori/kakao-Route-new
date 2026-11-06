@@ -751,6 +751,44 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .aitag ul li::before{content:"← ";color:var(--sub)}
 .ai-mark{display:inline-flex;align-items:center;font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-soft);padding:2px 7px;border-radius:6px}
 .rules h4 small{font-weight:500;font-size:12.5px;color:var(--sub)}
+.ctable-wrap{overflow-x:auto}
+.ctable{width:100%;min-width:520px;border-collapse:collapse;table-layout:fixed;font-size:13.5px}
+.ctable th,.ctable td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle;font-weight:500}
+.ctable tr>:first-child{text-align:left;color:var(--ink2)}
+.ctable td{font-weight:700;font-variant-numeric:tabular-nums}
+.ctable .grp th{font-size:12px;font-weight:700;color:var(--sub);padding:0 0 6px;border-bottom:2px solid var(--ink)}
+.ctable .grp th+th{border-left:8px solid #fff}
+.ctable .grp td{border:0}
+.ctable .ph th{vertical-align:top;padding-top:12px;border-bottom:0}
+.ctable .ph td,.ctable .pf td:first-child,.ctable .pk td{border-bottom:0}
+.ctable .pn{display:block;font-size:15px;font-weight:800;margin-top:6px}
+.ctable .pp{display:block;font-size:17px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
+.ctable .ph small{display:block;font-size:11.5px;color:var(--sub)}
+.ctable .pf>*{font-size:12.5px;line-height:1.4;font-weight:500;vertical-align:top}
+.ctable .pf th{color:var(--sub);font-weight:600}
+.ctable .pk td{padding-top:4px}
+.ctable .chip{height:32px;font-size:13px;width:100%;justify-content:center}
+.ctable .sec th{font-size:12px;font-weight:700;color:var(--sub);background:var(--bg2);padding:7px 8px}
+.ctable .on{background:var(--y-soft)}
+.ox{display:inline-grid;place-items:center;vertical-align:middle}
+.ox.o{color:var(--ok)}
+.ox.x{color:var(--mute)}
+.seg{display:inline-flex;gap:4px;padding:3px;border-radius:12px;background:var(--bg3)}
+.seg button{height:30px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:600;color:var(--sub)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow-1)}
+.mrow{display:flex;flex-wrap:wrap;gap:8px}
+.mrow .cbx{flex:1;min-width:150px}
+.mrow .cbx.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);font-weight:600}
+.mrow .cbx[aria-disabled=true]{color:var(--mute);border-style:dashed;cursor:not-allowed}
+.agrees{display:flex;flex-direction:column;gap:8px}
+.agrees .cbx{align-items:flex-start;line-height:1.45}
+.agrees .cbx input{margin-top:3px}
+.sum{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:7px 0}
+.sum span{color:var(--sub)}
+.sum.tot{border-top:1px solid var(--line);margin-top:6px;padding-top:12px;font-size:15px}
+.sum.tot b{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.sum.tot span{color:var(--ink);font-weight:700}
+.paybig{height:52px;font-size:15px;margin-top:14px}
 @media (max-width:900px){
   .kpis{grid-template-columns:1fr 1fr}
   .find-grid{grid-template-columns:1fr}
@@ -1677,7 +1715,7 @@ const INDEX=[
  {g:'신청',items:[['entry','입장 화면']]},
  {g:'동행방',items:[['room-recruit','모집 중'],['room-vote','확정'],['room-settle','정산 카드']]},
  {g:'당일 · 종료',items:[['live','당일 진행'],['end','종료']]},
- {g:'파트너 웹 · IP보유자',items:[['b-ipdash','대시보드','PC'],['b-find','공간찾기 · 공간정보','PC'],['b-ipinbox','협업함','PC'],['b-places','장소 관리','PC'],['partner','루트 관리','PC']]},
+ {g:'파트너 웹 · IP보유자',items:[['b-ipdash','대시보드','PC'],['b-find','공간찾기 · 공간정보','PC'],['b-ipinbox','협업함','PC'],['b-places','장소 관리','PC'],['partner','루트 관리','PC'],['b-billing','플랜 · 결제','PC']]},
  {g:'파트너 웹 · 공간제공자',items:[['b-spdash','대시보드','PC'],['b-cal','회차 캘린더','PC'],['b-inbox','협업함','PC'],['b-edit','공간정보 · AI 태그','PC'],['b-ipfind','IP 찾기','PC'],['b-report','리포트 · 정산','PC']]},
 ];
 const NOTES={
@@ -1704,6 +1742,7 @@ const NOTES={
  'b-ipfind':['공간에서 IP로 먼저 협업을 신청하는 입구예요 (팝업형).','IP 정보는 소속사가 공개한 것만, 팬 규모는 구간으로만 보여요.'],
  'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액에만 수수료가 붙어요.','수수료율 5%는 목업 값이에요.'],
  'partner':['루트 목록 → 루트 만들기 → 장소 IP 라벨링(멤버 · 앨범 · 장면) → AI 루트 추천 순서예요. 카카오 승인 없이 바로 공개돼요.','라벨링 표의 종류 · 기간 · 협업 조건은 장소 관리와 협업함에서 가져와요. 라벨이 3곳 이상이면 다음으로 가요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있어요.'],
+ 'b-billing':['캠페인 1개 단위 이용권이에요. 39만 · 99만 · 249만 원(VAT 별도)은 검증 전 시험 가격이에요.','국가를 바꾸면 통화 · 결제수단 · 세금 · 증빙 · 청구 정보 칸이 바뀌고, 해외는 영어로 먼저 보여요. 해외 법인 영세율 0%는 세무 검토가 필요해요.','목업이라 버튼만 눌러도 완료돼요. 실제로는 서버가 PG 결제 상태와 웹훅을 확인한 뒤 캠페인을 활성화해요.'],
 };
 function curKey(){
  switch(S.screen){
@@ -1994,7 +2033,7 @@ const prop=id=>S.b.props.find(p=>p.id===id);
 const ME=()=>SP('s1'); // 공간제공자 화면의 주인공 매장
 
 /* 공통 셸 */
-const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['partner','route','루트 관리'],['','gear','설정']];
+const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['partner','route','루트 관리'],['b-billing','wallet','플랜 · 결제'],['','gear','설정']];
 const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴'],['','qr','QR 키트'],['b-report','wallet','리포트 · 정산']];
 function pcShell(role,url,body){
  const nav=role==='ip'?NAV_IP:NAV_SP;
@@ -2261,6 +2300,161 @@ function scrPlaces(){
  <p class="walk">GPS 반경 50m는 임시 값이에요 (정책 미정). 공공장소는 공간찾기에 나오지 않고 송객 수수료도 없어요.</p></div>`);
 }
 
+/* 플랜 · 결제 (캠페인 이용권) */
+const PLANS=[
+ {id:'starter',g:'self',name:'Starter',price:390000,days:7,cluster:1,routes:1,places:3,users:300,admins:1,ai:20},
+ {id:'campaign',g:'ops',name:'Campaign',price:990000,days:14,cluster:1,routes:3,places:8,users:1500,admins:3,ai:100,best:true},
+ {id:'scale',g:'ops',name:'Scale',price:2490000,days:30,cluster:3,routes:10,places:20,users:5000,admins:10,ai:300},
+];
+const ADDONS=[{id:'ops',price:100000},{id:'ai',price:30000,beta:true}];
+const FX={KRW:1,USD:1380,JPY:9.2}; // ponytail: 목업 환율(1단위당 원), 실제는 PG가 결제 시점 환율로 확정
+const COUNTRIES=[{id:'KR',cur:'KRW',ko:'대한민국',en:'South Korea'},{id:'US',cur:'USD',ko:'미국',en:'United States'},{id:'JP',cur:'JPY',ko:'일본',en:'Japan'},{id:'SG',cur:'USD',ko:'싱가포르',en:'Singapore'},{id:'TW',cur:'USD',ko:'대만',en:'Taiwan'},{id:'XX',cur:'USD',ko:'기타 국가',en:'Other'}];
+const METHODS={kr:['kakaopay','card','vbank'],intl:['icard','paypal','wire']};
+const OFFLINE=new Set(['vbank','wire']);
+const LIMITS=['days','cluster','routes','places','users','admins','ai'];
+const FEATURES=[
+ ['dash',[['d_count',true,true,true],['d_compare',false,true,true],['d_csv',false,true,true],['d_region',false,false,true],['d_roles',false,false,true],['d_90',true,true,true]]],
+ ['support',[['s_email',true,true,true],['s_review',false,1,2],['s_remote',false,true,true],['s_contact',false,false,true]]],
+];
+const BT={
+ ko:{title:'플랜 · 결제',meta1:'캠페인 1개 단위 이용권',meta2:'제작 · 미리보기는 무료, 팬 모집 전에 결제',
+  camp:'캠페인',campName:'캠페인 이름',start:'시작 예정일',startHelp:'첫 팬 모집일이에요. 결제 후 30일 안에 시작해요',
+  plan:'플랜',planSub:'시험 가격 · 캠페인 1개 기준',best:'대표 플랜',vatEx:'공급가 · VAT 별도',
+  g_self:'셀프서비스 진입',g_ops:'운영형 캠페인',fitL:'추천 대상',pick:'선택',picked:'선택됨',yes:'포함',no:'미포함',
+  fit_starter:'개인 · 인디 · 소규모 IP',fit_campaign:'중소 IP사 · 마케팅팀 · 대행사',fit_scale:'대형 IP사 · 브랜드',
+  fitNote:'추천 대상은 참고용이에요. 회사 규모가 아니라 한도로 고르면 되고, 같은 범위면 같은 요금이에요. 큰 회사도 작은 캠페인이면 Starter를 쓸 수 있어요.',
+  sec_limits:'운영 한도',sec_dash:'대시보드',sec_support:'지원',
+  days:'운영 기간 (일)',cluster:'지역 클러스터 (곳)',routes:'공개 루트 (개)',places:'고유 장소 (곳)',users:'참여자 한도 (계정)',admins:'관리자 (명)',ai:'AI 루트 생성 (회)',
+  d_count:'신청 · 방문 · 완주 집계',d_compare:'루트 · 장소 · 시간대 비교',d_csv:'집계 CSV 내보내기',d_region:'지역 비교',d_roles:'관리자 권한 관리',d_90:'종료 후 90일 읽기 전용 조회',
+  s_email:'영업일 이메일',s_review:'원격 설정 점검 (회)',s_remote:'예약 원격 안내',s_contact:'지정 담당 창구',
+  addons:'추가 옵션',addSub:'필요할 때만',add_ops:'원격 운영 지원 2시간',add_ai:'AI 루트 생성 100회 추가',beta:'출시 검토 중',
+  bill:'청구 정보',billSubKr:'세금계산서에 그대로 들어가요',billSubIntl:'Invoice에 그대로 들어가요',country:'국가 · 지역',
+  buyer:'대표 구매자',buyer_ip:'IP 보유자 직접 결제',buyer_agency:'대행사 대리 결제',buyerHelp:'캠페인 1건에 구매자는 1곳이에요. 대행사가 결제하면 IP사에 중복 청구하지 않아요',
+  company:'회사명',bizno:'사업자등록번호',ceo:'대표자',contact:'담당자',emailKr:'세금계산서 받을 이메일',emailIntl:'청구 이메일',
+  taxid:'세금 식별번호 (선택)',taxidHelp:'EIN, 일본 적격청구서 번호, GST 번호 등',addr:'청구 주소',city:'도시',zip:'우편번호',
+  method:'결제수단',m_kakaopay:'카카오페이',m_card:'법인카드',m_vbank:'계좌이체 (가상계좌)',m_icard:'해외카드 · Visa · Mastercard · AMEX · JCB',m_paypal:'PayPal',m_wire:'해외 송금 (Wire · Invoice)',m_po:'후불 · 발주서',
+  poToast:'후불 · 발주서 결제는 승인된 기업 고객만 별도 계약으로 가능해요',vbankHelp:'가상계좌로 입금이 확인되면 캠페인을 활성화해요',wireHelp:'송금 수수료는 보내는 쪽 부담이에요. 보통 영업일 3–5일 걸리고, 입금이 확인되면 활성화해요',
+  agree:'권리 · 운영 책임 확인',agreeSub:'모두 확인해야 결제할 수 있어요',
+  ag0:'캠페인에 쓰는 IP · 이미지 · 콘텐츠를 사용할 권한이 있어요',ag1:'참여 상점의 동의 · 수용 인원 · 현장 안내와 안전 운영은 구매자가 책임져요',ag2:'활성화 전 취소는 전액 환불, 활성화 후 환불은 계약 조건을 따라요',
+  summary:'견적 요약',planLine:n=>`${n} 이용권`,subtotal:'공급가 합계',vat:'VAT 10%',vat0:'VAT 0% (영세율)',total:'합계',
+  vat0Help:'해외 법인 · 국내 사업장 없음 기준이에요. 영세율 적용은 세무 검토가 필요해요',
+  fxHelp:(krw,c,r)=>`원화 ${krw}원 기준 · 목업 환율 1 ${c} = ${r}원 · 결제 시점 환율로 확정돼요`,
+  pay:(n,a)=>`${n} 이용권 결제 · ${a}`,payVbank:a=>`가상계좌 발급 · ${a}`,payWire:a=>`Invoice 발급 요청 · ${a}`,
+  payNote:'결제 후 30일 안에 시작해요. 시작 전 취소는 전액 환불돼요.',
+  e_req:'필수 항목을 모두 채워 주세요',e_start:'시작일은 오늘부터 30일 안으로 골라 주세요',e_biz:'사업자등록번호 10자리를 확인해 주세요',e_mail:'이메일 형식을 확인해 주세요',e_agree:'권리 · 운영 책임 3개를 모두 확인해 주세요',
+  doneTitle:'결제가 끝났어요',pendTitle:'입금을 기다리고 있어요',st_ok:d=>`활성화 대기 · ${d} 시작`,st_pend:'입금 확인 후 활성화',
+  campL:'캠페인',planL:'플랜',amount:'결제 금액',docKr:'세금계산서 번호',docIntl:'Invoice 번호',startL:'시작일',endL:'운영 종료일',
+  readOnly:'종료 후 90일 동안 결과를 읽기 전용으로 볼 수 있어요. 결과를 보려고 다시 결제할 필요는 없어요.',
+  dl:'세금계산서 · 영수증 받기',dlToast:'세금계산서와 영수증을 담당자 이메일로 보냈어요 (목업)',newPay:'새 캠페인 결제',
+  toastOk:'결제가 끝났어요 · 시작일에 캠페인이 활성화돼요',toastPend:'입금 안내를 이메일로 보냈어요 · 입금이 확인되면 활성화돼요'},
+ en:{title:'Plans & billing',meta1:'One pass per campaign',meta2:'Building and preview are free; pay before fans can join',
+  camp:'Campaign',campName:'Campaign name',start:'Planned start date',startHelp:'The first day fans can sign up. Must be within 30 days of payment',
+  plan:'Plan',planSub:'Pilot pricing · per campaign',best:'Core plan',vatEx:'excl. VAT',
+  g_self:'Self-serve',g_ops:'Managed',fitL:'Best for',pick:'Select',picked:'Selected',yes:'Included',no:'Not included',
+  fit_starter:'Solo creators · indie · small IPs',fit_campaign:'Mid-size IP companies · marketing teams · agencies',fit_scale:'Large IP companies · brands',
+  fitNote:'Best-fit labels are a guide only. Choose by limits, not company size: the same scope costs the same. Large companies can use Starter for a small campaign.',
+  sec_limits:'Limits',sec_dash:'Dashboard',sec_support:'Support',
+  days:'Duration (days)',cluster:'Area clusters',routes:'Public routes',places:'Unique places',users:'Participants',admins:'Admin seats',ai:'AI route generations',
+  d_count:'Sign-up · visit · completion counts',d_compare:'Route · place · time-slot comparison',d_csv:'Aggregate CSV export',d_region:'Region comparison',d_roles:'Admin permissions',d_90:'90-day read-only access after end',
+  s_email:'Business-day email',s_review:'Remote setup reviews',s_remote:'Scheduled remote guidance',s_contact:'Dedicated contact',
+  addons:'Add-ons',addSub:'Optional',add_ops:'Remote ops support · 2 hours',add_ai:'+100 AI route generations',beta:'Coming soon',
+  bill:'Billing details',billSubKr:'Shown on your tax invoice',billSubIntl:'Shown on your invoice',country:'Country / region',
+  buyer:'Purchasing party',buyer_ip:'IP holder (direct)',buyer_agency:'Agency on behalf of IP holder',buyerHelp:'One purchaser per campaign. If an agency pays, the IP holder is not charged again',
+  company:'Company legal name',bizno:'Business registration no.',ceo:'Representative',contact:'Contact name',emailKr:'Tax invoice email',emailIntl:'Billing email',
+  taxid:'Tax ID / VAT ID (optional)',taxidHelp:'e.g. EIN, Japan invoice no., GST no.',addr:'Billing address',city:'City',zip:'Postal code',
+  method:'Payment method',m_kakaopay:'KakaoPay',m_card:'Corporate card',m_vbank:'Bank transfer (virtual account)',m_icard:'Card · Visa · Mastercard · AMEX · JCB',m_paypal:'PayPal',m_wire:'Wire transfer (invoice)',m_po:'Net terms · PO',
+  poToast:'Net terms and purchase orders are available to approved customers under a separate contract',vbankHelp:'The campaign activates once the transfer is confirmed',wireHelp:'Bank fees are paid by the sender. Funds usually arrive in 3–5 business days; the campaign activates on receipt',
+  agree:'Rights & responsibilities',agreeSub:'All three are required',
+  ag0:'We hold the rights to the IP, images and content used in this campaign',ag1:'We are responsible for partner store consent, capacity, on-site guidance and safety',ag2:'Full refund if cancelled before activation; refunds after activation follow the contract',
+  summary:'Order summary',planLine:n=>`${n} pass`,subtotal:'Subtotal',vat:'VAT 10%',vat0:'VAT 0% (zero-rated)',total:'Total',
+  vat0Help:'Applies to overseas entities without a Korean establishment. Local taxes (e.g. reverse charge) are your responsibility',
+  fxHelp:(krw,c,r)=>`Based on ₩${krw}. Mock rate 1 ${c} = ₩${r}; the final rate is set at payment`,
+  pay:(n,a)=>`Pay ${a} · ${n} pass`,payVbank:a=>`Get virtual account · ${a}`,payWire:a=>`Request invoice · ${a}`,
+  payNote:'Start within 30 days of payment. Full refund if cancelled before activation.',
+  e_req:'Please fill in all required fields',e_start:'Pick a start date within the next 30 days',e_biz:'Check the 10-digit business registration number',e_mail:'Check the email address',e_agree:'Please confirm all three statements',
+  doneTitle:'Payment complete',pendTitle:'Awaiting payment',st_ok:d=>`Ready · starts ${d}`,st_pend:'Activates once funds arrive',
+  campL:'Campaign',planL:'Plan',amount:'Amount',docKr:'Tax invoice no.',docIntl:'Invoice no.',startL:'Starts',endL:'Ends',
+  readOnly:'Results stay viewable (read-only) for 90 days after the campaign ends. No need to pay again to see them.',
+  dl:'Download invoice & receipt',dlToast:'Invoice and receipt sent to the billing email (mock)',newPay:'Pay for another campaign',
+  toastOk:'Payment complete · the campaign activates on the start date',toastPend:'Payment instructions sent by email · activates once funds arrive'},
+};
+S.b.bill={lang:'ko',country:'KR',cur:'KRW',plan:'campaign',add:{},method:'kakaopay',agree:[false,false,false],form:{camp:'LUMIN 2집 〈Afterglow〉 루트',start:'2026-11-20',buyer:'ip'},paid:null};
+const bt=(k,...a)=>{const v=BT[S.b.bill.lang][k];return typeof v==='function'?v(...a):v};
+function quote(b){
+ const p=PLANS.find(x=>x.id===b.plan),adds=ADDONS.filter(a=>b.add[a.id]);
+ const sub=p.price+adds.reduce((s,a)=>s+a.price,0),vat=b.country==='KR'?Math.round(sub*.1):0;
+ return {p,adds,sub,vat,total:sub+vat};
+}
+console.assert(quote({plan:'campaign',add:{},country:'KR'}).total===1089000&&quote({plan:'campaign',add:{},country:'US'}).total===990000,'quote');
+const money=(krw,cur=S.b.bill.cur)=>cur==='KRW'&&S.b.bill.lang==='ko'?won(krw)+'원'
+ :new Intl.NumberFormat(S.b.bill.lang==='en'?'en-US':'ko-KR',{style:'currency',currency:cur,maximumFractionDigits:cur==='USD'?2:0}).format(krw/FX[cur]);
+const addD=(d,n)=>{const x=new Date(d);x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)};
+const fmtDay=d=>new Intl.DateTimeFormat(S.b.bill.lang==='en'?'en-US':'ko-KR',{month:'short',day:'numeric',timeZone:'UTC'}).format(new Date(d));
+function setCountry(id){
+ const b=S.b.bill,kr=id==='KR';
+ Object.assign(b,{country:id,cur:COUNTRIES.find(c=>c.id===id).cur,lang:kr?'ko':'en',method:METHODS[kr?'kr':'intl'][0]});render();
+}
+function billDone(p){
+ return `<div class="panel" style="max-width:720px"><h3>${bt(p.pending?'pendTitle':'doneTitle')}<span class="pill ${p.pending?'warn':'ok'}">${p.pending?bt('st_pend'):bt('st_ok',fmtDay(p.start))}</span></h3>
+  <dl class="kv"><dt>${bt('campL')}</dt><dd>${esc(p.camp)}</dd><dt>${bt('planL')}</dt><dd>${p.plan.name}</dd><dt>${bt('amount')}</dt><dd class="num">${money(p.total,p.cur)}</dd>
+   <dt>${bt(p.kr?'docKr':'docIntl')}</dt><dd class="num">${p.no}</dd><dt>${bt('startL')}</dt><dd class="num">${fmtDay(p.start)}</dd><dt>${bt('endL')}</dt><dd class="num">${fmtDay(addD(p.start,p.plan.days-1))}</dd></dl>
+  <p class="walk">${bt('readOnly')}</p>
+  <div class="pc-actions"><button class="btn line" data-act="toast" data-msg="${esc(bt('dlToast'))}">${bt('dl')}</button><button class="btn dark" data-act="bnew">${bt('newPay')}</button></div></div>`;
+}
+function scrBilling(){
+ const b=S.b.bill,f=b.form,kr=b.country==='KR',q=quote(b);
+ const langSeg=`<div class="seg" role="radiogroup" aria-label="Language">${[['ko','KO'],['en','EN']].map(([v,l])=>`<button role="radio" aria-checked="${b.lang===v}" class="${b.lang===v?'on':''}" data-act="blang" data-v="${v}">${l}</button>`).join('')}</div>`;
+ const head=pcTitle(bt('title'),bt('title'),[bt('meta1'),bt('meta2')],langSeg);
+ if(b.paid)return pcShell('ip','billing',head+billDone(b.paid));
+ const fld=(k,lab,o={})=>`<div class="fld"${o.span?' style="grid-column:1/-1"':''}><label for="bb-${k}">${lab}</label><input id="bb-${k}" type="${o.type||'text'}" data-bbind="${k}" value="${esc(f[k]||'')}" placeholder="${esc(o.ph||'')}"${o.attr||''}>${o.help?`<p class="help">${o.help}</p>`:''}</div>`;
+ const fields=kr
+  ?fld('company',bt('company'),{ph:'스텔라엔터테인먼트 주식회사'})+fld('bizno',bt('bizno'),{ph:'123-45-67890',attr:' inputmode="numeric"'})+fld('ceo',bt('ceo'))+fld('contact',bt('contact'))+fld('email',bt('emailKr'),{type:'email',span:1,ph:'billing@company.co.kr'})
+  :fld('company',bt('company'),{span:1,ph:'Stellar Entertainment Inc.'})+fld('taxid',bt('taxid'),{help:bt('taxidHelp')})+fld('contact',bt('contact'))+fld('addr',bt('addr'),{span:1,ph:'123 Main St, Suite 400'})+fld('city',bt('city'),{ph:'Los Angeles'})+fld('zip',bt('zip'),{ph:'90012'})+fld('email',bt('emailIntl'),{type:'email',span:1,ph:'billing@company.com'});
+ const methods=METHODS[kr?'kr':'intl'];
+ const amt=money(q.total),payLabel=b.method==='vbank'?bt('payVbank',amt):b.method==='wire'?bt('payWire',amt):bt('pay',q.p.name,amt);
+ const sum=(l,v)=>`<div class="sum"><span>${l}</span><b class="num">${v}</b></div>`;
+ const col=p=>b.plan===p.id?' class="on"':'';
+ const ox=v=>typeof v==='boolean'?`<span class="ox ${v?'o':'x'}" role="img" aria-label="${bt(v?'yes':'no')}">${ic(v?'check':'close',16,v?2.6:2)}</span>`:v.toLocaleString();
+ return pcShell('ip','billing',`${head}
+ <div class="pc-grid">
+  <div>
+   <div class="panel"><h3>${bt('camp')}</h3><div class="fgrid">
+    ${fld('camp',bt('campName'))}${fld('start',bt('start'),{type:'date',attr:` min="${TODAY}" max="${addD(TODAY,30)}"`,help:bt('startHelp')})}</div></div>
+   <div class="panel"><h3>${bt('plan')} <small>${bt('planSub')}</small></h3>
+    <div class="ctable-wrap" role="radiogroup" aria-label="${bt('plan')}"><table class="ctable"><colgroup><col style="width:36%">${PLANS.map(()=>'<col>').join('')}</colgroup>
+     <thead><tr class="grp"><td></td>${['self','ops'].map(g=>`<th scope="colgroup" colspan="${PLANS.filter(p=>p.g===g).length}"><span>${bt('g_'+g)}</span></th>`).join('')}</tr>
+      <tr class="ph"><td></td>${PLANS.map(p=>`<th scope="col"${col(p)}><span class="pill ink"${p.best?'':' style="visibility:hidden" aria-hidden="true"'}>${bt('best')}</span><b class="pn">${p.name}</b><b class="pp num">${money(p.price)}</b><small>${bt('vatEx')}</small></th>`).join('')}</tr>
+      <tr class="pf"><th scope="row">${bt('fitL')}</th>${PLANS.map(p=>`<td${col(p)}>${bt('fit_'+p.id)}</td>`).join('')}</tr>
+      <tr class="pk"><td></td>${PLANS.map(p=>{const on=b.plan===p.id;return `<td${col(p)}><button class="chip ${on?'on':''}" role="radio" aria-checked="${on}" aria-label="${p.name}" data-act="bplan" data-v="${p.id}">${on?ic('check',14,3)+bt('picked'):bt('pick')}</button></td>`}).join('')}</tr></thead>
+     <tbody>${[['limits',LIMITS.map(k=>[k,...PLANS.map(p=>p[k])])],...FEATURES].map(([s,rs])=>`<tr class="sec"><th colspan="${PLANS.length+1}" scope="rowgroup">${bt('sec_'+s)}</th></tr>
+      ${rs.map(([k,...v])=>`<tr><th scope="row">${bt(k)}</th>${v.map((x,i)=>`<td${col(PLANS[i])}>${ox(x)}</td>`).join('')}</tr>`).join('')}`).join('')}</tbody></table></div>
+    <p class="walk">${bt('fitNote')}</p></div>
+   <div class="panel"><h3>${bt('addons')} <small>${bt('addSub')}</small></h3><div class="agrees">
+    ${ADDONS.map(a=>`<label class="cbx"><input type="checkbox" data-badd="${a.id}" ${b.add[a.id]?'checked':''}>${bt('add_'+a.id)} · <span class="num">${money(a.price)}</span>${a.beta?` <span class="pill neutral">${bt('beta')}</span>`:''}</label>`).join('')}</div></div>
+   <div class="panel"><h3>${bt('bill')} <small>${bt(kr?'billSubKr':'billSubIntl')}</small></h3><div class="fgrid">
+    <div class="fld"><label for="bb-country">${bt('country')}</label><select id="bb-country">${COUNTRIES.map(c=>`<option value="${c.id}" ${c.id===b.country?'selected':''}>${c[b.lang]}</option>`).join('')}</select></div>
+    <div class="fld"><label for="bb-buyer">${bt('buyer')}</label><select id="bb-buyer" data-bbind="buyer">${['ip','agency'].map(v=>`<option value="${v}" ${f.buyer===v?'selected':''}>${bt('buyer_'+v)}</option>`).join('')}</select><p class="help">${bt('buyerHelp')}</p></div>
+    ${fields}</div></div>
+   <div class="panel"><h3>${bt('method')}</h3>
+    <div class="mrow" role="radiogroup" aria-label="${bt('method')}">${methods.map(m=>`<button class="cbx ${b.method===m?'on':''}" role="radio" aria-checked="${b.method===m}" data-act="bmethod" data-v="${m}">${bt('m_'+m)}</button>`).join('')}
+     <button class="cbx" aria-disabled="true" data-act="toast" data-msg="${esc(bt('poToast'))}">${ic('lock',14)}${bt('m_po')}</button></div>
+    ${OFFLINE.has(b.method)?`<p class="walk">${bt(b.method==='wire'?'wireHelp':'vbankHelp')}</p>`:''}</div>
+   <div class="panel"><h3>${bt('agree')} <small>${bt('agreeSub')}</small></h3><div class="agrees">
+    ${[0,1,2].map(i=>`<label class="cbx"><input type="checkbox" data-bagree="${i}" ${b.agree[i]?'checked':''}>${bt('ag'+i)}</label>`).join('')}</div></div>
+  </div>
+  <div class="side-col"><div class="panel"><h3>${bt('summary')}
+    <div class="seg" role="radiogroup" aria-label="Currency">${Object.keys(FX).map(c=>`<button role="radio" aria-checked="${b.cur===c}" class="${b.cur===c?'on':''}" data-act="bcur" data-v="${c}">${c}</button>`).join('')}</div></h3>
+   ${sum(bt('planLine',q.p.name),money(q.p.price))}${q.adds.map(a=>sum(bt('add_'+a.id),money(a.price))).join('')}
+   ${sum(bt('subtotal'),money(q.sub))}${sum(bt(kr?'vat':'vat0'),money(q.vat))}
+   <div class="sum tot"><span>${bt('total')}</span><b class="num">${amt}</b></div>
+   ${kr?'':`<p class="walk">${bt('vat0Help')}</p>`}
+   ${b.cur==='KRW'?'':`<p class="walk">${bt('fxHelp',won(q.total),b.cur,FX[b.cur])}</p>`}
+   <button class="btn dark paybig" data-act="bpay">${payLabel}</button>
+   <p class="ferr" id="bberr" role="alert"></p>
+   <p class="walk">${bt('payNote')}</p></div></div>
+ </div>`);
+}
+
 /* 4-3 공간제공자 대시보드 */
 function scrSpDash(){
  const ppl=BOOK.flat().reduce((a,b)=>a+b,0),teams=BOOK.flat().filter(Boolean).length;
@@ -2400,7 +2594,7 @@ function bModal(){
   <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="bsend">${{apply:'신청 보내기',story:'저장 · IP 인증',public:'등록'}[m.t]}</button></div></div>`;
 }
 
-Object.assign(SCREENS,{'b-find':scrFind,'b-ipinbox':scrIpInbox,'b-inbox':scrInbox,'b-ipdash':scrIpDash,'b-places':scrPlaces,'b-spdash':scrSpDash,'b-cal':scrCal,'b-edit':scrEdit,'b-ipfind':scrIpFind,'b-report':scrReport});
+Object.assign(SCREENS,{'b-find':scrFind,'b-ipinbox':scrIpInbox,'b-inbox':scrInbox,'b-ipdash':scrIpDash,'b-places':scrPlaces,'b-spdash':scrSpDash,'b-cal':scrCal,'b-edit':scrEdit,'b-ipfind':scrIpFind,'b-report':scrReport,'b-billing':scrBilling});
 
 const bgo=to=>{S.b.modal=null;S.b.editing=null;S.b.bot=null;S.screen=to;render(true);window.scrollTo(0,0)};
 const val=id=>(document.getElementById(id)?.value||'').trim();
@@ -2475,6 +2669,20 @@ Object.assign(ACT,{
  payLink:()=>{S.payLink=!S.payLink;render()},
  ipcat:d=>{S.b.ipq.cat=d.v;render()},
  ipopen:()=>{S.b.ipq.open=!S.b.ipq.open;render()},
+ bplan:d=>{S.b.bill.plan=d.v;render()},
+ bcur:d=>{S.b.bill.cur=d.v;render()},
+ blang:d=>{S.b.bill.lang=d.v;render()},
+ bmethod:d=>{S.b.bill.method=d.v;render()},
+ bnew:()=>{Object.assign(S.b.bill,{paid:null,agree:[false,false,false]});render(true);window.scrollTo(0,0)},
+ bpay:()=>{const b=S.b.bill,f=b.form,kr=b.country==='KR',has=k=>(f[k]||'').trim();
+  if((kr?['camp','start','company','bizno','ceo','contact','email']:['camp','start','company','contact','addr','city','zip','email']).some(k=>!has(k)))return ferr('bberr',bt('e_req'));
+  if(dday(f.start)<0||dday(f.start)>30)return ferr('bberr',bt('e_start'));
+  if(kr&&f.bizno.replace(/\D/g,'').length!==10)return ferr('bberr',bt('e_biz'));
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim()))return ferr('bberr',bt('e_mail'));
+  if(!b.agree.every(Boolean))return ferr('bberr',bt('e_agree'));
+  const q=quote(b),pending=OFFLINE.has(b.method);
+  b.paid={no:(kr?'KR':'INV')+'-261107-'+String(Date.now()).slice(-4),plan:q.p,total:q.total,cur:b.cur,start:f.start,camp:f.camp,kr,pending};
+  render(true);window.scrollTo(0,0);toast(esc(bt(pending?'toastPend':'toastOk')))},
 });
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape'&&S.b.modal){S.b.modal=null;render()}
@@ -2488,10 +2696,14 @@ document.addEventListener('mouseover',e=>{
 document.addEventListener('input',e=>{
  if(e.target.id==='rt-persona')S.b.rt.persona=e.target.value;
  if(e.target.id==='ipq'){S.b.ipq.text=e.target.value;ipFilterText()}
+ const bk=e.target.dataset.bbind;if(bk)S.b.bill.form[bk]=e.target.value;
  const k=e.target.dataset.sbind;if(k){const s=ME();s[k]=e.target.type==='number'?+e.target.value:e.target.value}
  if(e.target.id==='bcap'){const v=+e.target.value;if(v>=1&&v<=40){S.b.slotCap=v;render();const c=document.getElementById('bcap');c.focus()}}
 });
 document.addEventListener('change',e=>{
+ const ba=e.target.dataset.bagree;if(ba!=null)S.b.bill.agree[+ba]=e.target.checked;
+ const bo=e.target.dataset.badd;if(bo){S.b.bill.add[bo]=e.target.checked;render()}
+ if(e.target.id==='bb-country')setCountry(e.target.value);
  const c=e.target.dataset.scol;if(c){const s=ME();e.target.checked?s.collab.push(c):s.collab.splice(s.collab.indexOf(c),1)}
 });
 
