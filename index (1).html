@@ -643,9 +643,6 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .device.desktop .stats small{font-size:12px;color:var(--sub);display:block}
 .device.desktop .stats b{font-size:18px;font-weight:800;display:block;margin-top:4px;color:var(--ink)}
 .device.desktop .stats b svg{color:var(--ok)}
-.device.desktop .story{border-left:3px solid var(--ink);padding:2px 0 2px 12px;font-size:14px;line-height:1.55}
-.device.desktop .story+.story{margin-top:12px}
-.device.desktop .story small{display:block;color:var(--sub);font-size:12px}
 .device.desktop .bdim{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:50;animation:fade .2s ease}
 .device.desktop .bmodal{position:fixed;z-index:51;left:50%;top:24px;max-height:calc(100vh - 48px);overflow-y:auto;overscroll-behavior:contain;width:min(560px,calc(100vw - 32px));transform:translateX(-50%);background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow-2);animation:bpop .22s var(--ease)}
 .device.desktop .bmodal.lg{width:min(1000px,calc(100vw - 48px));background:#FAFAF8;padding:24px 28px 28px}
@@ -1728,8 +1725,8 @@ const INDEX=[
  {g:'신청',items:[['entry','입장 화면']]},
  {g:'동행방',items:[['room-recruit','모집 중'],['room-vote','확정'],['room-settle','정산 카드']]},
  {g:'당일 · 종료',items:[['live','당일 진행'],['end','종료']]},
- {g:'파트너 웹 · IP보유자',items:[['b-ipdash','대시보드','PC'],['b-find','공간찾기 · 공간정보','PC'],['b-ipinbox','협업함','PC'],['b-places','장소 관리','PC'],['b-label','장소 라벨링','PC'],['partner','루트 관리','PC'],['b-billing','플랜 · 결제','PC']]},
- {g:'파트너 웹 · 공간제공자',items:[['b-spdash','대시보드','PC'],['b-cal','회차 캘린더','PC'],['b-inbox','협업함','PC'],['b-edit','공간정보 · AI 태그','PC'],['b-ipfind','IP 찾기','PC'],['b-report','리포트 · 정산','PC']]},
+ {g:'파트너 웹 · IP보유자',items:[['b-ipdash','대시보드','PC'],['b-find','공간찾기 · 공간정보','PC'],['b-ipinbox','협업함','PC'],['b-places','장소 관리','PC'],['partner','루트 관리','PC'],['b-billing','플랜 · 결제','PC']]},
+ {g:'파트너 웹 · 공간제공자',items:[['b-spdash','대시보드','PC'],['b-cal','회차 캘린더','PC'],['b-inbox','협업함','PC'],['b-edit','공간정보 · AI 태그','PC'],['b-ipfind','IP 찾기','PC'],['b-license','IP 이용권 결제','PC'],['b-report','리포트 · 정산','PC']]},
 ];
 const NOTES={
  'more':['더보기 탭에 카카오루트 메뉴. 설치 없이 바로 들어가요.','첫 노출 때만 코치마크를 띄워요.'],
@@ -1746,16 +1743,16 @@ const NOTES={
  'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.','"계속 둘래요"로 과반이 되면 방이 일반 그룹채팅으로 전환돼요. 대화·사진은 남고, 하나·정산·지도는 빠지고, 닉네임은 그대로예요.'],
  'b-ipdash':['회차 모집률·참가 팬·노쇼율·진행 중 협업을 한눈에 봐요.','팝업 종료가 30일 안이면 그 장소가 들어간 루트 수와 함께 경고해요.','루트 관리에서 공개한 루트도 아래 표에 \'공개 중\'으로 들어와요.'],
  'b-find':['문장을 조건 칩으로 바꿔요. 검은 칩=태그(순서), 파란 칩=필터(걸러 냄).','카드를 누르면 공간정보 상세 팝업이 열리고, 팝업 아래 \'협업 제안\'으로 조건을 적어 바로 보내요. 팝업은 X · 바깥 배경 · Esc로 닫혀요.','카드에 마우스를 올리면 지도 핀이 빨갛게, 제안을 보낸 곳은 검은 핀으로 보여요. 오른쪽 목록은 제안을 보낸 공간이에요.'],
- 'b-ipinbox':['공간이 먼저 신청한 팝업 협업을 수락하면 장소 관리에 \'스토리 필요\'로 들어가요.','조건 수정을 누르면 그 자리에서 수정 제안을 보낼 수 있어요.','종료 · 거절된 건은 목록에 남기지 않고 카카오톡 챗봇으로 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
- 'b-places':['스토리를 쓰는 게 곧 IP 인증이에요.','공공장소는 직접 등록, GPS 도착 체크로 스탬프 (반경은 정책 미정).','팝업형 장소는 종료 D-day를 경고해요.'],
+ 'b-ipinbox':['공간이 먼저 신청한 팝업 협업을 수락하면 장소 관리에 \'라벨 필요\'로 들어가요.','조건 수정을 누르면 그 자리에서 수정 제안을 보낼 수 있어요.','종료 · 거절된 건은 목록에 남기지 않고 카카오톡 챗봇으로 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
+ 'b-places':['장소마다 IP 라벨(멤버 · 앨범 · 장면)을 붙이는 게 곧 IP 인증이에요.','이 라벨로 루트 관리의 AI 추천이 장소를 묶어요. 라벨 붙은 장소가 3곳 이상이면 추천할 수 있어요.','공공장소는 직접 등록하고 GPS 도착 체크로 스탬프를 줘요 (반경은 정책 미정). 팝업형 장소는 종료 D-day를 경고해요.'],
  'b-spdash':['오늘 도착 타임라인: 루트 동선 기준 도착 예정 시간이에요.','이번 주 도착 예정 인원은 회차 캘린더와 같은 데이터예요.'],
  'b-cal':['칸을 누르면 그 시간대를 막아요 (휴무·대관). 예약이 있는 칸은 막을 수 없어요.','수용 인원을 바꾸면 마감 표시가 바로 다시 계산돼요.'],
  'b-inbox':['받은 제안을 수락·거절하거나 조건을 고쳐 다시 보낼 수 있어요.','진행 중 탭에 지금 협업 중인 IP가 있어요.','종료 · 거절된 건은 카카오톡 챗봇으로만 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
  'b-edit':['AI 태그 제안은 근거와 함께 보여 주고, 수락한 것만 공개돼요.','수락하면 공간찾기 검색 결과에 바로 반영돼요.'],
  'b-ipfind':['공간에서 IP로 먼저 협업을 신청하는 입구예요 (팝업형).','IP 정보는 소속사가 공개한 것만, 팬 규모는 구간으로만 보여요.'],
+ 'b-license':['사장님이 IP사와 직접 계약하지 않고 IP 홍보 · 이벤트 권리를 사요. 신청 → IP사 승인 · 가격 제안 → 결제 순서예요.','결제 금액 = IP사 제안가 + 카카오 중개수수료 10% + VAT 10%. 수수료는 사장님이 더 내요 (목업 정책).','신청 후 검토 중 화면에 3초 머물면 IP사가 추천가로 승인하는 데모가 돌아요. IP보유자 협업함 \'받은 신청\'에서 직접 가격을 적어 승인할 수도 있어요. 승인되면 카카오톡 챗봇 알림이 떠요.'],
  'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액에만 수수료가 붙어요.','수수료율 5%는 목업 값이에요.'],
- 'b-label':['장소마다 IP 정보(멤버 · 앨범 · 장면)를 붙여요. 이 라벨로 루트 관리의 AI 추천이 장소를 묶어요.','표의 종류 · 기간 · 협업 조건은 장소 관리와 협업함에서 가져와요.'],
- 'partner':['루트 목록 → 오른쪽 위 루트 만들기 → 장소 선택(체크와 지도로 먼 곳 빼기) → AI 루트 추천 순서예요. 라벨 붙은 장소를 3곳 이상 고르면 다음으로 가요.','라벨이 없는 장소는 고를 수 없어요. 장소 라벨링에서 먼저 라벨을 붙여요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있고, 카카오 승인 없이 바로 공개돼요.'],
+ 'partner':['루트 목록 → 오른쪽 위 루트 만들기 → 장소 선택(체크와 지도로 먼 곳 빼기) → AI 루트 추천 순서예요. 라벨 붙은 장소를 3곳 이상 고르면 다음으로 가요.','라벨이 없는 장소는 고를 수 없어요. 장소 관리에서 먼저 라벨을 붙여요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있고, 카카오 승인 없이 바로 공개돼요.'],
  'b-billing':['캠페인 1개 단위 이용권이에요. 39만 · 99만 · 249만 원(VAT 별도)은 검증 전 시험 가격이에요.','국가를 바꾸면 통화 · 결제수단 · 세금 · 증빙 · 청구 정보 칸이 바뀌고, 해외는 영어로 먼저 보여요. 해외 법인 영세율 0%는 세무 검토가 필요해요.','목업이라 버튼만 눌러도 완료돼요. 실제로는 서버가 PG 결제 상태와 웹훅을 확인한 뒤 캠페인을 활성화해요.'],
 };
 function curKey(){
@@ -2035,7 +2032,7 @@ S.b={
   {id:'y2',side:'ip',dir:'out',who:"카페 '그레이룸'",space:'s6',from:'2026-11-20',to:'2027-01-31',cap:10,menu:'하나 시그니처 에이드',ops:['한정 메뉴'],status:'wait'},
   ...[['s1','2026-09-01','2027-02-28',12,'애프터글로우 라떼'],['s5','2026-09-01','2027-02-28',8,'유진 추천 LP 청음'],['s4','2026-10-15','2026-11-30',6,'세라 생일 프레임']].map(([sp,from,to,cap,menu],i)=>({id:'ya'+i,side:'ip',dir:null,who:SP(sp).name,space:sp,from,to,cap,menu,ops:['한정 메뉴'],status:'active'})),
  ],
- places:PLACES.map(p=>({id:p.id,name:p.name,kind:p.id==='p6'?'popup':p.shop?'space':'public',story:p.story,from:p.id==='p6'?'2026-10-01':null,to:p.id==='p6'?'2026-11-30':null,radius:p.shop?null:50})),
+ places:PLACES.map(p=>({id:p.id,name:p.name,kind:p.id==='p6'?'popup':p.shop?'space':'public',from:p.id==='p6'?'2026-10-01':null,to:p.id==='p6'?'2026-11-30':null,radius:p.shop?null:50})),
  ai:[
   {tag:'빈티지',cat:'분위기',ev:['사진 2: 원목 바 테이블과 황동 조명',"리뷰 6건에 '빈티지한 인테리어' 표현"],st:'new'},
   {tag:'포토존',cat:'특성',ev:['사진 5: 통창 앞 역광 자리',"리뷰 14건에 '사진 맛집' 표현"],st:'new'},
@@ -2048,11 +2045,11 @@ const prop=id=>S.b.props.find(p=>p.id===id);
 const ME=()=>SP('s1'); // 공간제공자 화면의 주인공 매장
 
 /* 공통 셸 */
-const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['b-label','flag','장소 라벨링'],['partner','route','루트 관리'],['b-billing','wallet','플랜 · 결제'],['','gear','설정']];
-const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴'],['','qr','QR 키트'],['b-report','wallet','리포트 · 정산']];
+const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['partner','route','루트 관리'],['b-billing','wallet','플랜 · 결제'],['','gear','설정']];
+const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴'],['','qr','QR 키트'],['b-license','ticket','IP 이용권'],['b-report','wallet','리포트 · 정산']];
 function pcShell(role,url,body){
  const nav=role==='ip'?NAV_IP:NAV_SP;
- const open=S.b.props.filter(p=>p.side===role&&p.dir==='in'&&p.status==='wait').length;
+ const open=S.b.props.filter(p=>p.side===role&&p.dir==='in'&&p.status==='wait').length+(role==='ip'&&licWaiting()?1:0);
  return `<div class="chrome"><i></i><i></i><i></i><span class="url">partner.kakaoroute.kakao.com/${url}</span></div>
  <div class="pc">
   <nav class="pc-nav"><div class="pc-logo"><i>${ic('route',16,2.2)}</i><span>${role==='ip'?'파트너 센터':'공간 파트너'}<small>${role==='ip'?'스텔라엔터 · LUMIN':esc(ME().name)+' · 사장님'}</small></span></div>
@@ -2127,8 +2124,8 @@ function spaceDetail(m){
    <div class="panel"><h3>협업 조건 <small>AI가 추측하지 않는 항목이에요</small></h3>
     <dl class="kv"><dt>한정 메뉴</dt><dd>${yes('한정 메뉴')}</dd><dt>굿즈 비치</dt><dd>${yes('굿즈 비치')}</dd><dt>포토존 설치</dt><dd>${yes('포토존 설치')}</dd><dt>팝업 대관</dt><dd>${s.popup?`<span class="ok">${ic('check',14,2.6)}가능 · 기간 협의</span>`:'<span class="no">—</span>'}</dd><dt>희망 수수료</dt><dd>측정된 카카오페이 결제의 ${FEE*100}%</dd></dl>
    </div>
-   <div class="panel"><h3>IP별 스토리 <small>소속사가 써요</small></h3>
-    ${st.length?st.map(x=>`<div class="story"><small>${A(x.ip).name} · ${x.k}</small>${esc(x.t)}</div>`).join(''):`<p class="walk" style="margin:0">아직 연결된 IP 스토리가 없어요. 협업이 확정되면 장소 관리에서 스토리를 써서 IP 인증을 마칠 수 있어요.</p>`}
+   <div class="panel"><h3>연결된 IP</h3>
+    ${st.length?`<div class="tagrow" style="margin:0">${st.map(x=>`<span class="tg">${A(x.ip).name} · ${x.k}</span>`).join('')}</div>`:`<p class="walk" style="margin:0">아직 연결된 IP가 없어요. 협업이 확정되면 장소 관리에서 IP 라벨을 붙여 인증해요.</p>`}
    </div>
   </div>
   <div>
@@ -2156,6 +2153,10 @@ function botDemo(side){ // 데모: 협업함에 들어오고 3초 뒤, 보낸 �
 }
 const iga=w=>{const c=w.replace(/[^가-힣]/g,'').slice(-1).charCodeAt(0)-0xAC00;return c>=0&&c%28?'이':'가'};
 function botCard(role){
+ const r=S.b.lic.req;
+ if(role==='space'&&r?.status==='offered'&&!r.seen)return `<aside class="kbot" role="status" aria-label="카카오톡 챗봇 알림"><div class="kbot-h"><span class="kbot-av">${ic('route',16,2.2)}</span><b>카카오루트 파트너</b><small>카카오톡 · 방금</small><button class="iconbtn sm" data-act="licBotX" aria-label="알림 닫기">${ic('close',16,2.2)}</button></div>
+  <div class="kbot-msg"><b>[IP 이용 승인]</b><p>${esc(licIp(r.ip))}${iga(licIp(r.ip))} 이용을 승인하고 가격을 제안했어요 · <b class="num">${won(r.price)}원</b> (수수료 · VAT 별도)</p>
+   <button class="btn sm" data-act="licBotGo">결제하러 가기</button></div></aside>`;
  const b=S.b.bot;if(!b||b.side!==role)return '';
  const ip=role==='ip';
  return `<aside class="kbot" role="status" aria-label="카카오톡 챗봇 알림"><div class="kbot-h"><span class="kbot-av">${ic('route',16,2.2)}</span><b>카카오루트 파트너</b><small>카카오톡 · 방금</small><button class="iconbtn sm" data-act="kbotx" aria-label="알림 닫기">${ic('close',16,2.2)}</button></div>
@@ -2180,11 +2181,20 @@ function inboxHTML(side){
  const groups={in:all.filter(p=>p.dir==='in'&&['wait','countered'].includes(p.status)),out:all.filter(p=>p.dir==='out'&&['wait','countered'].includes(p.status)),active:all.filter(p=>p.status==='active')};
  const lbl={in:side==='ip'?'받은 신청':'받은 제안',out:side==='ip'?'보낸 제안':'보낸 신청',active:'진행 중'};
  botDemo(side);
- const waitN=groups.in.filter(p=>p.status==='wait').length;
- return `<div class="tabs" role="tablist">${Object.keys(lbl).map(k=>`<button role="tab" aria-selected="${t===k}" class="${t===k?'on':''}" data-act="btab" data-side="${side}" data-t="${k}">${lbl[k]} <span class="num">${groups[k].length}</span>${k==='in'&&waitN?`<i class="num">${waitN}</i>`:''}</button>`).join('')}</div>
- ${groups[t].length?groups[t].map(propCard).join(''):`<div class="empty-b"><b>${lbl[t]} 항목이 없어요</b>${t==='out'?(side==='ip'?'공간찾기에서 협업 제안을 보내 보세요.':'IP 찾기에서 협업을 신청해 보세요.'):''}</div>`}`;
+ const licN=side==='ip'&&licWaiting()?1:0,lic=t==='in'&&licN?licCard():'';
+ const waitN=groups.in.filter(p=>p.status==='wait').length+licN;
+ return `<div class="tabs" role="tablist">${Object.keys(lbl).map(k=>`<button role="tab" aria-selected="${t===k}" class="${t===k?'on':''}" data-act="btab" data-side="${side}" data-t="${k}">${lbl[k]} <span class="num">${groups[k].length+(k==='in'?licN:0)}</span>${k==='in'&&waitN?`<i class="num">${waitN}</i>`:''}</button>`).join('')}</div>
+ ${lic}${groups[t].length?groups[t].map(propCard).join(''):lic?'':`<div class="empty-b"><b>${lbl[t]} 항목이 없어요</b>${t==='out'?(side==='ip'?'공간찾기에서 협업 제안을 보내 보세요.':'IP 찾기에서 협업을 신청해 보세요.'):''}</div>`}`;
 }
-const scrIpInbox=()=>pcShell('ip','collabs',pcTitle('협업함','협업함',['수락하면 장소 관리에 들어가요','스토리를 쓰면 IP 인증이 끝나요'])+inboxHTML('ip'));
+function licCard(){
+ const r=licWaiting();
+ return `<article class="prop"><div class="prop-h"><div><b>${esc(ME().name)}</b> <span class="meta" style="display:inline-flex"><span>IP 이용권 신청</span></span><div class="tagrow">${r.uses.map(u=>`<span class="tg">${esc(u)}</span>`).join('')}</div></div><span class="pill warn">가격 제안 필요</span></div>
+  <div class="terms"><div><small>이용 기간</small><span class="num">${licPeriod(r)} · ${licMonths(r)}개월</span></div><div><small>카카오 중개수수료</small>사장님이 ${LIC_FEE*100}% 더 내요</div>
+   <div class="fld" style="grid-column:span 2"><label for="lc-price">제안가 (원 · VAT 별도)</label><input id="lc-price" type="number" min="10000" step="10000" value="${licSuggest(r)}"></div></div>
+  ${r.msg?`<p class="msg">${esc(r.msg)}</p>`:''}
+  <div class="acts"><button class="btn line sm" data-act="licDecline">거절</button><button class="btn dark sm" data-act="licApprove">승인 · 가격 제안</button></div><p class="ferr" id="lcperr" role="alert"></p></article>`;
+}
+const scrIpInbox=()=>pcShell('ip','collabs',pcTitle('협업함','협업함',['수락하면 장소 관리에 들어가요','라벨을 붙이면 IP 인증이 끝나요'])+inboxHTML('ip'));
 const scrInbox=()=>pcShell('space','collabs',pcTitle('협업함','협업함',['수락하면 회차 캘린더에 도착 예정 인원이 들어와요'])+inboxHTML('space'));
 
 /* 4-4 IP보유자 대시보드 */
@@ -2198,13 +2208,13 @@ function scrIpDash(){
  const all=Math.round(rs.reduce((a,r)=>a+fill(r),0)/rs.length);
  const ends=S.b.places.filter(p=>p.to&&dday(p.to)>=0&&dday(p.to)<=30);
  const inN=S.b.props.filter(p=>p.side==='ip'&&p.dir==='in'&&p.status==='wait').length;
- const noStory=S.b.places.filter(p=>!p.story).length;
+ const noLabel=S.b.places.filter(p=>!p.label).length;
  return pcShell('ip','dashboard',`
  ${pcTitle('대시보드','LUMIN 대시보드',['11.2 – 11.8 기준','스텔라엔터'],`<button class="btn dark sm" data-act="rtgo" data-v="pick">${ic('plus',16,2.4)}새 루트 만들기</button>`)}
  ${kpis([['회차 모집률',all+'%','열린 회차 기준'],['이번 주 참가 팬','46명','지난주보다 12명 늘었어요'],['노쇼율','4.1%','D-1 확인으로 자리 해제 7건'],['진행 중 협업',S.b.props.filter(p=>p.side==='ip'&&p.status==='active').length+'곳','공공장소 제외']])}
  ${ends.map(p=>{const n=ROUTES.filter(r=>r.places.includes(p.id)).length;return `<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(p.name)} 팝업이 ${fmtD(p.to)}에 끝나요 (D-${dday(p.to)})</b><br>이 장소가 들어간 루트 ${n}개의 이후 회차는 장소를 바꾸거나 회차를 닫아야 해요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">장소 관리</button></div>`}).join('')}
  ${inN?`<div class="alert info">${ic('bubble',18,2)}<div><b>받은 협업 신청 ${inN}건</b><br>공간제공자가 먼저 협업을 신청했어요.</div><button class="btn line sm" data-act="bgotab" data-to="b-ipinbox" data-side="ip" data-t="in">협업함</button></div>`:''}
- ${noStory?`<div class="alert info">${ic('pen',18,2)}<div><b>스토리를 기다리는 장소 ${noStory}곳</b><br>스토리를 써야 IP 인증이 끝나고 루트에 넣을 수 있어요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">스토리 쓰기</button></div>`:''}
+ ${noLabel?`<div class="alert info">${ic('flag',18,2)}<div><b>라벨을 기다리는 장소 ${noLabel}곳</b><br>라벨을 붙여야 IP 인증이 끝나고 루트 추천에 쓰여요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">라벨 붙이기</button></div>`:''}
  <div class="panel" style="margin-top:6px"><h3>루트 <small>공개 중인 루트</small></h3>${routeTable(rs)}</div>`);
 }
 
@@ -2233,40 +2243,25 @@ function scrRtPick(){
  const ps=S.b.places.map((p,i)=>({p,n:i+1,xy:P(p.id)||SP(p.id),on:!!p.label&&!rt.off.includes(p.id)}));
  const nOn=ps.filter(x=>x.on).length;
  return pcShell('ip','routes/new/places',`
- ${pcTitle('<a href="#" data-act="rtgo" data-v="list">루트 관리</a> › 루트 만들기 › 장소 선택','장소 선택',['추천에 쓸 장소를 고르고, 너무 먼 곳은 체크를 풀어 빼요','라벨은 장소 라벨링에서 붙여요'],`<button class="btn dark sm" data-act="rtgo" data-v="reco" ${nOn>=3?'':'disabled'}>다음 · AI 루트 추천</button>`)}
+ ${pcTitle('<a href="#" data-act="rtgo" data-v="list">루트 관리</a> › 루트 만들기 › 장소 선택','장소 선택',['추천에 쓸 장소를 고르고, 너무 먼 곳은 체크를 풀어 빼요','라벨은 장소 관리에서 붙여요'],`<button class="btn dark sm" data-act="rtgo" data-v="reco" ${nOn>=3?'':'disabled'}>다음 · AI 루트 추천</button>`)}
  <div class="pc-grid">
   <div class="panel"><h3>추천에 쓸 장소 <small class="num">${nOn}곳 선택 · 라벨 붙은 장소 3곳 이상이면 추천</small></h3>
    <div class="pgrid">${ps.map(({p,n,on})=>`<article class="pcard ${p.label?on?'on':'':'off'}" data-hover="${p.id}" ${p.label?`data-act="rtsel" data-id="${p.id}" role="checkbox" aria-checked="${on}" tabindex="0"`:'aria-disabled="true"'} aria-label="${esc(p.name)}">
     <span class="rck">${on?ic('check',14,3):''}</span>
     <div><b class="pc-name"><span class="ord">${n}</span>${esc(p.name)}</b>
      <div style="margin-top:6px"><span class="pill ${p.kind==='popup'?'branch':'neutral'}">${kindL[p.kind]}</span></div>
-     ${p.label?`<div class="tagrow" style="margin:8px 0 0">${labelText(p.label).map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:`<a href="#" class="shop n" style="display:inline-block;margin-top:8px" data-act="pcgo" data-to="b-label">라벨 필요 · 장소 라벨링</a>`}</div>
+     ${p.label?`<div class="tagrow" style="margin:8px 0 0">${labelText(p.label).map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:`<a href="#" class="shop n" style="display:inline-block;margin-top:8px" data-act="pcgo" data-to="b-places">라벨 필요 · 장소 관리</a>`}</div>
    </article>`).join('')}</div></div>
   <div class="side-col"><div class="panel"><h3>지도 <small>번호 = 표 순서 · 검은 핀 = 추천에 씀</small></h3>
    <div class="mapbox">${mapSVG({label:'추천에 쓸 장소 지도',pins:ps.filter(x=>x.xy?.x!=null).map(({p,n,xy,on})=>({id:p.id,x:xy.x,y:xy.y,n,on}))})}</div>
    <p class="walk">멀리 떨어진 장소는 체크를 풀면 추천에서 빠져요</p></div></div>
  </div>`);
 }
-function scrRtLabel(){
- const ps=S.b.places,n=ps.filter(p=>p.label).length;
- return pcShell('ip','places/label',`
- ${pcTitle('장소 라벨링','장소 라벨링',['장소마다 IP 정보를 붙이면 루트 관리에서 AI가 루트를 추천해요','조건은 장소 관리 · 협업함에서 가져와요'],
-  `<button class="btn line sm" data-act="pcgo" data-to="partner">루트 관리로</button>`)}
- <div class="panel"><h3>루트에 넣을 수 있는 장소 <small class="num">라벨 ${n}/${ps.length}곳 · 3곳 이상이면 AI 추천 가능</small></h3>
- <table class="ptable"><thead><tr><th>장소</th><th>종류</th><th class="hide-s">기간</th><th>협업 조건</th><th>IP 라벨</th><th></th></tr></thead><tbody>
- ${ps.map(p=>`<tr><td><b style="font-weight:600">${esc(p.name)}</b></td>
-  <td><span class="pill ${p.kind==='popup'?'branch':'neutral'}">${kindL[p.kind]}</span></td>
-  <td class="hide-s num">${periodOf(p)}</td>
-  <td class="num">${collabOf(p)}</td>
-  <td>${p.label?`<div class="tagrow" style="margin:0">${labelText(p.label).map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:'<span class="shop n">라벨 필요</span>'}</td>
-  <td><button class="btn ${p.label?'line':'dark'} sm" data-act="rtlabel" data-id="${p.id}">${p.label?'수정':'라벨링'}</button></td></tr>`).join('')}
- </tbody></table></div>`);
-}
 function labelModal(m){
  const p=S.b.places.find(x=>x.id===m.id),l=p.label||{members:P(p.id)?.tags||[],albums:[],scenes:[]};
  const grp=(title,name,items)=>`<div class="fld"><label>${title}</label><div class="row" style="flex-wrap:wrap">${items.map(([v,t])=>`<label class="cbx"><input type="checkbox" name="${name}" value="${esc(v)}" ${l[name].includes(v)?'checked':''}>${esc(t)}</label>`).join('')}</div></div>`;
  return `<div class="mhead"><div><h3>${esc(p.name)} · IP 정보</h3><span class="meta" style="margin-top:6px"><span>${kindL[p.kind]}</span><span>${periodOf(p)}</span><span>협업 조건 ${collabOf(p)}</span></span></div><button class="iconbtn mx" data-act="bclose" aria-label="닫기">${ic('close',22,2)}</button></div>
- <div class="panel">${p.story?`<p class="walk" style="margin:0 0 14px">스토리: ${esc(p.story)}</p>`:''}
+ <div class="panel">
   ${grp('관련 멤버','members',A('lumin').members.map(x=>[x.id,x.name]))}
   ${grp('관련 앨범 · 곡','albums',ALBUMS.map(x=>[x,x]))}
   ${grp('장면 종류','scenes',SCENES.map(x=>[x,x]))}
@@ -2307,7 +2302,7 @@ function scrRtReco(){
      <ol class="rstops">${r.places.map((id,i)=>`<li><span class="ord">${i+1}</span>${esc(P(id).name)}</li>`).join('')}</ol>
      <p class="why">${ic('compass',14)}<span>${esc(r.why)}</span></p></div>
     <div class="mapbox">${mapSVG({route:r.places,label:r.name+' 지도'})}</div></article>`}).join('')
-    :`<div class="empty-b"><b>추천할 루트가 없어요</b>같은 앨범 · 멤버 · 장면 라벨이 붙은 장소가 2곳 이상 있어야 해요. 장소 라벨링에서 라벨을 더 붙이거나, 장소 선택에서 장소를 더 골라 보세요.</div>`
+    :`<div class="empty-b"><b>추천할 루트가 없어요</b>같은 앨범 · 멤버 · 장면 라벨이 붙은 장소가 2곳 이상 있어야 해요. 장소 관리에서 라벨을 더 붙이거나, 장소 선택에서 장소를 더 골라 보세요.</div>`
    :`<div class="empty-b"><b>페르소나를 적고 '추천 받기'를 눌러 보세요</b>오른쪽 IP 컨셉은 자동으로 반영돼요.</div>`}
   </div>
   <div class="side-col">
@@ -2324,15 +2319,17 @@ function scrRtReco(){
 /* 장소 관리 */
 function scrPlaces(){
  return pcShell('ip','places',`
- ${pcTitle('장소 관리','장소 관리',['스토리를 쓰면 IP 인증 완료','공공장소는 GPS 도착 체크로 스탬프'],`<button class="btn dark sm" data-act="bpublic">${ic('plus',16,2.4)}공공장소 등록</button>`)}
+ ${pcTitle('장소 관리','장소 관리',['라벨을 붙이면 IP 인증 완료 · AI 루트 추천에 쓰여요','공공장소는 GPS 도착 체크로 스탬프'],`<button class="btn dark sm" data-act="bpublic">${ic('plus',16,2.4)}공공장소 등록</button>`)}
  ${S.b.places.filter(p=>p.to&&dday(p.to)>=0&&dday(p.to)<=30).map(p=>`<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(p.name)} · ${fmtD(p.to)} 종료 (D-${dday(p.to)})</b><br>들어간 루트: ${ROUTES.filter(r=>r.places.includes(p.id)).map(r=>esc(r.short)).join(', ')||'없음'} · 종료 뒤 회차는 수정이 필요해요.</div><button class="btn line sm" data-act="toast" data-msg="공간제공자에게 기간 연장을 요청했어요 (목업)">기간 연장 요청</button></div>`).join('')}
- <div class="panel"><table class="ptable"><thead><tr><th>장소</th><th>종류</th><th>IP 인증 (스토리)</th><th class="hide-s">스탬프</th><th class="hide-s">기간</th><th></th></tr></thead><tbody>
- ${S.b.places.map(p=>`<tr><td><b style="font-weight:600">${esc(p.name)}</b>${p.story?`<div style="font-size:12px;color:var(--sub);margin-top:2px">${esc(p.story.slice(0,30))}…</div>`:''}</td>
-  <td><span class="pill ${p.kind==='popup'?'branch':'neutral'}">${kindL[p.kind]}</span></td>
-  <td>${p.story?'<span class="shop y">인증 완료</span>':'<span class="shop n">스토리 필요</span>'}</td>
+ <div class="panel"><h3>장소 <small class="num">라벨 ${S.b.places.filter(p=>p.label).length}/${S.b.places.length}곳 · 3곳 이상이면 AI 추천 가능</small></h3>
+ <table class="ptable"><thead><tr><th>종류</th><th>장소</th><th class="hide-s">기간</th><th>협업 조건</th><th class="hide-s">스탬프</th><th>IP 라벨</th><th></th></tr></thead><tbody>
+ ${S.b.places.map(p=>`<tr><td><span class="pill ${p.kind==='popup'?'branch':'neutral'}">${kindL[p.kind]}</span></td>
+  <td><b style="font-weight:600">${esc(p.name)}</b></td>
+  <td class="hide-s num">${periodOf(p)}</td>
+  <td class="num">${collabOf(p)}</td>
   <td class="hide-s">${p.kind==='public'?`GPS · 반경 ${p.radius}m`:'매장 QR'}</td>
-  <td class="hide-s num">${p.to?`${fmtD(p.from)} – ${fmtD(p.to)}`:'상시'}</td>
-  <td><button class="btn ${p.story?'line':'dark'} sm" data-act="bstory" data-id="${p.id}">${p.story?'스토리 수정':'스토리 쓰기'}</button></td></tr>`).join('')}
+  <td>${p.label?`<div class="tagrow" style="margin:0">${labelText(p.label).map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:'<span class="shop n">라벨 필요</span>'}</td>
+  <td><button class="btn ${p.label?'line':'dark'} sm" data-act="rtlabel" data-id="${p.id}">${p.label?'수정':'라벨링'}</button></td></tr>`).join('')}
  </tbody></table>
  <p class="walk">GPS 반경 50m는 임시 값이에요 (정책 미정). 공공장소는 공간찾기에 나오지 않고 송객 수수료도 없어요.</p></div>`);
 }
@@ -2492,6 +2489,76 @@ function scrBilling(){
  </div></div>`);
 }
 
+/* IP 이용권 (소상공인이 IP 권리를 사요 · 카카오는 중개수수료) */
+const LIC_USES=['홍보 이미지 사용','IP 이벤트 진행','한정 메뉴','포토존 · 굿즈'];
+const LIC_FEE=0.1;
+const LIC_METHODS=[['kakaopay','카카오페이'],['card','카드'],['vbank','계좌이체 (가상계좌)']];
+const LIC_AGREE=['IP사가 준 공식 에셋 범위 안에서만 쓸게요','이용 기간이 끝나면 홍보물 · 이벤트를 내릴게요','이용 시작 전 취소는 전액 환불, 시작 후 환불은 IP사 조건을 따라요'];
+// ponytail: 목업 월 단가(팬 규모 구간별), 실제 가격은 IP사가 승인할 때 직접 정함
+const licRate=ip=>{const b=IPINFO[ip].band;return b.includes('미만')?300000:b.startsWith('50만')?1500000:800000};
+const licMonths=r=>Math.max(1,Math.ceil((dday(r.to)-dday(r.from)+1)/30));
+const licSuggest=r=>licRate(r.ip)*licMonths(r);
+function licQuote(price){const fee=Math.round(price*LIC_FEE),vat=Math.round((price+fee)*.1);return {price,fee,sub:price+fee,vat,total:price+fee+vat}}
+console.assert(licQuote(1000000).total===1210000&&licQuote(1000000).fee===100000,'licQuote');
+S.b.lic={form:{ip:'lumin',from:'2026-11-20',to:'2026-12-19',uses:['홍보 이미지 사용','IP 이벤트 진행'],msg:''},req:null,
+ pay:{method:'kakaopay',agree:[false,false,false],form:{company:ME().name,bizno:'',ceo:'',email:''}}};
+const licIp=id=>{const a=A(id);return `${a.name} · ${a.agency}`};
+const licPeriod=r=>`${fmtD(r.from)} – ${fmtD(r.to)}`;
+const licWaiting=()=>{const r=S.b.lic.req;return r&&r.status==='wait'&&r.ip==='lumin'?r:null}; // IP보유자 화면의 주인공은 LUMIN
+function licOffer(r,price){Object.assign(r,{status:'offered',price,seen:false,note:'로고 · 앨범 이미지 등 공식 에셋만 쓸 수 있어요. 멤버 사진 단독 사용은 빠져요.'})}
+let licTimer;
+function licDemo(){ // 데모: 검토 중 화면에 3초 머물면 IP사가 추천가로 승인
+ if(licTimer)return;
+ licTimer=setTimeout(()=>{licTimer=null;const r=S.b.lic.req;if(S.screen!=='b-license'||r?.status!=='wait')return;licOffer(r,licSuggest(r));render()},3000);
+}
+const licSummary=r=>`<dl class="kv"><dt>IP</dt><dd>${esc(licIp(r.ip))}</dd><dt>이용 기간</dt><dd class="num">${licPeriod(r)} · ${licMonths(r)}개월</dd>
+ <dt>이용 범위</dt><dd><div class="tagrow" style="margin:0">${r.uses.map(u=>`<span class="tg">${esc(u)}</span>`).join('')}</div></dd>${r.msg?`<dt>하고 싶은 이벤트</dt><dd>${esc(r.msg)}</dd>`:''}</dl>`;
+function scrLicense(){
+ const L=S.b.lic,r=L.req,f=L.form,pay=L.pay,pf=pay.form;
+ const st=!r||r.status==='declined'?0:r.status==='wait'?1:r.status==='offered'?2:3;
+ const steps=`<div class="steps" style="padding:0 0 16px">${['신청','IP사 승인 · 가격 제안','결제','이용 시작'].map((t,i)=>`<span class="${i===st?'on':''}"><i>${i<st||st===3?ic('check',11,3):i+1}</i>${t}</span>`).join(ic('chev',14))}</div>`;
+ const sum=(l,v)=>`<div class="sum"><span>${l}</span><b class="num">${won(v)}원</b></div>`;
+ const lf=(k,lab,o={})=>`<div class="fld"${o.span?' style="grid-column:1/-1"':''}><label for="lp-${k}">${lab}</label><input id="lp-${k}" type="${o.type||'text'}" data-lpay="${k}" value="${esc(pf[k]||'')}" placeholder="${esc(o.ph||'')}"${o.attr||''}></div>`;
+ if(r?.status==='wait')licDemo();
+ let left='';
+ if(!r||r.status==='declined')left=`${r?`<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(licIp(r.ip))}${iga(licIp(r.ip))} 이번 신청을 거절했어요</b><br>결제 전이라 청구된 금액은 없어요.</div><button class="btn line sm" data-act="pcgo" data-to="b-ipfind">다른 IP 찾아보기</button></div>`:''}
+  <div class="panel"><h3>이용 신청 <small>IP사가 승인하면서 가격을 제안해요</small></h3>
+   <div class="fgrid">
+    <div class="fld" style="grid-column:1/-1"><label for="lc-ip">쓰고 싶은 IP</label><select id="lc-ip" data-lbind="ip">${ARTISTS.map(a=>`<option value="${a.id}" ${a.id===f.ip?'selected':''}>${esc(licIp(a.id))}</option>`).join('')}</select>
+     <p class="help">팬 규모 ${IPINFO[f.ip].band} · 예상 가격 월 ${won(licRate(f.ip))}원부터 (IP사가 확정해요)</p></div>
+    <div class="fld"><label for="lc-from">시작일</label><input id="lc-from" type="date" data-lbind="from" value="${f.from}" min="${TODAY}"></div>
+    <div class="fld"><label for="lc-to">종료일</label><input id="lc-to" type="date" data-lbind="to" value="${f.to}" min="${TODAY}"></div>
+   </div>
+   <div class="fld"><label>이용 범위</label><div class="row" style="flex-wrap:wrap">${LIC_USES.map(u=>`<label class="cbx"><input type="checkbox" data-luse="${u}" ${f.uses.includes(u)?'checked':''}>${u}</label>`).join('')}</div></div>
+   <div class="fld"><label for="lc-msg">하고 싶은 이벤트</label><textarea id="lc-msg" data-lbind="msg" maxlength="200" placeholder="예: 컴백 주간에 LUMIN 포스터를 걸고, 영수증을 인증하면 포토카드를 드리고 싶어요">${esc(f.msg)}</textarea></div>
+   <p class="ferr" id="lcerr" role="alert"></p>
+   <div class="pc-actions"><button class="btn dark" data-act="licSend">이용 신청 보내기</button></div></div>`;
+ else if(r.status==='wait')left=`<div class="panel"><h3>신청 내용 <span class="pill neutral">IP사 검토 중</span></h3>${licSummary(r)}
+  <p class="walk">IP사가 승인하면서 가격을 제안하면 카카오톡으로 알려 드려요. 보통 영업일 2일 안에 답이 와요.</p></div>`;
+ else if(r.status==='offered')left=`<div class="panel"><h3>IP사 제안 <span class="pill ok">승인됨</span></h3>
+   <div class="feebox" style="margin-bottom:14px">${esc(licIp(r.ip))} 제안가 <b class="num">${won(r.price)}원</b><small>${esc(r.note)}</small></div>${licSummary(r)}</div>
+  <div class="panel"><h3>청구 정보 <small>세금계산서에 그대로 들어가요</small></h3><div class="fgrid">
+   ${lf('company','상호')}${lf('bizno','사업자등록번호',{ph:'123-45-67890',attr:' inputmode="numeric"'})}${lf('ceo','대표자')}${lf('email','세금계산서 받을 이메일',{type:'email',ph:'owner@store.kr'})}</div></div>
+  <div class="panel"><h3>결제수단</h3><div class="mrow" role="radiogroup" aria-label="결제수단">${LIC_METHODS.map(([v,l])=>`<button class="cbx ${pay.method===v?'on':''}" role="radio" aria-checked="${pay.method===v}" data-act="licMethod" data-v="${v}">${l}</button>`).join('')}</div>
+   ${pay.method==='vbank'?'<p class="walk">가상계좌로 입금이 확인되면 이용이 시작돼요</p>':''}</div>
+  <div class="panel"><h3>이용 조건 확인 <small>모두 확인해야 결제할 수 있어요</small></h3><div class="agrees">${LIC_AGREE.map((t,i)=>`<label class="cbx"><input type="checkbox" data-lagree="${i}" ${pay.agree[i]?'checked':''}>${t}</label>`).join('')}</div></div>`;
+ else left=`<div class="panel"><h3>${r.pending?'입금을 기다리고 있어요':'결제가 끝났어요'}<span class="pill ${r.pending?'warn':'ok'}">${r.pending?'입금 확인 후 이용 시작':fmtD(r.from)+'부터 이용'}</span></h3>
+  <dl class="kv"><dt>IP</dt><dd>${esc(licIp(r.ip))}</dd><dt>이용 기간</dt><dd class="num">${licPeriod(r)}</dd><dt>이용 범위</dt><dd>${r.uses.map(esc).join(', ')}</dd><dt>결제 금액</dt><dd class="num">${won(r.total)}원</dd><dt>결제 번호</dt><dd class="num">${r.no}</dd></dl>
+  <p class="walk">라이선스료는 IP사에, 중개수수료는 카카오에 정산돼요. 공식 에셋(로고 · 이미지)은 이용 시작일에 카카오톡으로 보내 드려요.</p>
+  <div class="pc-actions"><button class="btn line" data-act="toast" data-msg="영수증과 세금계산서를 이메일로 보냈어요 (목업)">영수증 받기</button><button class="btn dark" data-act="licNew">새 이용권 신청</button></div></div>`;
+ const q=r?.price?licQuote(r.price):null;
+ const right=r?.status==='offered'?`<div class="panel"><h3>결제 금액</h3>
+   ${sum('IP 라이선스료',q.price)}${sum(`카카오 중개수수료 ${LIC_FEE*100}%`,q.fee)}${sum('공급가 합계',q.sub)}${sum('VAT 10%',q.vat)}
+   <div class="sum tot"><span>합계</span><b class="num">${won(q.total)}원</b></div>
+   <button class="btn dark paybig" data-act="licPay">${pay.method==='vbank'?'가상계좌 발급':'결제하기'} · ${won(q.total)}원</button>
+   <p class="ferr" id="lperr" role="alert"></p><p class="walk">이용 시작 전 취소는 전액 환불돼요.</p></div>`
+  :`<div class="panel"><h3>이렇게 진행돼요</h3>
+   <div class="flow"><div><b>1</b>쓰고 싶은 IP와 기간 · 범위를 골라 신청</div><div><b>2</b>IP사가 승인하면서 가격 제안 · 카카오톡 알림</div><div><b>3</b>제안가를 확인하고 결제</div><div><b>4</b>공식 에셋을 받고 홍보 · 이벤트 시작</div></div>
+   <div class="feebox" style="margin-top:12px">카카오 중개수수료 <b>라이선스료의 ${LIC_FEE*100}%</b><small>IP사와 따로 계약하지 않아도 돼요. 계약 · 권리 확인 · 정산은 카카오가 대신하고, 수수료는 결제할 때 라이선스료에 더해져요.</small></div></div>`;
+ return pcShell('space','license',`${pcTitle('IP 이용권','IP 이용권',['IP 계약 없이 홍보 · 이벤트 권리를 사요',`카카오 중개수수료 ${LIC_FEE*100}%`])}
+ ${steps}<div class="pc-grid bill-grid"><div>${left}</div><div class="side-col">${right}</div></div>`);
+}
+
 /* 4-3 공간제공자 대시보드 */
 function scrSpDash(){
  const ppl=BOOK.flat().reduce((a,b)=>a+b,0),teams=BOOK.flat().filter(Boolean).length;
@@ -2578,7 +2645,8 @@ function scrIpFind(){
   const ex=S.b.props.find(p=>p.side==='space'&&p.ip===a.id&&p.status!=='declined');
   return `<article class="ipc" data-k="${esc(ipKey(a))}" ${ipHit(ipKey(a))?'':'hidden'}><div class="top"><span class="av" style="background:${grad(a.c)}">${esc(a.name.slice(0,2))}</span><div><b>${esc(a.name)}</b><div class="meta"><span>${a.agency}</span></div></div>${inf.open?'<span class="pill branch" style="margin-left:auto">팝업 협업 받는 중</span>':''}</div>
    <dl class="kv sm"><dt>장르</dt><dd>${inf.genre}</dd><dt>팬 규모</dt><dd>${inf.band}</dd><dt>루트 지역</dt><dd>${areas.join(', ')||'아직 없음'}</dd><dt>다음 컴백</dt><dd>${inf.comeback||'<span class="no">비공개</span>'}</dd></dl>
-   ${!ex?`<button class="btn dark" data-act="bapply" data-id="${a.id}">협업 신청</button>`:ex.dir==='out'?'<button class="btn line" disabled>신청함 · 응답 대기</button>':`<button class="btn line" data-act="bgotab" data-to="b-inbox" data-side="space" data-t="${ex.status==='active'?'active':'in'}">${ex.status==='active'?'협업 중':'받은 제안 확인'}</button>`}</article>`}).join('')}</div>
+   <div class="row" style="margin-top:auto">${!ex?`<button class="btn dark" style="flex:1" data-act="bapply" data-id="${a.id}">협업 신청</button>`:ex.dir==='out'?'<button class="btn line" style="flex:1" disabled>신청함 · 응답 대기</button>':`<button class="btn line" style="flex:1" data-act="bgotab" data-to="b-inbox" data-side="space" data-t="${ex.status==='active'?'active':'in'}">${ex.status==='active'?'협업 중':'받은 제안 확인'}</button>`}
+    <button class="btn line" style="flex:1" data-act="licFrom" data-id="${a.id}">이용권 신청</button></div></article>`}).join('')}</div>
  <p class="walk">팬 규모는 구간으로만 보여요 (소속사 의견 확인 중).</p>`);
 }
 
@@ -2619,19 +2687,15 @@ function bModal(){
   const s=ME(),a=A(m.id);
   h=`<h3>${esc(a.name)}에 팝업 협업 신청</h3><p class="s">수락되면 기간 동안만 성지로 노출되고, 팬 앱에 '기간 한정' 라벨이 붙어요.</p>${proposeFields(s,true)}`;
  }
- if(m.t==='story'){const p=S.b.places.find(x=>x.id===m.id);
-  h=`<h3>${esc(p.name)} 스토리</h3><p class="s">이 장소가 LUMIN의 어떤 장면과 이어지는지 써 주세요. 저장하면 IP 인증이 끝나고 팬 앱에 소속사 인증 배지가 붙어요.</p>
-  <div class="fld"><label for="mf-story">스토리</label><textarea id="mf-story" maxlength="120" placeholder="예: 2집 재킷 B버전을 찍은 1층 네온 사인 앞이에요.">${esc(p.story||'')}</textarea><p class="help">10자 이상 · 팬 앱 장소 카드에 그대로 보여요</p></div>`;}
  if(m.t==='public'){
-  h=`<h3>공공장소 등록</h3><p class="s">공원·벽화·계단처럼 주인이 없는 장소예요. 공간 인증 없이 스토리만으로 IP 인증을 하고, 스탬프는 GPS 도착 체크로 줘요.</p>
+  h=`<h3>공공장소 등록</h3><p class="s">공원·벽화·계단처럼 주인이 없는 장소예요. 공간 인증 없이 IP 라벨만으로 IP 인증을 하고, 스탬프는 GPS 도착 체크로 줘요.</p>
   <div class="fld"><label for="mf-name">장소 이름</label><input id="mf-name" placeholder="예: 성수 연무장길 계단"></div>
-  <div class="fld"><label for="mf-story">스토리</label><textarea id="mf-story" maxlength="120" placeholder="예: 〈Afterglow〉 티저에서 멤버들이 앉아 있던 계단이에요."></textarea></div>
   <div class="fld"><label for="mf-rad">GPS 도착 반경</label><select id="mf-rad"><option value="30">30m</option><option value="50" selected>50m</option><option value="100">100m</option></select><p class="help">반경 기준은 아직 정책 미정이에요</p></div>`;}
  return `<div class="bdim" data-act="bclose"></div><div class="bmodal" role="dialog" aria-modal="true" aria-label="${m.t}">${h}<p class="ferr" id="mferr" role="alert"></p>
-  <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="bsend">${{apply:'신청 보내기',story:'저장 · IP 인증',public:'등록'}[m.t]}</button></div></div>`;
+  <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="bsend">${{apply:'신청 보내기',public:'등록'}[m.t]}</button></div></div>`;
 }
 
-Object.assign(SCREENS,{'b-find':scrFind,'b-ipinbox':scrIpInbox,'b-inbox':scrInbox,'b-ipdash':scrIpDash,'b-places':scrPlaces,'b-spdash':scrSpDash,'b-cal':scrCal,'b-edit':scrEdit,'b-ipfind':scrIpFind,'b-report':scrReport,'b-billing':scrBilling,'b-label':scrRtLabel});
+Object.assign(SCREENS,{'b-find':scrFind,'b-ipinbox':scrIpInbox,'b-inbox':scrInbox,'b-ipdash':scrIpDash,'b-places':scrPlaces,'b-spdash':scrSpDash,'b-cal':scrCal,'b-edit':scrEdit,'b-ipfind':scrIpFind,'b-report':scrReport,'b-billing':scrBilling,'b-license':scrLicense});
 
 const bgo=to=>{S.b.modal=null;S.b.editing=null;S.b.bot=null;S.screen=to;render(true);window.scrollTo(0,0)};
 const val=id=>(document.getElementById(id)?.value||'').trim();
@@ -2659,18 +2723,15 @@ Object.assign(ACT,{
  bopen:d=>{S.b.modal={t:'space',id:d.id,form:false};render();document.querySelector('.bmodal .mx')?.focus()},
  bpropose:()=>{S.b.modal.form=true;render();document.getElementById('mf-from')?.focus()},
  bapply:d=>{S.b.modal={t:'apply',id:d.id};render();document.getElementById('mf-from')?.focus()},
- bstory:d=>{S.b.modal={t:'story',id:d.id};render();document.getElementById('mf-story')?.focus()},
  bpublic:()=>{S.b.modal={t:'public'};render();document.getElementById('mf-name')?.focus()},
  bclose:()=>{S.b.modal=null;render()},
  bsend:()=>{const m=S.b.modal;
-  if(m.t==='story'||m.t==='public'){
-   const story=val('mf-story'),name=m.t==='public'?val('mf-name'):'';
-   if(m.t==='public'&&name.length<2)return ferr('mferr','장소 이름을 입력해 주세요');
-   if(story.length<10)return ferr('mferr','스토리를 10자 이상 써 주세요');
-   if(m.t==='story')S.b.places.find(x=>x.id===m.id).story=story;
-   else S.b.places.push({id:'u'+Date.now(),name,kind:'public',story,from:null,to:null,radius:+val('mf-rad')});
+  if(m.t==='public'){
+   const name=val('mf-name');
+   if(name.length<2)return ferr('mferr','장소 이름을 입력해 주세요');
+   S.b.places.push({id:'u'+Date.now(),name,kind:'public',from:null,to:null,radius:+val('mf-rad')});
    S.b.modal=null;render();
-   return toast(m.t==='story'?'스토리를 저장했어요 · IP 인증 완료<br><span style="opacity:.7">이제 루트 만들기에서 이 장소를 고를 수 있어요</span>':`${esc(name)}을 공공장소로 등록했어요`);
+   return toast(`${esc(name)}을 공공장소로 등록했어요<br><span style="opacity:.7">라벨링을 눌러 IP 정보를 붙여 주세요</span>`);
   }
   const s=m.t==='space'?SP(m.id):ME(),from=val('mf-from'),to=val('mf-to'),cap=+val('mf-cap');
   if(!from||!to)return ferr('mferr','기간을 입력해 주세요');
@@ -2687,8 +2748,8 @@ Object.assign(ACT,{
  bformx:()=>{S.b.modal.form=false;render()},
  btab:d=>{S.b.tab[d.side]=d.t;S.b.editing=null;render()},
  bacc:d=>{const p=prop(d.id);p.status='active';
-  if(p.side==='ip'&&!S.b.places.some(x=>x.id===p.space))S.b.places.push({id:p.space,name:p.who,kind:p.popup?'popup':'space',story:'',from:p.from,to:p.to,radius:null});
-  render();toast(p.side==='ip'?'협업을 시작했어요<br><span style="opacity:.7">장소 관리에서 스토리를 쓰면 IP 인증이 끝나요</span>':'협업을 시작했어요<br><span style="opacity:.7">소속사가 스토리를 쓰고 회차를 열면 캘린더에 도착 예정 인원이 들어와요</span>')},
+  if(p.side==='ip'&&!S.b.places.some(x=>x.id===p.space))S.b.places.push({id:p.space,name:p.who,kind:p.popup?'popup':'space',from:p.from,to:p.to,radius:null});
+  render();toast(p.side==='ip'?'협업을 시작했어요<br><span style="opacity:.7">장소 관리에서 라벨을 붙이면 IP 인증이 끝나요</span>':'협업을 시작했어요<br><span style="opacity:.7">소속사가 라벨을 붙이고 회차를 열면 캘린더에 도착 예정 인원이 들어와요</span>')},
  bdec:d=>{prop(d.id).status='declined';render();toast('거절했어요')},
  kbotx:()=>{S.b.bot=null;render()},
  bcounter:d=>{S.b.editing=d.id;render();document.getElementById('ce-cap')?.focus()},
@@ -2722,6 +2783,29 @@ Object.assign(ACT,{
   const q=quote(b),pending=OFFLINE.has(b.method);
   b.paid={no:(kr?'KR':'INV')+'-261107-'+String(Date.now()).slice(-4),plan:q.p,total:q.total,cur:b.cur,start:f.start,camp:f.camp,kr,pending};
   render(true);window.scrollTo(0,0);toast(esc(bt(pending?'toastPend':'toastOk')))},
+ licFrom:d=>{const L=S.b.lic;L.form.ip=d.id;if(!L.req||['declined','paid'].includes(L.req.status))L.req=null;bgo('b-license')},
+ licSend:()=>{const L=S.b.lic,f=L.form;
+  if(!f.from||!f.to)return ferr('lcerr','기간을 입력해 주세요');
+  if(f.to<f.from)return ferr('lcerr','종료일이 시작일보다 빨라요');
+  if(!f.uses.length)return ferr('lcerr','이용 범위를 하나 이상 골라 주세요');
+  L.req={id:'l'+Date.now(),ip:f.ip,from:f.from,to:f.to,uses:[...f.uses],msg:f.msg.trim(),status:'wait'};
+  render();toast(`${esc(A(f.ip).name)}에 이용 신청을 보냈어요<br><span style="opacity:.7">IP사가 승인하면 카카오톡으로 알려 드려요</span>`)},
+ licApprove:()=>{const price=+val('lc-price');
+  if(!(price>=10000))return ferr('lcperr','제안가를 1만 원 이상으로 적어 주세요');
+  licOffer(S.b.lic.req,price);render();toast('승인하고 가격을 제안했어요<br><span style="opacity:.7">사장님 카카오톡으로 알림이 갔어요</span>')},
+ licDecline:()=>{S.b.lic.req.status='declined';render();toast('이용 신청을 거절했어요')},
+ licBotGo:()=>{S.b.lic.req.seen=true;bgo('b-license')},
+ licBotX:()=>{S.b.lic.req.seen=true;render()},
+ licMethod:d=>{S.b.lic.pay.method=d.v;render()},
+ licPay:()=>{const L=S.b.lic,f=L.pay.form,has=k=>(f[k]||'').trim();
+  if(['company','bizno','ceo','email'].some(k=>!has(k)))return ferr('lperr','필수 항목을 모두 채워 주세요');
+  if(f.bizno.replace(/\D/g,'').length!==10)return ferr('lperr','사업자등록번호 10자리를 확인해 주세요');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim()))return ferr('lperr','이메일 형식을 확인해 주세요');
+  if(!L.pay.agree.every(Boolean))return ferr('lperr','이용 조건 3개를 모두 확인해 주세요');
+  const pending=L.pay.method==='vbank';
+  Object.assign(L.req,{status:'paid',pending,seen:true,total:licQuote(L.req.price).total,no:'RT-L-261107-'+String(Date.now()).slice(-4)});
+  render(true);window.scrollTo(0,0);toast(pending?'입금 안내를 이메일로 보냈어요 · 입금이 확인되면 이용이 시작돼요':'결제가 끝났어요 · 시작일에 공식 에셋을 카카오톡으로 보내 드려요')},
+ licNew:()=>{S.b.lic.req=null;S.b.lic.pay.agree=[false,false,false];render(true);window.scrollTo(0,0)},
 });
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape'&&S.b.modal){S.b.modal=null;render()}
@@ -2737,6 +2821,8 @@ document.addEventListener('input',e=>{
  if(e.target.id==='mf-etc')document.getElementById('mf-etc-on').checked=!!e.target.value.trim();
  if(e.target.id==='ipq'){S.b.ipq.text=e.target.value;ipFilterText()}
  const bk=e.target.dataset.bbind;if(bk)S.b.bill.form[bk]=e.target.value;
+ const lk=e.target.dataset.lbind;if(lk)S.b.lic.form[lk]=e.target.value;
+ const lp=e.target.dataset.lpay;if(lp)S.b.lic.pay.form[lp]=e.target.value;
  const k=e.target.dataset.sbind;if(k){const s=ME();s[k]=e.target.type==='number'?+e.target.value:e.target.value}
  if(e.target.id==='bcap'){const v=+e.target.value;if(v>=1&&v<=40){S.b.slotCap=v;render();const c=document.getElementById('bcap');c.focus()}}
 });
@@ -2744,6 +2830,9 @@ document.addEventListener('change',e=>{
  const ba=e.target.dataset.bagree;if(ba!=null)S.b.bill.agree[+ba]=e.target.checked;
  const bo=e.target.dataset.badd;if(bo){S.b.bill.add[bo]=e.target.checked;render()}
  if(e.target.id==='bb-country')setCountry(e.target.value);
+ if(e.target.id==='lc-ip'){S.b.lic.form.ip=e.target.value;render()}
+ const la=e.target.dataset.lagree;if(la!=null)S.b.lic.pay.agree[+la]=e.target.checked;
+ const lu=e.target.dataset.luse;if(lu){const u=S.b.lic.form.uses,i=u.indexOf(lu);e.target.checked?i<0&&u.push(lu):i>=0&&u.splice(i,1)}
  const c=e.target.dataset.scol;if(c){const s=ME();e.target.checked?s.collab.push(c):s.collab.splice(s.collab.indexOf(c),1)}
 });
 
