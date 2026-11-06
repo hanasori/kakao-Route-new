@@ -536,14 +536,10 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .pc-logo small{display:block;font-weight:500;font-size:11.5px;color:var(--sub)}
 .pc-nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;font-size:14px;color:var(--ink2);text-decoration:none}
 .pc-nav a.on{background:var(--bg2);color:var(--ink);font-weight:700}
-.pc-nav a .pro{margin-left:auto;font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;background:var(--ink);color:var(--y)}
 .pc-main{padding:26px 32px 36px;min-width:0}
 .crumb{font-size:12.5px;color:var(--sub)}
 .pc-title{display:flex;justify-content:space-between;align-items:flex-end;margin:6px 0 20px;gap:16px;flex-wrap:wrap}
 .pc-title h2{font-size:24px;font-weight:800;letter-spacing:-.03em}
-.pc-steps{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
-.pc-steps span{font-size:13px;padding:7px 12px;border-radius:8px;background:#fff;border:1px solid var(--line);color:var(--sub)}
-.pc-steps span.on{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}
 .pc-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px;align-items:start}
 .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
 .panel+.panel{margin-top:16px}
@@ -554,34 +550,15 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .fld input{width:100%;height:42px;border-radius:10px;border:1px solid var(--line2);padding:0 12px;font-size:14.5px;outline:none;transition:border-color .15s}
 .fld input:focus{border-color:var(--ink)}
 .fld .help{font-size:12px;color:var(--sub);margin-top:6px}
-.kindsel{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.kindsel button{text-align:left;border:1px solid var(--line2);border-radius:12px;padding:12px 14px;font-size:14px}
-.kindsel button small{display:block;font-size:12px;color:var(--sub);margin-top:3px;line-height:1.4}
-.kindsel button.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);background:var(--y-soft)}
 .ptable{width:100%;border-collapse:collapse;font-size:13.5px}
 .ptable th{font-size:12px;color:var(--sub);font-weight:600;text-align:left;padding:8px 8px;border-bottom:1px solid var(--line)}
 .ptable td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
-.ptable tr.off td{color:var(--mute)}
-.ptable .ck{width:20px;height:20px;border-radius:6px;cursor:pointer}
-.ptable tr.on .ck{background:var(--ink);border-color:var(--ink);color:var(--y)}
 .ord{width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--y);font-size:11px;font-weight:700;display:inline-grid;place-items:center}
 .shop{font-size:12px;white-space:nowrap}
 .shop.y{color:var(--ok);font-weight:600}
 .shop.n{color:var(--warn)}
-.sess{display:flex;gap:8px;flex-wrap:wrap}
-.sess span{font-size:13px;padding:8px 12px;border-radius:9px;border:1px solid var(--line2);background:#fff}
-.sess span b{margin-right:4px}
-.sess .add{border-style:dashed;color:var(--sub)}
-.prev-phone{border-radius:22px;background:var(--bg2);padding:14px}
-.prev-phone .lbl{font-size:12px;color:var(--sub);font-weight:600;margin-bottom:8px}
-.prev-phone .rcard{margin:0}
 .pc-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
 .pc-actions .btn{width:auto;padding:0 22px;height:46px;font-size:15px}
-.checklist{font-size:13px;line-height:1.5}
-.checklist div{display:flex;gap:8px;padding:6px 0;align-items:flex-start}
-.checklist .ok{color:var(--ok)}
-.checklist .no{color:var(--warn)}
-
 /* ───────── B2B partner web ───────── */
 .device.desktop .crumb a{color:var(--sub);text-decoration:none}
 .device.desktop .crumb a:hover{text-decoration:underline}
@@ -619,9 +596,17 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .device.desktop .find-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px}
 .device.desktop .tgl{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--ink2);cursor:pointer}
 .device.desktop .tgl input{accent-color:var(--ink);width:16px;height:16px}
-.device.desktop .pro{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;background:var(--ink);color:var(--y)}
 .device.desktop .scard{display:grid;grid-template-columns:128px minmax(0,1fr);gap:16px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;transition:border-color .15s}
 .device.desktop .scard.on{border-color:var(--ink)}
+.device.desktop article.scard{cursor:pointer}
+.device.desktop article.scard:hover{border-color:#E5484D}
+.mpin.hot circle{fill:#E5484D;stroke:#E5484D}
+.mpin.hot text{fill:#fff}
+.device.desktop .sent{list-style:none;display:flex;flex-direction:column;gap:6px}
+.device.desktop .sent li{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.device.desktop .sent li button{display:flex;flex-direction:column;align-items:flex-start;text-align:left;font-size:14px;padding:6px 0}
+.device.desktop .sent li button span{font-size:12px;color:var(--sub)}
+.device.desktop .sent li button:hover b{text-decoration:underline}
 .device.desktop .thumb{border-radius:12px;min-height:128px;position:relative;width:100%}
 .device.desktop .thumb span{position:absolute;left:8px;top:8px;width:24px;height:24px;border-radius:50%;background:#fff;color:var(--ink);font-size:12px;font-weight:800;display:grid;place-items:center}
 .device.desktop .sc-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
@@ -634,9 +619,6 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .device.desktop .tg small{font-size:9.5px;margin-left:4px;color:var(--blue);font-weight:700}
 .device.desktop .why{display:flex;gap:6px;font-size:13px;color:var(--ink2);margin-top:8px;line-height:1.45}
 .device.desktop .why svg{margin-top:2px;color:var(--sub)}
-.device.desktop .cart{list-style:none;display:flex;flex-direction:column;gap:6px}
-.device.desktop .cart li{display:flex;align-items:center;gap:10px;font-size:14px}
-.device.desktop .cart li span:nth-child(2){flex:1}
 .device.desktop .iconbtn.sm{width:32px;height:32px}
 .device.desktop .walk{font-size:13px;color:var(--sub);margin-top:10px;line-height:1.5}
 .device.desktop .walk b{color:var(--ink)}
@@ -661,16 +643,34 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .device.desktop .stats small{font-size:12px;color:var(--sub);display:block}
 .device.desktop .stats b{font-size:18px;font-weight:800;display:block;margin-top:4px;color:var(--ink)}
 .device.desktop .stats b svg{color:var(--ok)}
-.device.desktop .vis{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;line-height:1.7}
-.device.desktop .vis h4{font-size:12px;font-weight:700;margin-bottom:2px}
-.device.desktop .vis ul{padding-left:16px;color:var(--ink2)}
 .device.desktop .story{border-left:3px solid var(--ink);padding:2px 0 2px 12px;font-size:14px;line-height:1.55}
 .device.desktop .story+.story{margin-top:12px}
 .device.desktop .story small{display:block;color:var(--sub);font-size:12px}
-.device.desktop .pv{background:#fff;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px;font-size:13.5px;line-height:1.5}
-.device.desktop .pv b{font-size:15px}
 .device.desktop .bdim{position:absolute;inset:0;background:rgba(0,0,0,.38);z-index:50;animation:fade .2s ease}
 .device.desktop .bmodal{position:absolute;z-index:51;left:50%;top:64px;width:min(560px,calc(100% - 32px));transform:translateX(-50%);background:#fff;border-radius:20px;padding:24px;box-shadow:var(--shadow-2);animation:bpop .22s var(--ease)}
+.device.desktop .bmodal.lg{width:min(1000px,calc(100% - 48px));background:#FAFAF8;padding:24px 28px 28px}
+.bmodal .mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px}
+.bmodal .mhead h3{font-size:24px}
+.bmodal .pform{margin-top:16px}
+.bmodal .pform .pc-actions{margin-top:8px}
+.rreco{display:grid;grid-template-columns:26px minmax(0,1fr) 220px;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;cursor:pointer;transition:border-color .15s}
+.rreco:hover{border-color:var(--line2)}
+.rreco.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.rck{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line2);display:grid;place-items:center}
+.rreco.on .rck{background:var(--ink);border-color:var(--ink);color:var(--y)}
+.rname{font-size:16.5px}
+.rstops{list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13.5px}
+.rstops li{display:flex;align-items:center;gap:6px}
+.rreco .mapbox{margin:0;border-radius:12px;overflow:hidden}
+.kbot{position:fixed;right:24px;bottom:24px;z-index:70;width:320px;background:#B2C7D9;border-radius:18px;padding:12px;box-shadow:var(--shadow-2);animation:bpop2 .3s var(--ease)}
+.kbot-h{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px}
+.kbot-h small{color:#4A5A68;font-size:11.5px}
+.kbot-h .iconbtn{margin-left:auto}
+.kbot-av{width:30px;height:30px;border-radius:11px;background:var(--y);display:grid;place-items:center}
+.kbot-msg{background:#fff;border-radius:4px 14px 14px 14px;padding:12px 14px;font-size:13.5px;line-height:1.5;margin-left:38px}
+.kbot-msg p{margin:4px 0 10px;color:var(--ink2)}
+.kbot-msg .btn{width:100%}
+@keyframes bpop2{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes bpop{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translateX(-50%)}}
 .bmodal h3{font-size:20px;font-weight:800;letter-spacing:-.02em}
 .bmodal p.s{font-size:14px;color:var(--sub);margin:6px 0 18px;line-height:1.5}
@@ -681,7 +681,8 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .fld textarea{min-height:90px;resize:vertical;line-height:1.5}
 .fld textarea:focus,.fld select:focus{border-color:var(--ink)}
 .cbx{display:inline-flex;gap:6px;align-items:center;font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:10px;cursor:pointer;background:#fff}
-.cbx input{accent-color:var(--ink)}
+.cbx input{accent-color:var(--ink);width:auto;height:auto}
+.fld label.cbx{display:inline-flex;margin:0;font-weight:500;color:var(--ink)}
 .feebox{background:var(--bg2);border-radius:12px;padding:12px 14px;font-size:14px}
 .feebox small{display:block;font-size:12.5px;color:var(--sub);margin-top:4px;line-height:1.5}
 .ferr{color:var(--warn);font-size:13px;margin-top:8px}
@@ -918,7 +919,7 @@ const PLACES=[
  {id:'p7',lat:37.5426,lng:127.053,name:"포토부스 '필름데이'",x:94,y:150,tags:['sera'],story:'세라 생일 프레임이 이번 달까지만 운영돼요.',shop:true,cap:6,menu:'세라 생일 프레임'},
  {id:'p8',lat:37.5293,lng:127.0689,name:'뚝섬 한강 계단',x:318,y:206,tags:['unitS'],story:'유닛 S 라이브 클립 촬영지. 해 질 녘이 제일 예뻐요.',shop:false},
 ];
-const P=id=>PLACES.find(p=>p.id===id);
+const P=id=>PLACES.find(p=>p.id===id)||SP(id); // 협업으로 새로 들어온 공간(s*)도 지도·동선 계산에 쓰여요
 const A=id=>ARTISTS.find(a=>a.id===id);
 const ses=(...a)=>a.map(([d,time,left],i)=>({id:'abcdefghij'[i],d:'2026-'+d,time,left}));
 const ROUTES=[
@@ -992,7 +993,6 @@ const S={
  room:null,roomKey:'room-vote',draft:'',greeted:false,
  live:{stamps:2,scanning:false,line:null,pop:-1},
  keep:null,sheet:null,
- partner:{name:'〈Afterglow〉 앨범 순서 루트',kind:'album',tags:['hana','sera','yujin','unitS'],places:['p1','p2','p3','p6','p5']},
 };
 let msgId=100;
 
@@ -1045,7 +1045,7 @@ function mapSVG(o={}){
   if(o.labels)s+=`<text x="${p.x}" y="${p.y-16}" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--ink)" stroke="var(--map)" stroke-width="3" paint-order="stroke">${esc(p.name.replace(/'/g,''))}</text>`;
  });
  if(o.line&&o.line.length>1)s+=`<polyline points="${o.line.map(p=>p.x+','+p.y).join(' ')}" fill="none" stroke="var(--ink)" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>`;
- (o.pins||[]).forEach(p=>{s+=`<circle cx="${p.x}" cy="${p.y}" r="11" fill="${p.on?'var(--ink)':'#fff'}" stroke="var(--ink)" stroke-width="2"/><text x="${p.x}" y="${p.y+4}" text-anchor="middle" font-size="11" font-weight="700" fill="${p.on?'var(--y)':'var(--ink)'}">${p.n}</text>`});
+ (o.pins||[]).forEach(p=>{s+=`<g class="mpin" data-pin="${p.id||''}"><circle cx="${p.x}" cy="${p.y}" r="11" fill="${p.on?'var(--ink)':'#fff'}" stroke="var(--ink)" stroke-width="2"/><text x="${p.x}" y="${p.y+4}" text-anchor="middle" font-size="11" font-weight="700" fill="${p.on?'var(--y)':'var(--ink)'}">${p.n}</text></g>`});
  if(o.me){s+=`<circle cx="${o.me[0]}" cy="${o.me[1]}" r="14" fill="#2E62C9" opacity=".18"/><circle cx="${o.me[0]}" cy="${o.me[1]}" r="6" fill="#2E62C9" stroke="#fff" stroke-width="2.5"/>`}
  return s+(o.zoom?'</g>':'')+'</svg>';
 }
@@ -1497,46 +1497,6 @@ function scrEnd(){
  </div></section>`;
 }
 
-/* 7. 파트너 센터 (PC) */
-function scrPartner(){
- const p=S.partner, a=A('lumin');
- const ord=p.places;
- const fake={id:'prev',kind:p.kind,name:p.name||'루트 이름',area:'성수',places:ord,dur:durText(ord.length*30+walkMin(ord))||'-',tags:p.tags,sessions:[]};
- const checks=[[p.name.trim().length>=4,'루트 이름 4자 이상'],[ord.length>=3,'인증 장소 3곳 이상'],[ord.some(id=>P(id).shop),'참여 매장 1곳 이상 (QR 스탬프)'],[p.tags.length>0,'멤버 태그 1개 이상'],[ord.includes('p6'),'마지막 지점: 굿즈샵 (한정 포카)']];
- const ready=checks.every(c=>c[0]);
- return pcShell('ip','routes/new',`
-   <div class="crumb">루트 관리 › 새 루트</div>
-   <div class="pc-title"><h2>새 루트 만들기</h2><span class="meta"><span>임시 저장 14:18</span><span>승인 후 카톡 채널로 팔로워에게 알림</span></span></div>
-   <div class="pc-steps"><span class="on">1 기본 정보 · 장소</span><span>2 회차 · 정원</span><span>3 한정 혜택</span><span>4 승인 요청</span></div>
-   <div class="pc-grid">
-    <div>
-     <div class="panel"><h3>기본 정보</h3>
-      <div class="fld"><label for="pname">루트 이름</label><input id="pname" value="${esc(p.name)}" maxlength="30"><p class="help">팬에게 보이는 이름이에요. 앨범명·멤버명을 넣으면 검색에 잘 걸려요.</p></div>
-      <div class="fld"><label>루트 유형</label><div class="kindsel"><button class="${p.kind==='album'?'on':''}" data-act="pkind" data-k="album"><b>앨범 순서</b><small>수록곡·뮤비 순서대로 걷는 공식 루트</small></button><button class="${p.kind==='branch'?'on':''}" data-act="pkind" data-k="branch"><b>최애 갈림길</b><small>특정 멤버 서사를 따라가는 루트</small></button></div></div>
-      <div class="fld" style="margin:0"><label>멤버 태그</label><div class="row" style="flex-wrap:wrap">${a.members.map(m=>`<button class="chip ${p.tags.includes(m.id)?'on':''}" data-act="ptag" data-id="${m.id}">${m.name}</button>`).join('')}</div><p class="help">태그된 멤버 칩을 누른 팬에게만 이 루트가 보여요.</p></div>
-     </div>
-     <div class="panel"><h3>장소 <small>인증 장소에서 고르기 · 순서는 동선 기준으로 추천</small></h3>
-      <table class="ptable"><thead><tr><th style="width:36px"></th><th style="width:40px">순서</th><th>장소</th><th class="hide-s">매장 참여</th><th class="hide-s">회차 수용</th></tr></thead><tbody>
-      ${PLACES.map(pl=>{const i=ord.indexOf(pl.id);return `<tr class="${i>=0?'on':'off'}"><td><span class="ck" data-act="pplace" data-id="${pl.id}" role="checkbox" aria-checked="${i>=0}" tabindex="0">${i>=0?ic('check',12,3):''}</span></td><td>${i>=0?`<span class="ord">${i+1}</span>`:''}</td><td><b style="font-weight:600">${esc(pl.name)}</b><div style="font-size:12px;color:var(--sub);margin-top:2px">${esc(pl.story.slice(0,34))}…</div></td><td class="hide-s"><span class="shop ${pl.shop?'y':'n'}">${pl.shop?'참여 · QR 발급':'공공장소'}</span></td><td class="hide-s num">${pl.shop?pl.cap+'명 · '+esc(pl.menu):'—'}</td></tr>`}).join('')}
-      </tbody></table>
-     </div>
-     <div class="panel"><h3>회차 미리보기 <small>정원 5명 · 최소 3명 확정</small></h3>
-      <div class="sess"><span><b>토 11.7</b>13:00</span><span><b>일 11.8</b>11:00</span><span><b>일 11.8</b>15:00</span><span class="add">+ 회차 추가</span></div></div>
-    </div>
-    <div style="position:sticky;top:16px">
-     <div class="panel"><h3>팬에게 보이는 모습</h3>
-      <div class="prev-phone"><div class="lbl">아티스트 홈 · 루트 카드</div>
-       <div class="rcard open"><div class="top"><div class="tags"><span class="pill ${fake.kind}">${fake.kind==='album'?'앨범 순서':'최애 갈림길'}</span><span class="mt" style="font-size:12px;color:var(--sub)">${fake.tags.map(t=>memberOf(t).name).join(' · ')}</span></div><h3>${esc(fake.name)}</h3><div class="meta"><span>${fake.area}</span><span>${ord.length}곳</span><span>약 ${fake.dur}</span></div></div></div>
-       <div class="mapbox" style="margin:10px 0 0">${mapSVG({route:orderPlaces(ord),label:'미리보기 지도'})}</div>
-      </div>
-     </div>
-     <div class="panel"><h3>승인 전 확인</h3><div class="checklist">${checks.map(c=>`<div><span class="${c[0]?'ok':'no'}">${ic(c[0]?'check':'alert',16,2.4)}</span>${c[1]}</div>`).join('')}</div></div>
-     <div class="pc-actions"><button class="btn line" data-act="toast" data-msg="임시 저장했어요">임시 저장</button><button class="btn dark" data-act="psubmit" ${ready?'':'disabled'}>승인 요청</button></div>
-    </div>
-   </div>
-`);
-}
-
 /* ═════════ Sheets ═════════ */
 function sheetHTML(){
  if(!S.sheet)return '';
@@ -1681,7 +1641,7 @@ const INDEX=[
  {g:'신청',items:[['entry','입장 화면']]},
  {g:'동행방',items:[['room-recruit','모집 중'],['room-vote','확정'],['room-settle','정산 카드']]},
  {g:'당일 · 종료',items:[['live','당일 진행'],['end','종료']]},
- {g:'파트너 웹 · IP보유자',items:[['b-ipdash','대시보드','PC'],['b-find','공간찾기','PC'],['b-space','공간정보','PC'],['b-ipinbox','협업함','PC'],['b-places','장소 관리','PC'],['partner','루트 만들기','PC']]},
+ {g:'파트너 웹 · IP보유자',items:[['b-ipdash','대시보드','PC'],['b-find','공간찾기 · 공간정보','PC'],['b-ipinbox','협업함','PC'],['b-places','장소 관리','PC'],['partner','루트 관리','PC']]},
  {g:'파트너 웹 · 공간제공자',items:[['b-spdash','대시보드','PC'],['b-cal','회차 캘린더','PC'],['b-inbox','협업함','PC'],['b-edit','공간정보 · AI 태그','PC'],['b-ipfind','IP 찾기','PC'],['b-report','리포트 · 정산','PC']]},
 ];
 const NOTES={
@@ -1697,18 +1657,17 @@ const NOTES={
  'room-settle':['"@카나나 ○○ 8000원 정산"이라고 부르면 1/N 정산 카드를 만들어요.','대상 체크를 풀면 1인 금액이 다시 계산돼요. 요청하면 완료 상태가 하나씩 올라와요.','카카오페이 정산은 수익원이 아니에요 (무료).'],
  'live':['스탬프 대신 리센느 원이 사진을 퍼즐 5조각으로 채워요. 못 채운 칸은 흐린 흑백으로 미리 보여요.','QR 스캔 → 퍼즐 조각 → 카나나 세계관 해설 한 줄.','다 채우면 1회용 완주 인증 QR이 나와요.'],
  'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.','"계속 둘래요"로 과반이 되면 방이 일반 그룹채팅으로 전환돼요. 대화·사진은 남고, 카나나·정산·지도는 빠지고, 닉네임은 그대로예요.'],
- 'b-ipdash':['회차 모집률·참가 팬·노쇼율·진행 중 협업을 한눈에 봐요.','팝업 종료가 30일 안이면 그 장소가 들어간 루트 수와 함께 경고해요.'],
- 'b-find':['문장을 조건 칩으로 바꿔요. 검은 칩=태그(순서), 파란 칩=필터(걸러 냄).','칩을 지우거나 더하면 결과가 바로 바뀌어요. 못 알아들은 부분은 숨기지 않고 보여 줘요.','2~3곳을 담으면 도보 동선이 나와요. 다른 문장으로도 검색해 보세요.'],
- 'b-space':['IP보유자가 \'루트에 넣을까?\'를 판단하는 화면이에요.','AI 태그는 근거와 함께, 협업 조건은 사장님이 입력한 것만 보여요.','팬 앱 공개 범위를 오른쪽에 같이 보여 줘요.'],
- 'b-ipinbox':['공간이 먼저 신청한 팝업 협업을 수락하면 장소 관리에 \'스토리 필요\'로 들어가요.','조건 수정을 누르면 그 자리에서 수정 제안을 보낼 수 있어요.'],
+ 'b-ipdash':['회차 모집률·참가 팬·노쇼율·진행 중 협업을 한눈에 봐요.','팝업 종료가 30일 안이면 그 장소가 들어간 루트 수와 함께 경고해요.','루트 관리에서 공개한 루트도 아래 표에 \'공개 중\'으로 들어와요.'],
+ 'b-find':['문장을 조건 칩으로 바꿔요. 검은 칩=태그(순서), 파란 칩=필터(걸러 냄).','카드를 누르면 공간정보 상세 팝업이 열리고, 팝업 아래 \'협업 제안\'으로 조건을 적어 바로 보내요. 팝업은 X · 바깥 배경 · Esc로 닫혀요.','카드에 마우스를 올리면 지도 핀이 빨갛게, 제안을 보낸 곳은 검은 핀으로 보여요. 오른쪽 목록은 제안을 보낸 공간이에요.'],
+ 'b-ipinbox':['공간이 먼저 신청한 팝업 협업을 수락하면 장소 관리에 \'스토리 필요\'로 들어가요.','조건 수정을 누르면 그 자리에서 수정 제안을 보낼 수 있어요.','종료 · 거절된 건은 목록에 남기지 않고 카카오톡 챗봇으로 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
  'b-places':['스토리를 쓰는 게 곧 IP 인증이에요.','공공장소는 직접 등록, GPS 도착 체크로 스탬프 (반경은 정책 미정).','팝업형 장소는 종료 D-day를 경고해요.'],
  'b-spdash':['오늘 도착 타임라인: 루트 동선 기준 도착 예정 시간이에요.','이번 주 도착 예정 인원은 회차 캘린더와 같은 데이터예요.'],
  'b-cal':['칸을 누르면 그 시간대를 막아요 (휴무·대관). 예약이 있는 칸은 막을 수 없어요.','수용 인원을 바꾸면 마감 표시가 바로 다시 계산돼요.'],
- 'b-inbox':['받은 제안을 수락·거절하거나 조건을 고쳐 다시 보낼 수 있어요.','진행 중 탭에 지금 협업 중인 IP가 있어요.'],
+ 'b-inbox':['받은 제안을 수락·거절하거나 조건을 고쳐 다시 보낼 수 있어요.','진행 중 탭에 지금 협업 중인 IP가 있어요.','종료 · 거절된 건은 카카오톡 챗봇으로만 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
  'b-edit':['AI 태그 제안은 근거와 함께 보여 주고, 수락한 것만 공개돼요.','수락하면 공간찾기 검색 결과에 바로 반영돼요.','협업 가능 항목·수용 인원은 AI가 추측하지 않아요.'],
  'b-ipfind':['공간에서 IP로 먼저 협업을 신청하는 입구예요 (팝업형).','IP 정보는 소속사가 공개한 것만, 팬 규모는 구간으로만 보여요.'],
  'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액에만 수수료가 붙어요.','수수료율 5%는 목업 값이에요.'],
- 'partner':['소속사가 인증 장소로 루트를 만들고 승인을 요청하는 PC 화면이에요.','오른쪽에서 팬에게 보이는 카드를 실시간으로 미리 볼 수 있어요.','체크 항목을 모두 채워야 승인 요청이 켜져요.'],
+ 'partner':['루트 목록 → 루트 만들기 → 장소 IP 라벨링(멤버 · 앨범 · 장면) → AI 루트 추천 순서예요. 카카오 승인 없이 바로 공개돼요.','라벨링 표의 종류 · 기간 · 협업 조건은 장소 관리와 협업함에서 가져와요. 라벨이 3곳 이상이면 다음으로 가요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있어요.'],
 };
 function curKey(){
  switch(S.screen){
@@ -1731,7 +1690,7 @@ function jump(key){
   case 'room-recruit':case 'room-vote':case 'room-settle':presetRoom(key.split('-')[1]);S.prev=['home'];S.screen='room';break;
   case 'live':S.live={stamps:2,scanning:false,line:null,pop:-1};S.prev=['home','room'];if(!S.room)presetRoom('vote');S.screen='live';break;
   case 'end':S.keep=null;S.prev=['home'];S.screen='end';break;
-  default:S.screen=key;S.b.modal=null;S.b.editing=null;
+  default:S.screen=key;S.b.modal=null;S.b.editing=null;S.b.bot=null;S.b.rt.view='list';
  }
  render(true);
 }
@@ -1769,6 +1728,7 @@ function render(nav){
  const bd=vp.querySelector('.bd');
  if(S.screen==='room'){const c=document.getElementById('chatbd');c.scrollTop=c.scrollHeight}
  else if(keepScroll!=null&&bd)bd.scrollTop=keepScroll;
+ const bm=vp.querySelector('.bmodal');if(bm)bm.style.top=Math.max(24,24-vp.getBoundingClientRect().top)+'px';
  bindInputs();
  renderNav();
  const km=document.getElementById('kmap');
@@ -1789,8 +1749,6 @@ function bindInputs(){
  if(obq)obq.oninput=e=>{S.ob.q=e.target.value;document.getElementById('obres').innerHTML=obResultsHTML()};
  const msg=document.getElementById('msg');
  if(msg){msg.oninput=e=>{S.draft=e.target.value;vp.querySelector('.send').disabled=!S.draft.trim()};msg.onkeydown=e=>{if(e.key==='Enter'&&!e.isComposing){e.preventDefault();handleSend();render();focusMsg()}}}
- const pn=document.getElementById('pname');
- if(pn)pn.oninput=e=>{S.partner.name=e.target.value;const pos=e.target.selectionStart;render();const n=document.getElementById('pname');n.focus();n.setSelectionRange(pos,pos)};
 }
 function focusMsg(){const m=document.getElementById('msg');if(m){m.focus();m.setSelectionRange(m.value.length,m.value.length)}}
 
@@ -1878,10 +1836,6 @@ const ACT={
    {t:'text',from:m1.nick,time:'오후 6:24',text:'방 안 없어져서 다행이에요 ㅠㅠ'},
    {t:'text',from:m2.nick,time:'오후 6:25',text:'다음 루트도 이 멤버로 가요!!'}].forEach(push);
   S.roomKey='end';go('room')},
- pkind:d=>{S.partner.kind=d.k;render()},
- ptag:d=>{const t=S.partner.tags,i=t.indexOf(d.id);i>=0?t.splice(i,1):t.push(d.id);render()},
- pplace:d=>{const p=S.partner.places,i=p.indexOf(d.id);if(i>=0)p.splice(i,1);else{if(p.length>=8)return;p.push(d.id)}S.partner.places=orderPlaces(p);render()},
- psubmit:()=>toast('승인 요청을 보냈어요. 카카오 검토 후 1영업일 안에 공개돼요'),
 };
 document.addEventListener('click',e=>{
  const n=e.target.closest('[data-nav]');
@@ -1892,7 +1846,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape'&&S.sheet){S.sheet=null;render()}
- if((e.key===' '||e.key==='Enter')&&e.target.matches('[role=checkbox][data-act],[role=radio][data-act]')){e.preventDefault();e.target.click()}
+ if((e.key===' '||e.key==='Enter')&&e.target.matches('[role=checkbox][data-act],[role=radio][data-act],[role=button][data-act]')){e.preventDefault();e.target.click()}
 });
 document.getElementById('mnav').addEventListener('change',e=>jump(e.target.value));
 
@@ -1969,19 +1923,19 @@ function bResults(){
  const cats=chips.filter(c=>c.k==='업종').map(c=>c.v), areas=chips.filter(c=>c.k==='지역').map(c=>c.v);
  const tagChips=chips.filter(c=>c.k==='분위기'||c.k==='특성').map(c=>c.v);
  return SPACES.filter(s=>(!cats.length||cats.includes(s.cat))&&(!areas.length||areas.includes(s.area))
-   &&chips.every(c=>c.k==='수용'?s.cap>=c.v:c.k==='협업'?s.collab.includes(c.v):true)&&(!S.b.related||s.related))
+   &&chips.every(c=>c.k==='수용'?s.cap>=c.v:c.k==='협업'?s.collab.includes(c.v):true))
   .map(s=>{const hit=tagChips.filter(t=>s.vibe.includes(t)||s.feat.includes(t));
    const sim=vibe?vibe.split(' ').filter(w=>(s.desc+s.reason).includes(w)).length:0; // ponytail: 단어 겹침, 실제는 임베딩 유사도
    return {s,hit,score:hit.length*10+sim}})
   .sort((a,b)=>b.score-a.score);
 }
-const walkPts=pts=>{let d=0;for(let i=1;i<pts.length;i++)d+=Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y);return Math.round(d*0.09)};
 const fmtD=d=>d.slice(5).replace('-','.');
 const dday=d=>Math.round((new Date(d)-new Date(TODAY))/864e5);
 
 S.payLink=false;
 S.b={
- text:DEMO_Q,q:parseQuery(DEMO_Q),addOpen:false,related:false,cart:['s2','s3'],sel:'s2',modal:null,editing:null,
+ text:DEMO_Q,q:parseQuery(DEMO_Q),addOpen:false,modal:null,editing:null,
+ published:[],rt:{view:'list',persona:'',recos:null,picks:[]},botShown:{},
  tab:{ip:'in',space:'in'},
  props:[
   {id:'x1',side:'space',dir:'in',who:'NOVA7 · 오비트',ip:'nova',from:'2026-12-01',to:'2026-12-31',cap:6,menu:'NOVA 블루 에이드',ops:['한정 메뉴','포스터 부착'],status:'wait',msg:'데뷔 1주년 루트의 첫 장소로 모시고 싶어요. 주말 오후 회차 위주예요.'},
@@ -2004,7 +1958,7 @@ const prop=id=>S.b.props.find(p=>p.id===id);
 const ME=()=>SP('s1'); // 공간제공자 화면의 주인공 매장
 
 /* 공통 셸 */
-const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['partner','route','루트 관리'],['','ticket','한정 혜택'],['','send','채널 알림'],['','chart','동선 리포트','PRO'],['','gear','계정 · 권한']];
+const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['partner','route','루트 관리'],['','gear','설정']];
 const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴 · 혜택'],['','qr','QR 키트'],['b-report','wallet','리포트 · 정산']];
 function pcShell(role,url,body){
  const nav=role==='ip'?NAV_IP:NAV_SP;
@@ -2012,63 +1966,63 @@ function pcShell(role,url,body){
  return `<div class="chrome"><i></i><i></i><i></i><span class="url">partner.kakaoroute.kakao.com/${url}</span></div>
  <div class="pc">
   <nav class="pc-nav"><div class="pc-logo"><i>${ic('route',16,2.2)}</i><span>${role==='ip'?'파트너 센터':'공간 파트너'}<small>${role==='ip'?'스텔라엔터 · LUMIN':esc(ME().name)+' · 사장님'}</small></span></div>
-   ${nav.map(([to,i,n,pro])=>`<a href="#" class="${S.screen===to||(to==='b-find'&&S.screen==='b-space')?'on':''}" data-act="pcgo" data-to="${to}" data-n="${n}">${ic(i,18)}${n}${pro?`<span class="pro">${pro}</span>`:''}${n==='협업함'&&open?`<span class="badge num">${open}</span>`:''}</a>`).join('')}
+   ${nav.map(([to,i,n])=>`<a href="#" class="${S.screen===to?'on':''}" data-act="pcgo" data-to="${to}" data-n="${n}">${ic(i,18)}${n}${n==='협업함'&&open?`<span class="badge num">${open}</span>`:''}</a>`).join('')}
   </nav>
   <div class="pc-main">${body}</div>
- </div>${bModal()}`;
+ </div>${bModal()}${botCard(role)}`;
 }
 const pcTitle=(crumb,h,meta,right='')=>`<div class="crumb">${crumb}</div><div class="pc-title"><div><h2>${h}</h2>${meta?`<span class="meta" style="margin-top:6px">${meta.map(m=>`<span>${m}</span>`).join('')}</span>`:''}</div>${right}</div>`;
 const kpis=list=>`<div class="kpis">${list.map(([l,v,s])=>`<div class="kpi"><small>${l}</small><b class="num">${v}</b>${s?`<span>${s}</span>`:''}</div>`).join('')}</div>`;
-const thumb=(s,n)=>`<button class="thumb" style="background:${grad(s.c)}" data-act="bopen" data-id="${s.id}" aria-label="${esc(s.name)} 공간정보 보기">${n?`<span>${n}</span>`:''}</button>`;
 const tagsOf=(s,hit=[])=>[...s.vibe,...s.feat].map(t=>`<span class="tg ${hit.includes(t)?'hit':''}">${t}</span>`).join('')+(s.popup?'<span class="tg pop">팝업 가능</span>':'');
+const sentProps=()=>S.b.props.filter(p=>p.side==='ip'&&p.dir==='out'&&['wait','countered'].includes(p.status));
 
 /* 4-2 공간찾기 */
 function scrFind(){
- const b=S.b,q=b.q,res=bResults(),cart=b.cart.map(SP);
+ const b=S.b,q=b.q,res=bResults(),sent=sentProps(),sentIds=sent.map(p=>p.space);
  const have=new Set(q.chips.map(c=>c.k+c.v));
  const sugg=[['협업','한정 메뉴'],['협업','팝업 대관'],['특성','포토존'],['특성','단체석'],['분위기','빈티지'],['업종','레코드숍'],['업종','포토부스'],['수용',6]].filter(([k,v])=>!have.has(k+v));
- const pins=res.map((r,i)=>({x:r.s.x,y:r.s.y,n:i+1,on:b.cart.includes(r.s.id)})).filter(p=>p.x!=null);
+ const pins=res.map((r,i)=>({id:r.s.id,x:r.s.x,y:r.s.y,n:i+1,on:sentIds.includes(r.s.id)})).filter(p=>p.x!=null);
  const off=res.filter(r=>r.s.x==null);
- const walk=walkPts(cart);
  return pcShell('ip','spaces/search',`
- ${pcTitle('공간찾기','공간찾기',['공간 인증을 마친 매장만 나와요','공공장소는 장소 관리에서 직접 등록'])}
+ ${pcTitle('공간찾기','공간찾기',['공공장소는 장소 관리에서 직접 등록'])}
  <div class="nlq"><span aria-hidden="true">${ic('search',20)}</span><input id="bq" value="${esc(b.text)}" aria-label="원하는 공간을 문장으로 설명해 주세요" placeholder="원하는 공간을 문장으로 설명해 주세요"><button class="btn dark sm" data-act="bsearch">찾기</button></div>
  <div class="qchips">${q.chips.map((c,i)=>`<span class="qchip ${isFilter(c)?'f':''}">${esc(chipLabel(c))}<button data-act="bchipx" data-i="${i}" aria-label="${esc(chipLabel(c))} 조건 지우기">${ic('close',12,2.4)}</button></span>`).join('')}<button class="qchip add" data-act="baddopen" aria-expanded="${b.addOpen}">${ic('plus',12,2.4)}조건 더하기</button></div>
  ${b.addOpen?`<div class="qsugg">${sugg.map(([k,v])=>`<button class="chip" data-act="badd" data-k="${k}" data-v="${v}">${esc(chipLabel({k,v}))}</button>`).join('')}</div>`:''}
  <div class="qlegend"><span><i class="lg-t"></i>태그 조건 · 순서에 반영</span><span><i class="lg-f"></i>필터 조건 · 맞지 않으면 빠짐</span></div>
- ${q.vibe?`<p class="qnote">${ic('compass',14)}<span>느낌 문장 <b>"${esc(q.vibe)}"</b>과 공간 설명·리뷰가 비슷한 순서로 정렬했어요</span></p>`:''}
  ${q.left.length?`<p class="qnote warn">${ic('alert',14,2.2)}<span>이 부분은 조건으로 바꾸지 못했어요: <b>${esc(q.left.join(' '))}</b></span></p>`:''}
  <div class="find-grid">
   <div>
-   <div class="find-bar"><b class="num">${res.length}곳</b><label class="tgl"><input type="checkbox" data-act="brel" ${b.related?'checked':''}>우리 IP와 이미 연관된 곳만<span class="pro">PRO</span></label></div>
-   ${res.length?res.map(({s,hit},i)=>`<article class="scard ${b.cart.includes(s.id)?'on':''}">
-    ${thumb(s,i+1)}
-    <div><div class="sc-top"><button class="sc-name" data-act="bopen" data-id="${s.id}">${esc(s.name)}</button><span class="meta"><span>${s.cat}</span><span>${s.area}</span><span class="num">최대 ${s.cap}명</span></span></div>
+   <div class="find-bar"><b class="num">${res.length}곳</b><span class="walk" style="margin:0">카드를 누르면 상세 정보와 협업 제안이 열려요</span></div>
+   ${res.length?res.map(({s,hit},i)=>`<article class="scard ${sentIds.includes(s.id)?'on':''}" data-act="bopen" data-id="${s.id}" data-hover="${s.id}" role="button" tabindex="0" aria-label="${esc(s.name)} 상세 보기">
+    <span class="thumb" style="background:${grad(s.c)}"><span>${i+1}</span></span>
+    <div><div class="sc-top"><b class="sc-name">${esc(s.name)}</b><span class="meta"><span>${s.cat}</span><span>${s.area}</span><span class="num">최대 ${s.cap}명</span></span></div>
      <div class="tagrow">${tagsOf(s,hit)}</div>
      <p class="why">${ic('compass',14)}<span>${esc(s.reason)}</span></p>
-     <div class="row" style="margin-top:12px"><button class="btn line sm" data-act="bcart" data-id="${s.id}" aria-pressed="${b.cart.includes(s.id)}">${b.cart.includes(s.id)?ic('check',14,2.4)+'담음':ic('plus',14,2.4)+'담기'}</button><button class="btn dark sm" data-act="bpropose" data-id="${s.id}">협업 제안</button></div>
+     ${sentIds.includes(s.id)?'<p class="walk" style="margin-top:8px"><span class="pill neutral">협업 제안 보냄</span></p>':''}
     </div></article>`).join(''):`<div class="empty-b"><b>조건에 맞는 공간이 없어요</b>파란 필터 칩(지역·수용·협업)을 하나 지워 보세요.</div>`}
   </div>
   <div class="find-side">
-   <div class="panel"><h3>지도 <small>번호 = 목록 순서 · 검은 핀 = 담은 곳</small></h3><div class="mapbox">${mapSVG({label:'검색 결과 지도',pins,line:cart.filter(s=>s.x!=null)})}</div>
+   <div class="panel"><h3>지도 <small>번호 = 목록 순서 · 검은 핀 = 제안 보낸 곳</small></h3><div class="mapbox">${mapSVG({label:'검색 결과 지도',pins})}</div>
     ${off.length?`<p class="walk">지도 밖 ${off.length}곳: ${off.map(r=>esc(r.s.name)+' ('+r.s.area+')').join(', ')}</p>`:''}</div>
-   <div class="panel"><h3>담은 공간 <small class="num">${cart.length}/3</small></h3>
-    ${cart.length?`<ol class="cart">${cart.map((s,i)=>`<li><span class="ord">${i+1}</span><span>${esc(s.name)}</span><button class="iconbtn sm" data-act="bcart" data-id="${s.id}" aria-label="${esc(s.name)} 빼기">${ic('close',14,2.2)}</button></li>`).join('')}</ol>`:''}
-    <p class="walk num">${cart.length>=2?`도보 약 <b>${walk}분</b> · 장소당 30분 머물면 약 <b>${durText(walk+cart.length*30)}</b>`:cart.length?'한 곳 더 담으면 동선이 나와요':'마음에 드는 공간을 2~3곳 담아 동선을 미리 보세요'}</p>
-    <button class="btn dark" style="height:46px;font-size:15px;margin-top:12px" data-act="btoroute" ${cart.length>=2?'':'disabled'}>이 동선으로 루트 만들기</button>
+   <div class="panel"><h3>협업 제안 보낸 공간 <small class="num">${sent.length}곳</small></h3>
+    ${sent.length?`<ul class="sent">${sent.map(p=>`<li><button data-act="bopen" data-id="${p.space}" data-hover="${p.space}"><b>${esc(p.who)}</b><span>${SP(p.space).area}</span></button><span class="pill neutral">${p.status==='countered'?'수정 제안 · 대기':'응답 대기'}</span></li>`).join('')}</ul>`:'<p class="walk" style="margin:0">아직 보낸 제안이 없어요. 카드를 눌러 협업을 제안해 보세요.</p>'}
    </div>
   </div>
  </div>`);
 }
 
-/* 4-1 공간정보 (IP보유자가 보는 화면) */
-function scrSpace(){
- const s=SP(S.b.sel),st=STORIES[s.id]||[],ev=EVID[s.id]||{};
+/* 4-1 공간정보 상세 팝업 (IP보유자가 보는 화면) */
+function spaceDetail(m){
+ const s=SP(m.id),st=STORIES[s.id]||[],ev=EVID[s.id]||{};
  const evl=[...s.vibe,...s.feat].filter(t=>ev[t]);
  const yes=o=>s.collab.includes(o)?`<span class="ok">${ic('check',14,2.6)}가능</span>`:'<span class="no">—</span>';
- return pcShell('ip',`spaces/${s.id}`,`
- ${pcTitle(`<a href="#" data-act="pcgo" data-to="b-find">공간찾기</a> › 공간정보`,esc(s.name),[s.cat,s.area,s.hours,`<span class="vbadge">${ic('shield',13,2.2)}공간 인증</span>`],
-  `<div class="row"><button class="btn line sm" data-act="toast" data-msg="태그 신고를 접수했어요. 카카오가 확인 후 공간제공자에게 알려요 (목업)">잘못된 태그 신고</button><button class="btn dark sm" data-act="bpropose" data-id="${s.id}">협업 제안</button></div>`)}
+ const cur=S.b.props.find(p=>p.side==='ip'&&p.space===s.id&&p.status!=='declined');
+ const foot=cur?`<div class="pc-actions" style="align-items:center"><span class="pill ${cur.status==='active'?'ok':'neutral'}">${cur.status==='active'?'협업 진행 중':'협업 제안 보냄 · 응답 대기'}</span><button class="btn line" data-act="bgotab" data-to="b-ipinbox" data-side="ip" data-t="${cur.status==='active'?'active':cur.dir==='in'?'in':'out'}">협업함에서 보기</button></div>`
+  :m.form?`<div class="panel pform"><h3>협업 제안 조건 <small>수락되면 루트 관리에서 이 장소로 루트를 만들 수 있어요</small></h3>${proposeFields(s,false)}<p class="ferr" id="mferr" role="alert"></p>
+   <div class="pc-actions"><button class="btn line" data-act="bformx">취소</button><button class="btn dark" data-act="bsend">제안 보내기</button></div></div>`
+  :`<div class="pc-actions"><button class="btn dark" data-act="bpropose">협업 제안</button></div>`;
+ return `<div class="mhead"><div><h3>${esc(s.name)}</h3><span class="meta" style="margin-top:6px"><span>${s.cat}</span><span>${s.area}</span><span>${s.hours}</span></span></div>
+  <div class="row"><button class="btn line sm" data-act="toast" data-msg="태그 신고를 접수했어요. 카카오가 확인 후 공간제공자에게 알려요 (목업)">잘못된 태그 신고</button><button class="iconbtn mx" data-act="bclose" aria-label="닫기">${ic('close',22,2)}</button></div></div>
  <div class="photos" aria-label="공간 사진">${[0,1,2,3].map(i=>`<span style="background:${grad(s.c,120+i*50)}"></span>`).join('')}</div>
  <div class="pc-grid">
   <div>
@@ -2083,27 +2037,41 @@ function scrSpace(){
    <div class="panel"><h3>협업 조건 <small>AI가 추측하지 않는 항목이에요</small></h3>
     <dl class="kv"><dt>한정 메뉴</dt><dd>${yes('한정 메뉴')}</dd><dt>굿즈 비치</dt><dd>${yes('굿즈 비치')}</dd><dt>포토존 설치</dt><dd>${yes('포토존 설치')}</dd><dt>팝업 대관</dt><dd>${s.popup?`<span class="ok">${ic('check',14,2.6)}가능 · 기간 협의</span>`:'<span class="no">—</span>'}</dd><dt>희망 수수료</dt><dd>측정된 카카오페이 결제의 ${FEE*100}%</dd></dl>
    </div>
-   <div class="panel"><h3>IP별 스토리 <small>소속사가 써요 · 한 공간이 여러 IP 루트에 들어갈 수 있어요</small></h3>
+   <div class="panel"><h3>IP별 스토리 <small>소속사가 써요</small></h3>
     ${st.length?st.map(x=>`<div class="story"><small>${A(x.ip).name} · ${x.k}</small>${esc(x.t)}</div>`).join(''):`<p class="walk" style="margin:0">아직 연결된 IP 스토리가 없어요. 협업이 확정되면 장소 관리에서 스토리를 써서 IP 인증을 마칠 수 있어요.</p>`}
    </div>
   </div>
-  <div class="side-col">
+  <div>
    <div class="panel"><h3>신뢰 지표</h3><div class="stats">
-    <div><small>공간 인증</small><b>${ic('check',16,2.6)}</b></div><div><small>지난 협업 IP</small><b class="num">${s.ips}개</b></div>
+    <div><small>지난 협업 IP</small><b class="num">${s.ips}개</b></div>
     <div><small>도착률</small><b class="num">${s.arrive!=null?s.arrive+'%':'—'}</b></div><div><small>QR 스캔</small><b class="num">${won(s.scans)}</b></div></div>
     ${s.arrive==null?'<p class="walk">첫 협업 전이라 도착률이 아직 없어요</p>':''}</div>
-   <div class="panel"><h3>팬 앱 공개 범위</h3><div class="vis">
-    <div><h4>팬 앱에 보임</h4><ul><li>이름 · 위치 · 사진</li><li>IP 스토리</li><li>운영 시간</li><li>한정 메뉴 이름</li></ul></div>
-    <div><h4>외부 웹에만</h4><ul><li>수용 인원</li><li>협업 조건 · 수수료</li><li>신뢰 지표</li><li>내부 태그</li></ul></div></div></div>
    ${s.x!=null?`<div class="panel"><h3>위치</h3><div class="mapbox">${mapSVG({label:s.name+' 위치',pins:[{x:s.x,y:s.y,n:'',on:true}]})}</div></div>`:''}
   </div>
- </div>`);
+ </div>
+ ${foot}`;
 }
 
-/* 협업함 (양쪽 공용) */
+/* 협업함 (양쪽 공용) · 종료·거절은 목록에 남기지 않고 카카오톡 챗봇으로 알려요 */
+let botTimer;
+function botDemo(side){ // 데모: 협업함에 들어오고 3초 뒤, 보낸 제안 1건이 상대에게 거절됨
+ if(S.b.botShown[side]||botTimer)return;
+ botTimer=setTimeout(()=>{botTimer=null;
+  const p=S.b.props.find(x=>x.side===side&&x.dir==='out'&&x.status==='wait');
+  if(S.screen!==(side==='ip'?'b-ipinbox':'b-inbox')||!p)return;
+  S.b.botShown[side]=true;p.status='declined';S.b.bot={side,who:p.who};render()},3000);
+}
+const iga=w=>{const c=w.replace(/[^가-힣]/g,'').slice(-1).charCodeAt(0)-0xAC00;return c>=0&&c%28?'이':'가'};
+function botCard(role){
+ const b=S.b.bot;if(!b||b.side!==role)return '';
+ const ip=role==='ip';
+ return `<aside class="kbot" role="status" aria-label="카카오톡 챗봇 알림"><div class="kbot-h"><span class="kbot-av">${ic('route',16,2.2)}</span><b>카카오루트 파트너</b><small>카카오톡 · 방금</small><button class="iconbtn sm" data-act="kbotx" aria-label="알림 닫기">${ic('close',16,2.2)}</button></div>
+  <div class="kbot-msg"><b>[협업 ${ip?'제안':'신청'} 결과]</b><p>${esc(b.who)}${iga(b.who)} ${ip?'LUMIN의 협업 제안을':'팝업 협업 신청을'} 거절했어요. 거절한 건은 협업함에 남지 않아요.</p>
+   <button class="btn line sm" data-act="pcgo" data-to="${ip?'b-find':'b-ipfind'}">${ip?'다른 공간 찾아보기':'다른 IP 찾아보기'}</button></div></aside>`;
+}
 function propCard(p){
  const who=p.side==='ip'?`<button class="sc-name" data-act="bopen" data-id="${p.space}">${esc(p.who)}</button>`:`<b>${esc(p.who)}</b>`;
- const pill={wait:p.dir==='in'?'<span class="pill warn">답변 필요</span>':'<span class="pill neutral">상대 응답 대기</span>',countered:'<span class="pill neutral">수정 제안 보냄 · 응답 대기</span>',active:'<span class="pill ok">진행 중</span>',declined:'<span class="pill neutral">거절함</span>'}[p.status];
+ const pill={wait:p.dir==='in'?'<span class="pill warn">답변 필요</span>':'<span class="pill neutral">상대 응답 대기</span>',countered:'<span class="pill neutral">수정 제안 보냄 · 응답 대기</span>',active:'<span class="pill ok">진행 중</span>'}[p.status];
  const ed=S.b.editing===p.id;
  const terms=ed?`<div class="terms">
    <div class="fld"><label for="ce-to">종료일</label><input id="ce-to" type="date" value="${p.to}" min="${p.from}"></div>
@@ -2116,8 +2084,9 @@ function propCard(p){
 }
 function inboxHTML(side){
  const all=S.b.props.filter(p=>p.side===side),t=S.b.tab[side];
- const groups={in:all.filter(p=>p.dir==='in'&&['wait','countered'].includes(p.status)),out:all.filter(p=>p.dir==='out'&&['wait','countered'].includes(p.status)),active:all.filter(p=>p.status==='active'),ended:all.filter(p=>['declined','ended'].includes(p.status))};
- const lbl={in:side==='ip'?'받은 신청':'받은 제안',out:side==='ip'?'보낸 제안':'보낸 신청',active:'진행 중',ended:'종료 · 거절'};
+ const groups={in:all.filter(p=>p.dir==='in'&&['wait','countered'].includes(p.status)),out:all.filter(p=>p.dir==='out'&&['wait','countered'].includes(p.status)),active:all.filter(p=>p.status==='active')};
+ const lbl={in:side==='ip'?'받은 신청':'받은 제안',out:side==='ip'?'보낸 제안':'보낸 신청',active:'진행 중'};
+ botDemo(side);
  const waitN=groups.in.filter(p=>p.status==='wait').length;
  return `<div class="tabs" role="tablist">${Object.keys(lbl).map(k=>`<button role="tab" aria-selected="${t===k}" class="${t===k?'on':''}" data-act="btab" data-side="${side}" data-t="${k}">${lbl[k]} <span class="num">${groups[k].length}</span>${k==='in'&&waitN?`<i class="num">${waitN}</i>`:''}</button>`).join('')}</div>
  ${groups[t].length?groups[t].map(propCard).join(''):`<div class="empty-b"><b>${lbl[t]} 항목이 없어요</b>${t==='out'?(side==='ip'?'공간찾기에서 협업 제안을 보내 보세요.':'IP 찾기에서 협업을 신청해 보세요.'):''}</div>`}`;
@@ -2126,36 +2095,128 @@ const scrIpInbox=()=>pcShell('ip','collabs',pcTitle('협업함','협업함',['�
 const scrInbox=()=>pcShell('space','collabs',pcTitle('협업함','협업함',['수락하면 회차 캘린더에 도착 예정 인원이 들어와요'])+inboxHTML('space'));
 
 /* 4-4 IP보유자 대시보드 */
+const fill=r=>{const t=r.sessions.length*5;return Math.round(r.sessions.reduce((a,s)=>a+5-s.left,0)/t*100)};
+const kindPill=k=>`<span class="pill ${k}">${k==='album'?'앨범 순서':'최애 갈림길'}</span>`;
+const routeTable=rs=>`<table class="ptable"><thead><tr><th>루트</th><th>유형</th><th class="hide-s">장소</th><th>회차</th><th>모집률</th><th>상태</th></tr></thead><tbody>
+  ${[...S.b.published,...rs].map(r=>`<tr><td><b style="font-weight:600">${esc(r.name)}</b></td><td>${kindPill(r.kind)}</td><td class="hide-s num">${nPlaces(r)}곳</td><td class="num">${r.sessions.length?r.sessions.length+'회':'—'}</td><td class="num">${r.sessions.length?fill(r)+'%':'—'}</td><td><span class="pill ok">공개 중</span></td></tr>`).join('')}
+  </tbody></table>`;
 function scrIpDash(){
  const rs=ROUTES.filter(r=>r.artist==='lumin');
- const fill=r=>{const t=r.sessions.length*5;return Math.round(r.sessions.reduce((a,s)=>a+5-s.left,0)/t*100)};
  const all=Math.round(rs.reduce((a,r)=>a+fill(r),0)/rs.length);
  const ends=S.b.places.filter(p=>p.to&&dday(p.to)>=0&&dday(p.to)<=30);
  const inN=S.b.props.filter(p=>p.side==='ip'&&p.dir==='in'&&p.status==='wait').length;
  const noStory=S.b.places.filter(p=>!p.story).length;
  return pcShell('ip','dashboard',`
- ${pcTitle('대시보드','LUMIN 대시보드',['11.2 – 11.8 기준','스텔라엔터'],`<button class="btn dark sm" data-act="pcgo" data-to="partner">${ic('plus',16,2.4)}새 루트 만들기</button>`)}
+ ${pcTitle('대시보드','LUMIN 대시보드',['11.2 – 11.8 기준','스텔라엔터'],`<button class="btn dark sm" data-act="rtgo" data-v="label">${ic('plus',16,2.4)}새 루트 만들기</button>`)}
  ${kpis([['회차 모집률',all+'%','열린 회차 기준'],['이번 주 참가 팬','46명','지난주보다 12명 늘었어요'],['노쇼율','4.1%','D-1 확인으로 자리 해제 7건'],['진행 중 협업',S.b.props.filter(p=>p.side==='ip'&&p.status==='active').length+'곳','공공장소 제외']])}
  ${ends.map(p=>{const n=ROUTES.filter(r=>r.places.includes(p.id)).length;return `<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(p.name)} 팝업이 ${fmtD(p.to)}에 끝나요 (D-${dday(p.to)})</b><br>이 장소가 들어간 루트 ${n}개의 이후 회차는 장소를 바꾸거나 회차를 닫아야 해요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">장소 관리</button></div>`}).join('')}
  ${inN?`<div class="alert info">${ic('bubble',18,2)}<div><b>받은 협업 신청 ${inN}건</b><br>공간제공자가 먼저 협업을 신청했어요.</div><button class="btn line sm" data-act="bgotab" data-to="b-ipinbox" data-side="ip" data-t="in">협업함</button></div>`:''}
  ${noStory?`<div class="alert info">${ic('pen',18,2)}<div><b>스토리를 기다리는 장소 ${noStory}곳</b><br>스토리를 써야 IP 인증이 끝나고 루트에 넣을 수 있어요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">스토리 쓰기</button></div>`:''}
- <div class="panel" style="margin-top:6px"><h3>루트 <small>승인 후 공개 중인 루트</small></h3>
-  <table class="ptable"><thead><tr><th>루트</th><th>유형</th><th class="hide-s">장소</th><th>회차</th><th>모집률</th><th>상태</th></tr></thead><tbody>
-  ${rs.map(r=>`<tr><td><b style="font-weight:600">${esc(r.name)}</b></td><td><span class="pill ${r.kind}">${r.kind==='album'?'앨범 순서':'최애 갈림길'}</span></td><td class="hide-s num">${nPlaces(r)}곳</td><td class="num">${r.sessions.length}회</td><td class="num">${fill(r)}%</td><td><span class="pill ok">공개 중</span></td></tr>`).join('')}
-  <tr><td><b style="font-weight:600">〈Afterglow〉 앨범 순서 루트 · 12월</b></td><td><span class="pill album">앨범 순서</span></td><td class="hide-s num">5곳</td><td class="num">—</td><td>—</td><td><span class="pill neutral">카카오 승인 대기</span></td></tr>
-  </tbody></table></div>`);
+ <div class="panel" style="margin-top:6px"><h3>루트 <small>공개 중인 루트</small></h3>${routeTable(rs)}</div>`);
+}
+
+/* 루트 관리: 목록 → 장소 IP 라벨링 → AI 루트 추천 · 공개 */
+const ALBUMS=['〈First Light〉 1집','〈Afterglow〉 2집','〈Neon Dive〉 미니','〈노을빛〉 싱글'];
+const SCENES=['뮤비 촬영지','재킷 촬영','멤버 단골','팬미팅','콘텐츠 촬영'];
+const kindL={space:'협업 공간',popup:'팝업형',public:'공공장소'};
+const periodOf=p=>p.to?`${fmtD(p.from)} – ${fmtD(p.to)}${dday(p.to)>=0?` · D-${dday(p.to)}`:''}`:'상시';
+function collabOf(p){
+ if(p.kind==='public')return '—';
+ const c=S.b.props.find(x=>x.side==='ip'&&x.status==='active'&&(x.space===p.id||x.who===p.name))||(P(p.id)?.shop?P(p.id):null);
+ return c?`${c.cap}명 · ${esc(c.menu)}`:'—';
+}
+const labelText=l=>[...l.members.map(id=>memberOf(id).name),...l.albums,...l.scenes];
+function scrPartner(){
+ const rt=S.b.rt;
+ if(rt.view==='label')return scrRtLabel();
+ if(rt.view==='reco')return scrRtReco();
+ const rs=ROUTES.filter(r=>r.artist==='lumin');
+ return pcShell('ip','routes',`
+ ${pcTitle('루트 관리','루트 관리',[`공개 중 ${rs.length+S.b.published.length}개`,'협업이 확정된 장소로 루트를 만들어요'],`<button class="btn dark sm" data-act="rtgo" data-v="label">${ic('plus',16,2.4)}루트 만들기</button>`)}
+ <div class="panel">${routeTable(rs)}</div>`);
+}
+function scrRtLabel(){
+ const ps=S.b.places,n=ps.filter(p=>p.label).length;
+ return pcShell('ip','routes/new/label',`
+ ${pcTitle('<a href="#" data-act="rtgo" data-v="list">루트 관리</a> › 루트 만들기','장소 IP 라벨링',['장소마다 IP 정보를 붙이면 다음 화면에서 AI가 루트를 추천해요','조건은 장소 관리 · 협업함에서 가져와요'],
+  `<button class="btn dark sm" data-act="rtgo" data-v="reco" ${n>=3?'':'disabled'}>다음 · AI 루트 추천</button>`)}
+ <div class="panel"><h3>루트에 넣을 수 있는 장소 <small class="num">라벨 ${n}/${ps.length}곳 · 3곳 이상이면 다음으로</small></h3>
+ <table class="ptable"><thead><tr><th>장소</th><th>종류</th><th class="hide-s">기간</th><th>협업 조건</th><th>IP 라벨</th><th></th></tr></thead><tbody>
+ ${ps.map(p=>`<tr><td><b style="font-weight:600">${esc(p.name)}</b></td>
+  <td><span class="pill ${p.kind==='popup'?'branch':'neutral'}">${kindL[p.kind]}</span></td>
+  <td class="hide-s num">${periodOf(p)}</td>
+  <td class="num">${collabOf(p)}</td>
+  <td>${p.label?`<div class="tagrow" style="margin:0">${labelText(p.label).map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:'<span class="shop n">라벨 필요</span>'}</td>
+  <td><button class="btn ${p.label?'line':'dark'} sm" data-act="rtlabel" data-id="${p.id}">${p.label?'수정':'라벨링'}</button></td></tr>`).join('')}
+ </tbody></table></div>`);
+}
+function labelModal(m){
+ const p=S.b.places.find(x=>x.id===m.id),l=p.label||{members:P(p.id)?.tags||[],albums:[],scenes:[]};
+ const grp=(title,name,items)=>`<div class="fld"><label>${title}</label><div class="row" style="flex-wrap:wrap">${items.map(([v,t])=>`<label class="cbx"><input type="checkbox" name="${name}" value="${esc(v)}" ${l[name].includes(v)?'checked':''}>${esc(t)}</label>`).join('')}</div></div>`;
+ return `<div class="mhead"><div><h3>${esc(p.name)} · IP 정보</h3><span class="meta" style="margin-top:6px"><span>${kindL[p.kind]}</span><span>${periodOf(p)}</span><span>협업 조건 ${collabOf(p)}</span></span></div><button class="iconbtn mx" data-act="bclose" aria-label="닫기">${ic('close',22,2)}</button></div>
+ <div class="panel">${p.story?`<p class="walk" style="margin:0 0 14px">스토리: ${esc(p.story)}</p>`:''}
+  ${grp('관련 멤버','members',A('lumin').members.map(x=>[x.id,x.name]))}
+  ${grp('관련 앨범 · 곡','albums',ALBUMS.map(x=>[x,x]))}
+  ${grp('장면 종류','scenes',SCENES.map(x=>[x,x]))}
+  <p class="ferr" id="mferr" role="alert"></p>
+  <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="rtlsave">라벨 저장</button></div></div>`;
+}
+// ponytail: 목업 추천기. 라벨(앨범·멤버·장면)로 장소를 묶고 페르소나 키워드로 점수만 더함. 실제는 IP 페르소나를 넣은 추천 API로 교체
+function recoRoutes(persona){
+ const ps=S.b.places.filter(p=>p.label&&P(p.id)?.x!=null);
+ const short=/짧|1시간|2시간|가볍/.test(persona),photo=/사진|포토|인증샷/.test(persona),newbie=/입덕|처음|초보|입문/.test(persona);
+ const cands=[
+  ...ALBUMS.map(a=>({name:`${a} 앨범 순서 루트`,kind:'album',ids:ps.filter(p=>p.label.albums.includes(a)).map(p=>p.id),why:`${a} 라벨이 붙은 장소를 동선 순서로 이었어요`})),
+  ...A('lumin').members.map(m=>({name:`${m.name}의 갈림길`,kind:'branch',tags:[m.id],ids:ps.filter(p=>p.label.members.includes(m.id)).map(p=>p.id),why:`${m.name} 라벨이 붙은 장소만 따라가요`})),
+  ...SCENES.map(s=>({name:`${s} 따라 걷기`,kind:'album',ids:ps.filter(p=>p.label.scenes.includes(s)).map(p=>p.id),why:`'${s}' 장면이 있는 장소를 모았어요`})),
+ ].filter(c=>c.ids.length>=2);
+ const seen=new Set(),out=[];
+ cands.map(c=>{
+  let ids=orderPlaces(c.ids);if(short)ids=ids.slice(0,3);
+  const sc=S.b.places.filter(p=>ids.includes(p.id));
+  const keys=[short&&'짧은 코스',photo&&sc.some(p=>p.label.scenes.some(s=>s==='뮤비 촬영지'||s==='재킷 촬영'))&&'포토 스폿',newbie&&c.kind==='album'&&'입덕 팬용 대표 장소'].filter(Boolean);
+  return {...c,ids,keys,score:ids.length+keys.length*2};
+ }).sort((a,b)=>b.score-a.score).forEach(c=>{const k=[...c.ids].sort().join();if(!seen.has(k)&&out.length<4){seen.add(k);out.push(c)}});
+ return out.map((c,i)=>{const w=walkMin(c.ids);return {id:'rc'+i,name:c.name,kind:c.kind,places:c.ids,tags:c.tags||[...new Set(S.b.places.filter(p=>c.ids.includes(p.id)).flatMap(p=>p.label.members))],
+  why:c.why+(c.keys.length?` · 페르소나 반영: ${c.keys.join(', ')}`:''),walk:w,dur:durText(c.ids.length*30+w),area:'성수',sessions:[]}});
+}
+function scrRtReco(){
+ const rt=S.b.rt,info=IPINFO.lumin,a=A('lumin');
+ const recos=rt.recos,np=rt.picks.length;
+ return pcShell('ip','routes/new/reco',`
+ ${pcTitle('<a href="#" data-act="rtgo" data-v="list">루트 관리</a> › <a href="#" data-act="rtgo" data-v="label">루트 만들기</a> › AI 추천','AI 루트 추천',['IP 컨셉과 페르소나를 보고 루트를 여러 개 추천해요','마음에 드는 루트를 여러 개 골라 바로 공개할 수 있어요'],
+  `<button class="btn line sm" data-act="rtgo" data-v="label">이전 · 라벨링</button>`)}
+ <div class="pc-grid">
+  <div>
+   ${recos?recos.length?recos.map(r=>{const on=rt.picks.includes(r.id);return `<article class="rreco ${on?'on':''}" data-act="rtpick" data-id="${r.id}" role="checkbox" aria-checked="${on}" tabindex="0">
+    <span class="rck">${on?ic('check',14,3):''}</span>
+    <div><div class="row" style="gap:8px;flex-wrap:wrap">${kindPill(r.kind)}<b class="rname">${esc(r.name)}</b></div>
+     <p class="meta" style="margin-top:6px"><span class="num">${r.places.length}곳</span><span class="num">도보 약 ${r.walk}분</span><span class="num">약 ${r.dur}</span>${r.tags.length?`<span>${r.tags.map(t=>memberOf(t).name).join(' · ')}</span>`:''}</p>
+     <ol class="rstops">${r.places.map((id,i)=>`<li><span class="ord">${i+1}</span>${esc(P(id).name)}</li>`).join('')}</ol>
+     <p class="why">${ic('compass',14)}<span>${esc(r.why)}</span></p></div>
+    <div class="mapbox">${mapSVG({route:r.places,label:r.name+' 지도'})}</div></article>`}).join('')
+    :`<div class="empty-b"><b>추천할 루트가 없어요</b>같은 앨범 · 멤버 · 장면 라벨이 붙은 장소가 2곳 이상 있어야 해요. 라벨링을 더 해 보세요.</div>`
+   :`<div class="empty-b"><b>페르소나를 적고 '추천 받기'를 눌러 보세요</b>오른쪽 IP 컨셉은 자동으로 반영돼요.</div>`}
+  </div>
+  <div class="side-col">
+   <div class="panel"><h3>AI가 읽은 LUMIN 컨셉 <small>자동 반영</small></h3>
+    <dl class="kv sm"><dt>장르</dt><dd>${info.genre}</dd><dt>멤버</dt><dd>${a.members.map(m=>m.name).join(' · ')}</dd><dt>앨범</dt><dd>${ALBUMS.join(', ')}</dd><dt>다음 컴백</dt><dd>${info.comeback||'—'}</dd></dl></div>
+   <div class="panel"><h3>소속사 페르소나</h3>
+    <div class="fld" style="margin:0"><textarea id="rt-persona" maxlength="200" placeholder="예: 컴백 전에 입덕한 20대 팬. 사진 찍기를 좋아하고 2시간 안에 끝나는 짧은 코스를 원해요.">${esc(rt.persona)}</textarea><p class="help">어떤 팬이 걸을 루트인지 문장으로 적어 주세요</p></div>
+    <button class="btn dark" style="height:44px;font-size:15px;margin-top:12px" data-act="rtreco">${recos?'다시 추천 받기':'추천 받기'}</button></div>
+   ${recos&&recos.length?`<button class="btn dark" style="height:48px;font-size:15px;margin-top:16px" data-act="rtpub" ${np?'':'disabled'}>${np?`선택한 ${np}개 공개`:'공개할 루트를 골라 주세요'}</button>`:''}
+  </div>
+ </div>`);
 }
 
 /* 장소 관리 */
 function scrPlaces(){
- const kindL={space:'협업 공간',popup:'팝업형',public:'공공장소'};
  return pcShell('ip','places',`
  ${pcTitle('장소 관리','장소 관리',['스토리를 쓰면 IP 인증 완료','공공장소는 GPS 도착 체크로 스탬프'],`<button class="btn dark sm" data-act="bpublic">${ic('plus',16,2.4)}공공장소 등록</button>`)}
  ${S.b.places.filter(p=>p.to&&dday(p.to)>=0&&dday(p.to)<=30).map(p=>`<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(p.name)} · ${fmtD(p.to)} 종료 (D-${dday(p.to)})</b><br>들어간 루트: ${ROUTES.filter(r=>r.places.includes(p.id)).map(r=>esc(r.short)).join(', ')||'없음'} · 종료 뒤 회차는 수정이 필요해요.</div><button class="btn line sm" data-act="toast" data-msg="공간제공자에게 기간 연장을 요청했어요 (목업)">기간 연장 요청</button></div>`).join('')}
- <div class="panel"><table class="ptable"><thead><tr><th>장소</th><th>종류</th><th class="hide-s">공간 인증</th><th>IP 인증 (스토리)</th><th class="hide-s">스탬프</th><th class="hide-s">기간</th><th></th></tr></thead><tbody>
+ <div class="panel"><table class="ptable"><thead><tr><th>장소</th><th>종류</th><th>IP 인증 (스토리)</th><th class="hide-s">스탬프</th><th class="hide-s">기간</th><th></th></tr></thead><tbody>
  ${S.b.places.map(p=>`<tr><td><b style="font-weight:600">${esc(p.name)}</b>${p.story?`<div style="font-size:12px;color:var(--sub);margin-top:2px">${esc(p.story.slice(0,30))}…</div>`:''}</td>
   <td><span class="pill ${p.kind==='popup'?'branch':'neutral'}">${kindL[p.kind]}</span></td>
-  <td class="hide-s">${p.kind==='public'?'<span class="shop">해당 없음</span>':'<span class="shop y">인증</span>'}</td>
   <td>${p.story?'<span class="shop y">인증 완료</span>':'<span class="shop n">스토리 필요</span>'}</td>
   <td class="hide-s">${p.kind==='public'?`GPS · 반경 ${p.radius}m`:'매장 QR'}</td>
   <td class="hide-s num">${p.to?`${fmtD(p.from)} – ${fmtD(p.to)}`:'상시'}</td>
@@ -2223,9 +2284,6 @@ function scrEdit(){
   </div>
   <div class="side-col">
    <div class="panel"><h3>사진 <small>5장</small></h3><div class="photos sm">${[0,1,2,3].map(i=>`<span style="background:${grad(s.c,120+i*50)}"></span>`).join('')}</div></div>
-   <div class="panel"><h3>팬 앱에 보이는 모습</h3><div class="prev-phone"><div class="lbl">루트 속 장소 카드</div>
-    <div class="pv"><b>${esc(s.name)}</b><span class="meta"><span>${esc(s.hours)}</span><span>한정 메뉴 ${esc(s.menu)}</span></span><p>${esc(STORIES.s1[0].t)}</p><span class="vbadge">${ic('shield',13,2.2)}스텔라엔터 인증</span></div></div>
-    <p class="walk">수용 인원 · 협업 조건 · 수수료 · 신뢰 지표 · 내부 태그는 팬 앱에 보이지 않아요.</p></div>
   </div>
  </div>`);
 }
@@ -2262,21 +2320,22 @@ function scrReport(){
 }
 
 /* 모달 */
+const proposeFields=(s,apply)=>`<div class="fgrid">
+   <div class="fld"><label for="mf-from">${apply?'팝업 ':''}시작일</label><input id="mf-from" type="date" value="2026-11-20" min="${TODAY}"></div>
+   <div class="fld"><label for="mf-to">${apply?'팝업 ':''}종료일</label><input id="mf-to" type="date" value="2026-12-31" min="${TODAY}"></div>
+   <div class="fld"><label for="mf-cap">회차당 인원</label><input id="mf-cap" type="number" min="1" max="${s.cap}" value="${Math.min(10,s.cap)}"><p class="help">${esc(s.name)}은 한 번에 ${s.cap}명까지 받아요</p></div>
+   <div class="fld"><label for="mf-menu">한정 메뉴 ${apply?'':'제안'}</label><input id="mf-menu" placeholder="예: 애프터글로우 라떼"></div>
+  </div>
+  <div class="fld"><label>${apply?'제공할 수 있는 것':'요청 항목'}</label><div class="row" style="flex-wrap:wrap">${s.collab.map(c=>`<label class="cbx"><input type="checkbox" name="mf-op" value="${c}" checked>${c}</label>`).join('')}</div></div>
+  ${apply?`<div class="fld"><label for="mf-msg">하고 싶은 콜라보</label><textarea id="mf-msg" placeholder="예: 컴백 기념으로 2층을 포토존으로 꾸미고 한정 음료를 낼게요"></textarea></div>`:''}
+  <div class="feebox">송객 수수료 <b>측정된 카카오페이 결제의 ${FEE*100}%</b><small>QR 스캔 후 카카오페이로 결제한 금액에만 붙어요. 요율은 정책 확정 전 목업 값이에요.</small></div>`;
 function bModal(){
  const m=S.b.modal;if(!m)return '';
+ if(m.t==='space'||m.t==='label')return `<div class="bdim" data-act="bclose"></div><div class="bmodal lg" role="dialog" aria-modal="true" aria-label="${m.t==='space'?'공간 상세':'IP 정보 라벨링'}">${m.t==='space'?spaceDetail(m):labelModal(m)}</div>`;
  let h='';
- if(m.t==='propose'||m.t==='apply'){
-  const s=m.t==='propose'?SP(m.id):ME(),a=m.t==='apply'?A(m.id):null;
-  h=`<h3>${m.t==='propose'?esc(s.name)+'에 협업 제안':esc(a.name)+'에 팝업 협업 신청'}</h3><p class="s">${m.t==='propose'?'수락되면 장소 관리에서 스토리를 써서 루트에 넣을 수 있어요.':'수락되면 기간 동안만 성지로 노출되고, 팬 앱에 \'기간 한정\' 라벨이 붙어요.'}</p>
-  <div class="fgrid">
-   <div class="fld"><label for="mf-from">${m.t==='apply'?'팝업 ':''}시작일</label><input id="mf-from" type="date" value="2026-11-20" min="${TODAY}"></div>
-   <div class="fld"><label for="mf-to">${m.t==='apply'?'팝업 ':''}종료일</label><input id="mf-to" type="date" value="2026-12-31" min="${TODAY}"></div>
-   <div class="fld"><label for="mf-cap">회차당 인원</label><input id="mf-cap" type="number" min="1" max="${s.cap}" value="${Math.min(10,s.cap)}"><p class="help">${esc(s.name)}은 한 번에 ${s.cap}명까지 받아요</p></div>
-   <div class="fld"><label for="mf-menu">한정 메뉴 ${m.t==='propose'?'제안':''}</label><input id="mf-menu" placeholder="예: 애프터글로우 라떼"></div>
-  </div>
-  <div class="fld"><label>${m.t==='propose'?'요청 항목':'제공할 수 있는 것'}</label><div class="row" style="flex-wrap:wrap">${s.collab.map(c=>`<label class="cbx"><input type="checkbox" name="mf-op" value="${c}" checked>${c}</label>`).join('')}</div></div>
-  ${m.t==='apply'?`<div class="fld"><label for="mf-msg">하고 싶은 콜라보</label><textarea id="mf-msg" placeholder="예: 컴백 기념으로 2층을 포토존으로 꾸미고 한정 음료를 낼게요"></textarea></div>`:''}
-  <div class="feebox">송객 수수료 <b>측정된 카카오페이 결제의 ${FEE*100}%</b><small>QR 스캔 후 카카오페이로 결제한 금액에만 붙어요. 요율은 정책 확정 전 목업 값이에요.</small></div>`;
+ if(m.t==='apply'){
+  const s=ME(),a=A(m.id);
+  h=`<h3>${esc(a.name)}에 팝업 협업 신청</h3><p class="s">수락되면 기간 동안만 성지로 노출되고, 팬 앱에 '기간 한정' 라벨이 붙어요.</p>${proposeFields(s,true)}`;
  }
  if(m.t==='story'){const p=S.b.places.find(x=>x.id===m.id);
   h=`<h3>${esc(p.name)} 스토리</h3><p class="s">이 장소가 LUMIN의 어떤 장면과 이어지는지 써 주세요. 저장하면 IP 인증이 끝나고 팬 앱에 소속사 인증 배지가 붙어요.</p>
@@ -2287,35 +2346,39 @@ function bModal(){
   <div class="fld"><label for="mf-story">스토리</label><textarea id="mf-story" maxlength="120" placeholder="예: 〈Afterglow〉 티저에서 멤버들이 앉아 있던 계단이에요."></textarea></div>
   <div class="fld"><label for="mf-rad">GPS 도착 반경</label><select id="mf-rad"><option value="30">30m</option><option value="50" selected>50m</option><option value="100">100m</option></select><p class="help">반경 기준은 아직 정책 미정이에요</p></div>`;}
  return `<div class="bdim" data-act="bclose"></div><div class="bmodal" role="dialog" aria-modal="true" aria-label="${m.t}">${h}<p class="ferr" id="mferr" role="alert"></p>
-  <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="bsend">${{propose:'제안 보내기',apply:'신청 보내기',story:'저장 · IP 인증',public:'등록'}[m.t]}</button></div></div>`;
+  <div class="pc-actions"><button class="btn line" data-act="bclose">취소</button><button class="btn dark" data-act="bsend">${{apply:'신청 보내기',story:'저장 · IP 인증',public:'등록'}[m.t]}</button></div></div>`;
 }
 
-Object.assign(SCREENS,{'b-find':scrFind,'b-space':scrSpace,'b-ipinbox':scrIpInbox,'b-inbox':scrInbox,'b-ipdash':scrIpDash,'b-places':scrPlaces,'b-spdash':scrSpDash,'b-cal':scrCal,'b-edit':scrEdit,'b-ipfind':scrIpFind,'b-report':scrReport});
+Object.assign(SCREENS,{'b-find':scrFind,'b-ipinbox':scrIpInbox,'b-inbox':scrInbox,'b-ipdash':scrIpDash,'b-places':scrPlaces,'b-spdash':scrSpDash,'b-cal':scrCal,'b-edit':scrEdit,'b-ipfind':scrIpFind,'b-report':scrReport});
 
-const bgo=to=>{S.b.modal=null;S.b.editing=null;S.screen=to;render(true);window.scrollTo(0,0)};
+const bgo=to=>{S.b.modal=null;S.b.editing=null;S.b.bot=null;S.screen=to;render(true);window.scrollTo(0,0)};
 const val=id=>(document.getElementById(id)?.value||'').trim();
 const ferr=(id,msg)=>{document.getElementById(id).textContent=msg};
 Object.assign(ACT,{
- pcgo:d=>d.to?bgo(d.to):toast(`'${esc(d.n)}'은 이번 목업에 없는 메뉴예요`),
+ pcgo:d=>{if(d.to==='partner')S.b.rt.view='list';d.to?bgo(d.to):toast(`'${esc(d.n)}'은 이번 목업에 없는 메뉴예요`)},
+ rtgo:d=>{S.b.rt.view=d.v;bgo('partner')},
+ rtlabel:d=>{S.b.modal={t:'label',id:d.id};render();document.querySelector('.bmodal .mx')?.focus()},
+ rtlsave:()=>{const p=S.b.places.find(x=>x.id===S.b.modal.id),pick=n=>[...document.querySelectorAll(`[name=${n}]:checked`)].map(x=>x.value);
+  const l={members:pick('members'),albums:pick('albums'),scenes:pick('scenes')};
+  if(!l.members.length&&!l.albums.length&&!l.scenes.length)return ferr('mferr','라벨을 하나 이상 골라 주세요');
+  p.label=l;S.b.rt.recos=null;S.b.rt.picks=[];S.b.modal=null;render();toast(`${esc(p.name)}에 IP 라벨을 붙였어요`)},
+ rtreco:()=>{const rt=S.b.rt;rt.persona=val('rt-persona');rt.recos=recoRoutes(rt.persona);rt.picks=[];render()},
+ rtpick:d=>{const k=S.b.rt.picks,i=k.indexOf(d.id);i>=0?k.splice(i,1):k.push(d.id);render()},
+ rtpub:()=>{const rt=S.b.rt,sel=rt.recos.filter(r=>rt.picks.includes(r.id));
+  S.b.published.unshift(...sel.map(r=>({...r,id:'pub'+Date.now()+r.id,artist:'lumin'})));
+  S.b.rt={view:'list',persona:'',recos:null,picks:[]};bgo('partner');
+  toast(`루트 ${sel.length}개를 공개했어요<br><span style="opacity:.7">대시보드와 루트 목록에서 볼 수 있어요</span>`)},
  bgotab:d=>{S.b.tab[d.side]=d.t;bgo(d.to)},
  bsearch:()=>{const v=val('bq');if(!v)return;S.b.text=v;S.b.q=parseQuery(v);S.b.addOpen=false;render()},
  bchipx:d=>{S.b.q.chips.splice(+d.i,1);render()},
  baddopen:()=>{S.b.addOpen=!S.b.addOpen;render()},
  badd:d=>{S.b.q.chips.push({k:d.k,v:d.k==='수용'?+d.v:d.v});render()},
- brel:()=>{S.b.related=!S.b.related;render()},
- bcart:d=>{const c=S.b.cart,i=c.indexOf(d.id);
-  if(i>=0)c.splice(i,1);
-  else if(c.length>=3)return toast('동선 미리보기는 3곳까지 담을 수 있어요');
-  else if(c.length&&SP(c[0]).area!==SP(d.id).area)return toast('다른 지역 공간은 한 동선에 담을 수 없어요');
-  else c.push(d.id);
-  render()},
- bopen:d=>{S.b.sel=d.id;bgo('b-space')},
- bpropose:d=>{S.b.modal={t:'propose',id:d.id};render();document.getElementById('mf-from')?.focus()},
+ bopen:d=>{S.b.modal={t:'space',id:d.id,form:false};render();document.querySelector('.bmodal .mx')?.focus()},
+ bpropose:()=>{S.b.modal.form=true;render();document.getElementById('mf-from')?.focus()},
  bapply:d=>{S.b.modal={t:'apply',id:d.id};render();document.getElementById('mf-from')?.focus()},
  bstory:d=>{S.b.modal={t:'story',id:d.id};render();document.getElementById('mf-story')?.focus()},
  bpublic:()=>{S.b.modal={t:'public'};render();document.getElementById('mf-name')?.focus()},
  bclose:()=>{S.b.modal=null;render()},
- btoroute:()=>{bgo('partner');toast('담은 공간은 협업이 확정되고 스토리를 쓰면 이 장소 목록에 들어가요')},
  bsend:()=>{const m=S.b.modal;
   if(m.t==='story'||m.t==='public'){
    const story=val('mf-story'),name=m.t==='public'?val('mf-name'):'';
@@ -2326,22 +2389,24 @@ Object.assign(ACT,{
    S.b.modal=null;render();
    return toast(m.t==='story'?'스토리를 저장했어요 · IP 인증 완료<br><span style="opacity:.7">이제 루트 만들기에서 이 장소를 고를 수 있어요</span>':`${esc(name)}을 공공장소로 등록했어요`);
   }
-  const s=m.t==='propose'?SP(m.id):ME(),from=val('mf-from'),to=val('mf-to'),cap=+val('mf-cap');
+  const s=m.t==='space'?SP(m.id):ME(),from=val('mf-from'),to=val('mf-to'),cap=+val('mf-cap');
   if(!from||!to)return ferr('mferr','기간을 입력해 주세요');
   if(to<from)return ferr('mferr','종료일이 시작일보다 빨라요');
   if(!(cap>=1&&cap<=s.cap))return ferr('mferr',`회차당 인원은 1~${s.cap}명이에요`);
   const ops=[...document.querySelectorAll('[name=mf-op]:checked')].map(x=>x.value);
   if(!ops.length)return ferr('mferr','항목을 하나 이상 골라 주세요');
   const base={id:'n'+Date.now(),dir:'out',from,to,cap,menu:val('mf-menu')||'—',status:'wait'};
-  if(m.t==='propose'){S.b.props.push({...base,side:'ip',who:s.name,space:s.id,ops});S.b.tab.ip='out'}
+  if(m.t==='space'){S.b.props.push({...base,side:'ip',who:s.name,space:s.id,ops});S.b.tab.ip='out'}
   else{const a=A(m.id);S.b.props.push({...base,side:'space',who:`${a.name} · ${a.agency}`,ip:a.id,ops:[...ops,'팝업'],popup:true,msg:val('mf-msg')});S.b.tab.space='out'}
   S.b.modal=null;render();
-  toast(`${m.t==='propose'?esc(s.name)+'에 협업 제안':esc(A(m.id).name)+'에 협업 신청'}을 보냈어요<br><span style="opacity:.7">협업함에서 확인할 수 있어요</span>`)},
+  toast(`${m.t==='space'?esc(s.name)+'에 협업 제안':esc(A(m.id).name)+'에 협업 신청'}을 보냈어요<br><span style="opacity:.7">협업함에서 확인할 수 있어요</span>`)},
+ bformx:()=>{S.b.modal.form=false;render()},
  btab:d=>{S.b.tab[d.side]=d.t;S.b.editing=null;render()},
  bacc:d=>{const p=prop(d.id);p.status='active';
   if(p.side==='ip'&&!S.b.places.some(x=>x.id===p.space))S.b.places.push({id:p.space,name:p.who,kind:p.popup?'popup':'space',story:'',from:p.from,to:p.to,radius:null});
   render();toast(p.side==='ip'?'협업을 시작했어요<br><span style="opacity:.7">장소 관리에서 스토리를 쓰면 IP 인증이 끝나요</span>':'협업을 시작했어요<br><span style="opacity:.7">소속사가 스토리를 쓰고 회차를 열면 캘린더에 도착 예정 인원이 들어와요</span>')},
- bdec:d=>{prop(d.id).status='declined';render();toast('거절했어요. 상대에게는 사유 없이 알림이 가요')},
+ bdec:d=>{prop(d.id).status='declined';render();toast('거절했어요')},
+ kbotx:()=>{S.b.bot=null;render()},
  bcounter:d=>{S.b.editing=d.id;render();document.getElementById('ce-cap')?.focus()},
  bcancel:()=>{S.b.editing=null;render()},
  bcsend:d=>{const p=prop(d.id),to=val('ce-to'),cap=+val('ce-cap'),max=p.side==='space'?ME().cap:SP(p.space).cap;
@@ -2362,7 +2427,13 @@ document.addEventListener('keydown',e=>{
  if(e.key==='Escape'&&S.b.modal){S.b.modal=null;render()}
  if(e.key==='Enter'&&!e.isComposing&&e.target.id==='bq'){e.preventDefault();ACT.bsearch()}
 });
+document.addEventListener('mouseover',e=>{
+ const id=e.target.closest?.('[data-hover]')?.dataset.hover;
+ document.querySelectorAll('.mpin.hot').forEach(g=>g.classList.remove('hot'));
+ if(id)document.querySelector(`.mpin[data-pin="${id}"]`)?.classList.add('hot');
+});
 document.addEventListener('input',e=>{
+ if(e.target.id==='rt-persona')S.b.rt.persona=e.target.value;
  const k=e.target.dataset.sbind;if(k){const s=ME();s[k]=e.target.type==='number'?+e.target.value:e.target.value}
  if(e.target.id==='bcap'){const v=+e.target.value;if(v>=1&&v<=40){S.b.slotCap=v;render();const c=document.getElementById('bcap');c.focus()}}
 });
