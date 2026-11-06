@@ -2001,8 +2001,6 @@ const CAL_DAYS=['11.9 월','11.10 화','11.11 수','11.12 목','11.13 금','11.1
 const CAL_SLOTS=['10–12시','12–14시','14–17시','17–20시'];
 const BOOK=[[0,3,0,0],[0,0,4,0],[0,0,0,0],[3,0,5,0],[0,4,0,6],[5,9,12,4],[4,8,10,0]];
 const WEEKS=[['10월 1주',612000],['10월 2주',948000],['10월 3주',1284000],['10월 4주',1982000]];
-const FEE=0.05; // ponytail: 목업 값, 수수료율은 정책 확정 후 교체
-
 const DEMO_Q='2집 컨셉이 레트로 필름 감성이라 그런 느낌 카페, 성수 근처, 10명 정도 받을 수 있는 곳';
 // 문장 → 조건. 실제 서비스는 kanana-2가 5-1 태그 목록 안에서 JSON으로 답함. 목업은 사전 매칭으로 흉내 냄
 function parseQuery(text){
@@ -2140,7 +2138,7 @@ function spaceDetail(m){
     <dl class="kv"><dt>한 번에 받는 인원</dt><dd class="num">${s.cap}명</dd><dt>받을 수 있는 시간</dt><dd>${s.slots.join(', ')}</dd><dt>단체석</dt><dd>${s.feat.includes('단체석')?'있음':'없음'}</dd><dt>운영 시간</dt><dd class="num">${s.hours}</dd></dl>
    </div>
    <div class="panel"><h3>협업 조건 <small>AI가 추측하지 않는 항목이에요</small></h3>
-    <dl class="kv"><dt>한정 메뉴</dt><dd>${yes('한정 메뉴')}</dd><dt>굿즈 비치</dt><dd>${yes('굿즈 비치')}</dd><dt>포토존 설치</dt><dd>${yes('포토존 설치')}</dd><dt>팝업 대관</dt><dd>${s.popup?`<span class="ok">${ic('check',14,2.6)}가능 · 기간 협의</span>`:'<span class="no">—</span>'}</dd><dt>희망 수수료</dt><dd>측정된 카카오페이 결제의 ${FEE*100}%</dd></dl>
+    <dl class="kv"><dt>한정 메뉴</dt><dd>${yes('한정 메뉴')}</dd><dt>굿즈 비치</dt><dd>${yes('굿즈 비치')}</dd><dt>포토존 설치</dt><dd>${yes('포토존 설치')}</dd><dt>팝업 대관</dt><dd>${s.popup?`<span class="ok">${ic('check',14,2.6)}가능 · 기간 협의</span>`:'<span class="no">—</span>'}</dd></dl>
    </div>
    <div class="panel"><h3>IP별 스토리 <small>소속사가 써요</small></h3>
     ${st.length?st.map(x=>`<div class="story"><small>${A(x.ip).name} · ${x.k}</small>${esc(x.t)}</div>`).join(''):`<p class="walk" style="margin:0">아직 연결된 IP 스토리가 없어요. 협업이 확정되면 장소 관리에서 스토리를 써서 IP 인증을 마칠 수 있어요.</p>`}
@@ -2199,7 +2197,7 @@ function propCard(p){
    <div class="fld"><label for="ce-to">종료일</label><input id="ce-to" type="date" value="${p.to}" min="${p.from}"></div>
    <div class="fld"><label for="ce-cap">회차당 인원</label><input id="ce-cap" type="number" min="1" value="${p.cap}"></div>
    <div class="fld" style="grid-column:span 2"><label for="ce-menu">한정 메뉴</label><input id="ce-menu" value="${esc(p.menu)}"></div></div>`
-  :`<div class="terms"><div><small>기간</small><span class="num">${fmtD(p.from)} – ${fmtD(p.to)}</span>${p.popup?' <span class="pill branch">팝업</span>':''}</div><div><small>회차당 인원</small><span class="num">${p.cap}명</span></div><div><small>한정 메뉴</small>${esc(p.menu)}</div><div><small>수수료</small>측정 결제의 ${FEE*100}%</div>${extra}</div>`;
+  :`<div class="terms"><div><small>기간</small><span class="num">${fmtD(p.from)} – ${fmtD(p.to)}</span>${p.popup?' <span class="pill branch">팝업</span>':''}</div><div><small>회차당 인원</small><span class="num">${p.cap}명</span></div><div><small>한정 메뉴</small>${esc(p.menu)}</div>${extra}</div>`;
  const acts=ed?`<button class="btn line sm" data-act="bcancel">취소</button><button class="btn dark sm" data-act="bcsend" data-id="${p.id}">수정 제안 보내기</button>`
   :p.dir==='in'&&p.status==='wait'?`<button class="btn line sm" data-act="bdec" data-id="${p.id}">거절</button><button class="btn line sm" data-act="bcounter" data-id="${p.id}">조건 수정</button><button class="btn dark sm" data-act="bacc" data-id="${p.id}">${p.side==='ip'?'승인 · 가격 제안':'수락'}</button>`
   :p.side==='space'&&p.status==='approved'?`<button class="btn dark sm" data-act="licOpen" data-id="${p.id}">IP 이용권 구매</button>`:'';
@@ -2353,7 +2351,7 @@ function scrPlaces(){
   <td>${p.label?`<div class="tagrow" style="margin:0">${labelText(p.label).map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:'<span class="shop n">라벨 필요</span>'}</td>
   <td><div class="row"><button class="btn ${p.label?'line':'dark'} sm" data-act="rtlabel" data-id="${p.id}">${p.label?'라벨 수정':'라벨링'}</button><button class="btn ${p.story?'line':'dark'} sm" data-act="bstory" data-id="${p.id}">${p.story?'스토리 수정':'스토리 쓰기'}</button></div></td></tr>`).join('')}
  </tbody></table>
- <p class="walk">GPS 반경 50m는 임시 값이에요 (정책 미정). 공공장소는 공간찾기에 나오지 않고 송객 수수료도 없어요.</p></div>`);
+ <p class="walk">GPS 반경 50m는 임시 값이에요 (정책 미정). 공공장소는 공간찾기에 나오지 않아요.</p></div>`);
 }
 
 /* 플랜 · 결제 (캠페인 이용권) */
@@ -2662,8 +2660,7 @@ const proposeFields=(s,apply)=>`<div class="fgrid">
    <div class="fld"><label for="mf-menu">한정 메뉴 ${apply?'':'제안'}</label><input id="mf-menu" placeholder="예: 애프터글로우 라떼"></div>
   </div>
   <div class="fld"><label>${apply?'제공할 수 있는 것':'요청 항목'}</label><div class="row" style="flex-wrap:wrap">${s.collab.map(c=>`<label class="cbx"><input type="checkbox" name="mf-op" value="${c}" checked>${c}</label>`).join('')}${apply?'':`<label class="cbx"><input type="checkbox" id="mf-etc-on">기타</label><input id="mf-etc" maxlength="40" aria-label="기타 요청 항목" placeholder="예: 사인 폴라로이드 비치" style="flex:1;min-width:180px;height:34px">`}</div></div>
-  ${apply?`<div class="fld"><label for="mf-msg">하고 싶은 콜라보</label><textarea id="mf-msg" placeholder="예: 컴백 기념으로 2층을 포토존으로 꾸미고 한정 음료를 낼게요"></textarea></div>`:''}
-  <div class="feebox">송객 수수료 <b>측정된 카카오페이 결제의 ${FEE*100}%</b><small>QR 스캔 후 카카오페이로 결제한 금액에만 붙어요. 요율은 정책 확정 전 목업 값이에요.</small></div>`;
+  ${apply?`<div class="fld"><label for="mf-msg">하고 싶은 콜라보</label><textarea id="mf-msg" placeholder="예: 컴백 기념으로 2층을 포토존으로 꾸미고 한정 음료를 낼게요"></textarea></div>`:''}`;
 function bModal(){
  const m=S.b.modal;if(!m)return '';
  if(m.t==='space'||m.t==='label'||m.t==='lic')return `<div class="bdim" data-act="bclose"></div><div class="bmodal lg" role="dialog" aria-modal="true" aria-label="${{space:'공간 상세',label:'IP 정보 라벨링',lic:'IP 이용권 결제'}[m.t]}">${{space:spaceDetail,label:labelModal,lic:licModal}[m.t](m)}</div>`;
