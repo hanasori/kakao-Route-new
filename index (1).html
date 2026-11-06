@@ -1733,7 +1733,7 @@ const INDEX=[
  {g:'동행방',items:[['room-recruit','모집 중'],['room-vote','확정'],['room-settle','정산 카드']]},
  {g:'당일 · 종료',items:[['live','당일 진행'],['end','종료']]},
  {g:'파트너 웹 · IP보유자',items:[['b-ipdash','대시보드','PC'],['b-find','공간찾기 · 공간정보','PC'],['b-ipinbox','협업함','PC'],['b-places','장소 관리','PC'],['partner','루트 관리','PC'],['b-billing','플랜 · 결제','PC']]},
- {g:'파트너 웹 · 공간제공자',items:[['b-spdash','대시보드','PC'],['b-cal','회차 캘린더','PC'],['b-inbox','협업함','PC'],['b-edit','공간정보 · AI 태그','PC'],['b-ipfind','IP 찾기','PC'],['b-report','리포트 · 정산','PC']]},
+ {g:'파트너 웹 · 공간제공자',items:[['b-spdash','대시보드','PC'],['b-cal','회차 캘린더','PC'],['b-inbox','협업함','PC'],['b-edit','공간정보 · AI 태그','PC'],['b-ipfind','IP 찾기','PC'],['b-report','리포트','PC']]},
 ];
 const NOTES={
  'more':['더보기 탭에 카카오루트 메뉴. 설치 없이 바로 들어가요.','첫 노출 때만 코치마크를 띄워요.'],
@@ -1757,7 +1757,7 @@ const NOTES={
  'b-inbox':['받은 제안을 수락하면 IP 이용권 결제 팝업이 떠요. 결제해야 협업이 시작되고, 팝업을 닫으면 답변 필요로 남아요.','보낸 신청에는 승인됨 · 거절됨이 보여요. 승인된 건은 IP 이용권 구매를 누르면 같은 결제 팝업이 떠요. 가격은 IP사가 승인할 때 정해요.','결제 금액 = IP사 제안가 + 카카오 중개수수료 10% + VAT 10%. 들어오고 3초 뒤 IP사가 신청을 승인하는 카카오톡 알림 데모가 떠요.'],
  'b-edit':['AI 태그 제안은 근거와 함께 보여 주고, 수락한 것만 공개돼요.','수락하면 공간찾기 검색 결과에 바로 반영돼요.'],
  'b-ipfind':['공간에서 IP로 먼저 협업을 신청하는 입구예요 (팝업형). IP사가 승인하면 협업함에서 IP 이용권을 결제해요.','IP 정보는 소속사가 공개한 것만, 팬 규모는 구간으로만 보여요.'],
- 'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액에만 수수료가 붙어요.','수수료율 5%는 목업 값이에요.'],
+ 'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액만 측정해요.'],
  'partner':['루트 목록 → 오른쪽 위 루트 만들기 → 장소 선택(체크와 지도로 먼 곳 빼기) → AI 루트 추천 순서예요. 라벨 붙은 장소를 3곳 이상 고르면 다음으로 가요.','라벨이 없는 장소는 고를 수 없어요. 장소 관리에서 먼저 라벨을 붙여요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있고, 카카오 승인 없이 바로 공개돼요.'],
  'b-billing':['캠페인 1개 단위 이용권이에요. 39만 · 99만 · 249만 원(VAT 별도)은 검증 전 시험 가격이에요.','국가를 바꾸면 통화 · 결제수단 · 세금 · 증빙 · 청구 정보 칸이 바뀌고, 해외는 영어로 먼저 보여요. 해외 법인 영세율 0%는 세무 검토가 필요해요.','목업이라 버튼만 눌러도 완료돼요. 실제로는 서버가 PG 결제 상태와 웹훅을 확인한 뒤 캠페인을 활성화해요.'],
 };
@@ -2063,7 +2063,7 @@ const ME=()=>SP('s1'); // 공간제공자 화면의 주인공 매장
 
 /* 공통 셸 */
 const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['partner','route','루트 관리'],['b-billing','wallet','플랜 · 결제'],['','gear','설정']];
-const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴'],['','qr','QR 키트'],['b-report','wallet','리포트 · 정산']];
+const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴'],['','qr','QR 키트'],['b-report','wallet','리포트']];
 function pcShell(role,url,body){
  const nav=role==='ip'?NAV_IP:NAV_SP;
  const open=S.b.props.filter(p=>p.side===role&&p.dir==='in'&&p.status==='wait').length;
@@ -2635,22 +2635,21 @@ function scrIpFind(){
  <p class="walk">팬 규모는 구간으로만 보여요 (소속사 의견 확인 중).</p>`);
 }
 
-/* 리포트 · 정산 */
+/* 리포트 */
 function scrReport(){
  const tot=WEEKS.reduce((a,w)=>a+w[1],0),max=Math.max(...WEEKS.map(w=>w[1]));
  return pcShell('space','report',`
- ${pcTitle('리포트 · 정산','리포트 · 정산',['2026년 10월','측정할 수 있는 결제에만 수수료'])}
- ${kpis([['송객 인원','312명','루트 참가자 도착'],['QR 스캔','298회','도착의 96%'],['측정 결제',won(tot)+'원','카카오페이 연결 201건'],['송객 수수료',won(tot*FEE)+'원',`측정 결제의 ${FEE*100}% · 11.10 정산`]])}
+ ${pcTitle('리포트','리포트',['2026년 10월'])}
+ ${kpis([['송객 인원','312명','루트 참가자 도착'],['QR 스캔','298회','도착의 96%'],['측정 결제',won(tot)+'원','카카오페이 연결 201건']])}
  <div class="pc-grid">
   <div>
    <div class="panel"><h3>주별 측정 결제 <small>원</small></h3><div class="bars tall">${WEEKS.map(([l,v])=>`<div><b>${won(v/1000)}천</b><i style="height:${Math.round(v/max*120)}px"></i>${l}</div>`).join('')}</div></div>
-   <div class="panel"><h3>월별 정산</h3><table class="ptable"><thead><tr><th>월</th><th>측정 결제</th><th>수수료</th><th>상태</th></tr></thead><tbody>
-    ${[['8월',1204000,'지급 완료'],['9월',2960000,'지급 완료'],['10월',tot,'11.10 지급 예정']].map(([m,v,st])=>`<tr><td>${m}</td><td class="num">${won(v)}원</td><td class="num">${won(v*FEE)}원</td><td><span class="pill ${st==='지급 완료'?'ok':'warn'}">${st}</span></td></tr>`).join('')}
+   <div class="panel"><h3>월별 측정 결제</h3><table class="ptable"><thead><tr><th>월</th><th>측정 결제</th></tr></thead><tbody>
+    ${[['8월',1204000],['9월',2960000],['10월',tot]].map(([m,v])=>`<tr><td>${m}</td><td class="num">${won(v)}원</td></tr>`).join('')}
    </tbody></table></div>
   </div>
   <div class="side-col"><div class="panel"><h3>어떻게 측정하나요</h3>
-   <div class="flow"><div><b>1</b>루트 참가자가 매장 QR 스캔</div><div><b>2</b>스캔 후 정해진 시간 안에 카카오페이 결제</div><div><b>3</b>그 결제액의 ${FEE*100}%만 수수료</div></div>
-   <p class="walk">현금 · 카드 결제, QR 없이 온 손님은 측정하지 않아요. 측정되지 않으면 수수료도 없어요. 결제 연결은 팬이 동의한 경우에만 생겨요.</p></div></div>
+   <div class="flow"><div><b>1</b>루트 참가자가 매장 QR 스캔</div><div><b>2</b>스캔 후 정해진 시간 안에 카카오페이 결제</div></div></div></div>
  </div>`);
 }
 
