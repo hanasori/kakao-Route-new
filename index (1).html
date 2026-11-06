@@ -1748,7 +1748,7 @@ const NOTES={
  'b-ipfind':['공간에서 IP로 먼저 협업을 신청하는 입구예요 (팝업형).','IP 정보는 소속사가 공개한 것만, 팬 규모는 구간으로만 보여요.'],
  'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액에만 수수료가 붙어요.','수수료율 5%는 목업 값이에요.'],
  'b-label':['장소마다 IP 정보(멤버 · 앨범 · 장면)를 붙여요. 이 라벨로 루트 관리의 AI 추천이 장소를 묶어요.','표의 종류 · 기간 · 협업 조건은 장소 관리와 협업함에서 가져와요.'],
- 'partner':['추천에 쓸 장소를 체크로 고르고, 지도에서 너무 먼 곳은 체크를 풀어 빼요. 라벨 붙은 장소가 3곳 이상이면 AI 루트 추천 버튼이 켜져요.','라벨이 없는 장소는 고를 수 없어요. 장소 라벨링에서 먼저 라벨을 붙여요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있고, 카카오 승인 없이 바로 공개돼요.'],
+ 'partner':['루트 목록 → 오른쪽 위 루트 만들기 → 장소 선택(체크와 지도로 먼 곳 빼기) → AI 루트 추천 순서예요. 라벨 붙은 장소를 3곳 이상 고르면 다음으로 가요.','라벨이 없는 장소는 고를 수 없어요. 장소 라벨링에서 먼저 라벨을 붙여요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있고, 카카오 승인 없이 바로 공개돼요.'],
  'b-billing':['캠페인 1개 단위 이용권이에요. 39만 · 99만 · 249만 원(VAT 별도)은 검증 전 시험 가격이에요.','국가를 바꾸면 통화 · 결제수단 · 세금 · 증빙 · 청구 정보 칸이 바뀌고, 해외는 영어로 먼저 보여요. 해외 법인 영세율 0%는 세무 검토가 필요해요.','목업이라 버튼만 눌러도 완료돼요. 실제로는 서버가 PG 결제 상태와 웹훅을 확인한 뒤 캠페인을 활성화해요.'],
 };
 function curKey(){
@@ -2193,7 +2193,7 @@ function scrIpDash(){
  const inN=S.b.props.filter(p=>p.side==='ip'&&p.dir==='in'&&p.status==='wait').length;
  const noStory=S.b.places.filter(p=>!p.story).length;
  return pcShell('ip','dashboard',`
- ${pcTitle('대시보드','LUMIN 대시보드',['11.2 – 11.8 기준','스텔라엔터'],`<button class="btn dark sm" data-act="rtgo" data-v="list">${ic('plus',16,2.4)}새 루트 만들기</button>`)}
+ ${pcTitle('대시보드','LUMIN 대시보드',['11.2 – 11.8 기준','스텔라엔터'],`<button class="btn dark sm" data-act="rtgo" data-v="pick">${ic('plus',16,2.4)}새 루트 만들기</button>`)}
  ${kpis([['회차 모집률',all+'%','열린 회차 기준'],['이번 주 참가 팬','46명','지난주보다 12명 늘었어요'],['노쇼율','4.1%','D-1 확인으로 자리 해제 7건'],['진행 중 협업',S.b.props.filter(p=>p.side==='ip'&&p.status==='active').length+'곳','공공장소 제외']])}
  ${ends.map(p=>{const n=ROUTES.filter(r=>r.places.includes(p.id)).length;return `<div class="alert">${ic('alert',18,2.2)}<div><b>${esc(p.name)} 팝업이 ${fmtD(p.to)}에 끝나요 (D-${dday(p.to)})</b><br>이 장소가 들어간 루트 ${n}개의 이후 회차는 장소를 바꾸거나 회차를 닫아야 해요.</div><button class="btn line sm" data-act="pcgo" data-to="b-places">장소 관리</button></div>`}).join('')}
  ${inN?`<div class="alert info">${ic('bubble',18,2)}<div><b>받은 협업 신청 ${inN}건</b><br>공간제공자가 먼저 협업을 신청했어요.</div><button class="btn line sm" data-act="bgotab" data-to="b-ipinbox" data-side="ip" data-t="in">협업함</button></div>`:''}
@@ -2214,12 +2214,19 @@ function collabOf(p){
 const labelText=l=>[...l.members.map(id=>memberOf(id).name),...l.albums,...l.scenes];
 function scrPartner(){
  const rt=S.b.rt;
+ if(rt.view==='pick')return scrRtPick();
  if(rt.view==='reco')return scrRtReco();
  const rs=ROUTES.filter(r=>r.artist==='lumin');
+ return pcShell('ip','routes',`
+ ${pcTitle('루트 관리','루트 관리',[`공개 중 ${rs.length+S.b.published.length}개`,'협업이 확정된 장소로 루트를 만들어요'],`<button class="btn dark sm" data-act="rtgo" data-v="pick">${ic('plus',16,2.4)}루트 만들기</button>`)}
+ <div class="panel">${routeTable(rs)}</div>`);
+}
+function scrRtPick(){
+ const rt=S.b.rt;
  const ps=S.b.places.map((p,i)=>({p,n:i+1,xy:P(p.id)||SP(p.id),on:!!p.label&&!rt.off.includes(p.id)}));
  const nOn=ps.filter(x=>x.on).length;
- return pcShell('ip','routes',`
- ${pcTitle('루트 관리','루트 관리',[`공개 중 ${rs.length+S.b.published.length}개`,'협업이 확정된 장소로 루트를 만들어요'],`<button class="btn dark sm" data-act="rtgo" data-v="reco" ${nOn>=3?'':'disabled'}>${ic('compass',16,2.2)}AI 루트 추천</button>`)}
+ return pcShell('ip','routes/new/places',`
+ ${pcTitle('<a href="#" data-act="rtgo" data-v="list">루트 관리</a> › 루트 만들기 › 장소 선택','장소 선택',['추천에 쓸 장소를 고르고, 너무 먼 곳은 체크를 풀어 빼요','라벨은 장소 라벨링에서 붙여요'],`<button class="btn dark sm" data-act="rtgo" data-v="reco" ${nOn>=3?'':'disabled'}>다음 · AI 루트 추천</button>`)}
  <div class="pc-grid">
   <div class="panel"><h3>추천에 쓸 장소 <small class="num">${nOn}곳 선택 · 라벨 붙은 장소 3곳 이상이면 추천</small></h3>
    <table class="ptable"><thead><tr><th></th><th>#</th><th>장소</th><th>종류</th><th>IP 라벨</th></tr></thead><tbody>
@@ -2231,8 +2238,7 @@ function scrPartner(){
   <div class="side-col"><div class="panel"><h3>지도 <small>번호 = 표 순서 · 검은 핀 = 추천에 씀</small></h3>
    <div class="mapbox">${mapSVG({label:'추천에 쓸 장소 지도',pins:ps.filter(x=>x.xy?.x!=null).map(({p,n,xy,on})=>({id:p.id,x:xy.x,y:xy.y,n,on}))})}</div>
    <p class="walk">멀리 떨어진 장소는 체크를 풀면 추천에서 빠져요</p></div></div>
- </div>
- <div class="panel" style="margin-top:16px"><h3>루트 <small>공개 중인 루트</small></h3>${routeTable(rs)}</div>`);
+ </div>`);
 }
 function scrRtLabel(){
  const ps=S.b.places,n=ps.filter(p=>p.label).length;
@@ -2283,8 +2289,8 @@ function scrRtReco(){
  const rt=S.b.rt,info=IPINFO.lumin,a=A('lumin');
  const recos=rt.recos,np=rt.picks.length;
  return pcShell('ip','routes/new/reco',`
- ${pcTitle('<a href="#" data-act="rtgo" data-v="list">루트 관리</a> › AI 루트 추천','AI 루트 추천',['IP 컨셉과 페르소나를 보고 루트를 여러 개 추천해요','마음에 드는 루트를 여러 개 골라 바로 공개할 수 있어요'],
-  `<button class="btn line sm" data-act="rtgo" data-v="list">이전 · 장소 선택</button>`)}
+ ${pcTitle('<a href="#" data-act="rtgo" data-v="list">루트 관리</a> › <a href="#" data-act="rtgo" data-v="pick">루트 만들기</a> › AI 추천','AI 루트 추천',['IP 컨셉과 페르소나를 보고 루트를 여러 개 추천해요','마음에 드는 루트를 여러 개 골라 바로 공개할 수 있어요'],
+  `<button class="btn line sm" data-act="rtgo" data-v="pick">이전 · 장소 선택</button>`)}
  <div class="pc-grid">
   <div>
    ${recos?recos.length?recos.map(r=>{const on=rt.picks.includes(r.id);return `<article class="rreco ${on?'on':''}" data-act="rtpick" data-id="${r.id}" role="checkbox" aria-checked="${on}" tabindex="0">
@@ -2294,7 +2300,7 @@ function scrRtReco(){
      <ol class="rstops">${r.places.map((id,i)=>`<li><span class="ord">${i+1}</span>${esc(P(id).name)}</li>`).join('')}</ol>
      <p class="why">${ic('compass',14)}<span>${esc(r.why)}</span></p></div>
     <div class="mapbox">${mapSVG({route:r.places,label:r.name+' 지도'})}</div></article>`}).join('')
-    :`<div class="empty-b"><b>추천할 루트가 없어요</b>같은 앨범 · 멤버 · 장면 라벨이 붙은 장소가 2곳 이상 있어야 해요. 장소 라벨링에서 라벨을 더 붙이거나, 루트 관리에서 장소를 더 골라 보세요.</div>`
+    :`<div class="empty-b"><b>추천할 루트가 없어요</b>같은 앨범 · 멤버 · 장면 라벨이 붙은 장소가 2곳 이상 있어야 해요. 장소 라벨링에서 라벨을 더 붙이거나, 장소 선택에서 장소를 더 골라 보세요.</div>`
    :`<div class="empty-b"><b>페르소나를 적고 '추천 받기'를 눌러 보세요</b>오른쪽 IP 컨셉은 자동으로 반영돼요.</div>`}
   </div>
   <div class="side-col">
