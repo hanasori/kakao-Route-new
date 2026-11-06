@@ -741,6 +741,8 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .ipc .top{display:flex;gap:12px;align-items:center}
 .ipc .av{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px}
 .ipc .btn{height:42px;font-size:14px;margin-top:auto}
+.ipc[hidden]{display:none}
+.ipfilter{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
 .aitag{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:start}
 .panel h3+.aitag{border-top:0;padding-top:0}
 .aitag b{font-size:15px}
@@ -1666,7 +1668,7 @@ const NOTES={
  'b-spdash':['오늘 도착 타임라인: 루트 동선 기준 도착 예정 시간이에요.','이번 주 도착 예정 인원은 회차 캘린더와 같은 데이터예요.'],
  'b-cal':['칸을 누르면 그 시간대를 막아요 (휴무·대관). 예약이 있는 칸은 막을 수 없어요.','수용 인원을 바꾸면 마감 표시가 바로 다시 계산돼요.'],
  'b-inbox':['받은 제안을 수락·거절하거나 조건을 고쳐 다시 보낼 수 있어요.','진행 중 탭에 지금 협업 중인 IP가 있어요.','종료 · 거절된 건은 카카오톡 챗봇으로만 알려요. 들어오고 3초 뒤 거절 알림 데모가 떠요.'],
- 'b-edit':['AI 태그 제안은 근거와 함께 보여 주고, 수락한 것만 공개돼요.','수락하면 공간찾기 검색 결과에 바로 반영돼요.','협업 가능 항목·수용 인원은 AI가 추측하지 않아요.'],
+ 'b-edit':['AI 태그 제안은 근거와 함께 보여 주고, 수락한 것만 공개돼요.','수락하면 공간찾기 검색 결과에 바로 반영돼요.'],
  'b-ipfind':['공간에서 IP로 먼저 협업을 신청하는 입구예요 (팝업형).','IP 정보는 소속사가 공개한 것만, 팬 규모는 구간으로만 보여요.'],
  'b-report':['QR 스캔 + 카카오페이 결제가 묶인 금액에만 수수료가 붙어요.','수수료율 5%는 목업 값이에요.'],
  'partner':['루트 목록 → 루트 만들기 → 장소 IP 라벨링(멤버 · 앨범 · 장면) → AI 루트 추천 순서예요. 카카오 승인 없이 바로 공개돼요.','라벨링 표의 종류 · 기간 · 협업 조건은 장소 관리와 협업함에서 가져와요. 라벨이 3곳 이상이면 다음으로 가요.','AI 추천은 IP 컨셉(자동)과 소속사 페르소나(문장)를 보고 여러 개를 추천해요. 여러 개를 골라 한 번에 공개할 수 있어요.'],
@@ -1692,7 +1694,7 @@ function jump(key){
   case 'room-recruit':case 'room-vote':case 'room-settle':presetRoom(key.split('-')[1]);S.prev=['home'];S.screen='room';break;
   case 'live':S.live={stamps:2,scanning:false,line:null,pop:-1};S.prev=['home','room'];if(!S.room)presetRoom('vote');S.screen='live';break;
   case 'end':S.keep=null;S.prev=['home'];S.screen='end';break;
-  default:S.screen=key;S.b.modal=null;S.b.editing=null;S.b.bot=null;S.b.rt.view='list';
+  default:S.screen=key;S.b.modal=null;S.b.editing=null;S.b.bot=null;S.b.rt.view='list';S.b.ipq={text:'',cat:'all',open:false};
  }
  render(true);
 }
@@ -1937,7 +1939,7 @@ const dday=d=>Math.round((new Date(d)-new Date(TODAY))/864e5);
 S.payLink=false;
 S.b={
  text:DEMO_Q,q:parseQuery(DEMO_Q),addOpen:false,modal:null,editing:null,
- published:[],rt:{view:'list',persona:'',recos:null,picks:[]},botShown:{},
+ published:[],rt:{view:'list',persona:'',recos:null,picks:[]},botShown:{},ipq:{text:'',cat:'all',open:false},
  tab:{ip:'in',space:'in'},
  props:[
   {id:'x1',side:'space',dir:'in',who:'NOVA7 · 오비트',ip:'nova',from:'2026-12-01',to:'2026-12-31',cap:6,menu:'NOVA 블루 에이드',ops:['한정 메뉴','포스터 부착'],status:'wait',msg:'데뷔 1주년 루트의 첫 장소로 모시고 싶어요. 주말 오후 회차 위주예요.'},
@@ -1961,7 +1963,7 @@ const ME=()=>SP('s1'); // 공간제공자 화면의 주인공 매장
 
 /* 공통 셸 */
 const NAV_IP=[['b-ipdash','home','대시보드'],['b-find','search','공간찾기'],['b-ipinbox','bubble','협업함'],['b-places','pin','장소 관리'],['partner','route','루트 관리'],['','gear','설정']];
-const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴 · 혜택'],['','qr','QR 키트'],['b-report','wallet','리포트 · 정산']];
+const NAV_SP=[['b-spdash','home','대시보드'],['b-cal','calendar','회차 캘린더'],['b-inbox','bubble','협업함'],['b-ipfind','search','IP 찾기'],['b-edit','store','공간정보 관리'],['','gift','한정 메뉴'],['','qr','QR 키트'],['b-report','wallet','리포트 · 정산']];
 function pcShell(role,url,body){
  const nav=role==='ip'?NAV_IP:NAV_SP;
  const open=S.b.props.filter(p=>p.side===role&&p.dir==='in'&&p.status==='wait').length;
@@ -2281,7 +2283,7 @@ function scrEdit(){
     <div class="fld"><label for="se-hours">운영 시간</label><input id="se-hours" data-sbind="hours" value="${esc(s.hours)}"></div>
     <div class="fld"><label for="se-cat">업종</label><select id="se-cat" data-sbind="cat">${VOCAB['업종'].map(c=>`<option ${c===s.cat?'selected':''}>${c}</option>`).join('')}</select><p class="help">카카오맵 사장님 계정에서 가져왔어요</p></div>
     <div class="fld"><label for="se-cap">한 번에 받는 인원</label><input id="se-cap" type="number" min="1" data-sbind="cap" value="${s.cap}"></div></div></div>
-   <div class="panel"><h3>협업 가능 항목 <small>약속이 되는 정보라 사장님만 입력해요 · AI는 추측하지 않아요</small></h3>
+   <div class="panel"><h3>협업 가능 항목 <small>약속이 되는 정보라 사장님만 입력해요</small></h3>
     <div class="row" style="flex-wrap:wrap">${VOCAB['협업'].map(c=>`<label class="cbx"><input type="checkbox" data-scol="${c}" ${s.collab.includes(c)?'checked':''}>${c}</label>`).join('')}</div></div>
   </div>
   <div class="side-col">
@@ -2291,12 +2293,27 @@ function scrEdit(){
 }
 
 /* IP 찾기 (공간 → IP) */
+const ipKey=a=>[a.name,a.ko,a.agency,IPINFO[a.id].genre,...(a.members||[]).map(m=>m.name)].join(' ').toLowerCase();
+const ipHit=k=>k.includes(S.b.ipq.text.trim().toLowerCase());
+function ipFilterText(){
+ let n=0;document.querySelectorAll('.ipc[data-k]').forEach(c=>{c.hidden=!ipHit(c.dataset.k);if(!c.hidden)n++});
+ const e=document.getElementById('ipempty');if(e)e.hidden=n>0;
+}
 function scrIpFind(){
+ const f=S.b.ipq,cats=[...new Set(ARTISTS.map(a=>a.cat))];
+ const list=ARTISTS.filter(a=>(f.cat==='all'||a.cat===f.cat)&&(!f.open||IPINFO[a.id].open));
+ const shown=list.filter(a=>ipHit(ipKey(a))).length;
  return pcShell('space','ips',`
  ${pcTitle('IP 찾기','IP 찾기',['소속사가 공개한 정보만 보여요','팝업형 협업으로 처음 성지가 될 수 있어요'])}
- <div class="ipgrid">${ARTISTS.map(a=>{const inf=IPINFO[a.id],areas=[...new Set(ROUTES.filter(r=>r.artist===a.id).map(r=>r.area))];
+ <div class="ipfilter">
+  <div class="nlq"><span aria-hidden="true">${ic('search',20)}</span><input id="ipq" value="${esc(f.text)}" aria-label="IP 검색" placeholder="이름, 멤버, 소속사, 장르로 검색"></div>
+  <div class="row" style="flex-wrap:wrap">${['all',...cats].map(c=>`<button class="chip ${f.cat===c?'on':''}" data-act="ipcat" data-v="${c}" aria-pressed="${f.cat===c}">${c==='all'?'전체':catName(c)}</button>`).join('')}
+   <button class="chip ${f.open?'on':''}" data-act="ipopen" aria-pressed="${f.open}">${f.open?ic('check',14,3):''}팝업 협업 받는 중</button></div>
+ </div>
+ <div class="empty-b" id="ipempty" ${shown?'hidden':''}><b>조건에 맞는 IP가 없어요</b></div>
+ <div class="ipgrid">${list.map(a=>{const inf=IPINFO[a.id],areas=[...new Set(ROUTES.filter(r=>r.artist===a.id).map(r=>r.area))];
   const ex=S.b.props.find(p=>p.side==='space'&&p.ip===a.id&&p.status!=='declined');
-  return `<article class="ipc"><div class="top"><span class="av" style="background:${grad(a.c)}">${esc(a.name.slice(0,2))}</span><div><b>${esc(a.name)}</b><div class="meta"><span>${a.agency}</span></div></div>${inf.open?'<span class="pill branch" style="margin-left:auto">팝업 협업 받는 중</span>':''}</div>
+  return `<article class="ipc" data-k="${esc(ipKey(a))}" ${ipHit(ipKey(a))?'':'hidden'}><div class="top"><span class="av" style="background:${grad(a.c)}">${esc(a.name.slice(0,2))}</span><div><b>${esc(a.name)}</b><div class="meta"><span>${a.agency}</span></div></div>${inf.open?'<span class="pill branch" style="margin-left:auto">팝업 협업 받는 중</span>':''}</div>
    <dl class="kv sm"><dt>장르</dt><dd>${inf.genre}</dd><dt>팬 규모</dt><dd>${inf.band}</dd><dt>루트 지역</dt><dd>${areas.join(', ')||'아직 없음'}</dd><dt>다음 컴백</dt><dd>${inf.comeback||'<span class="no">비공개</span>'}</dd></dl>
    ${!ex?`<button class="btn dark" data-act="bapply" data-id="${a.id}">협업 신청</button>`:ex.dir==='out'?'<button class="btn line" disabled>신청함 · 응답 대기</button>':`<button class="btn line" data-act="bgotab" data-to="b-inbox" data-side="space" data-t="${ex.status==='active'?'active':'in'}">${ex.status==='active'?'협업 중':'받은 제안 확인'}</button>`}</article>`}).join('')}</div>
  <p class="walk">팬 규모는 구간으로만 보여요 (소속사 의견 확인 중).</p>`);
@@ -2424,6 +2441,8 @@ Object.assign(ACT,{
  baiok:d=>{const a=S.b.ai[+d.i],s=ME();a.st='ok';(a.cat==='분위기'?s.vibe:s.feat).push(a.tag);render();toast(`'${a.tag}' 태그를 공개했어요 · 공간찾기에 바로 반영돼요`)},
  baino:d=>{S.b.ai[+d.i].st='no';render();toast('거절한 태그는 다시 분석해도 제안하지 않아요')},
  payLink:()=>{S.payLink=!S.payLink;render()},
+ ipcat:d=>{S.b.ipq.cat=d.v;render()},
+ ipopen:()=>{S.b.ipq.open=!S.b.ipq.open;render()},
 });
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape'&&S.b.modal){S.b.modal=null;render()}
@@ -2436,6 +2455,7 @@ document.addEventListener('mouseover',e=>{
 });
 document.addEventListener('input',e=>{
  if(e.target.id==='rt-persona')S.b.rt.persona=e.target.value;
+ if(e.target.id==='ipq'){S.b.ipq.text=e.target.value;ipFilterText()}
  const k=e.target.dataset.sbind;if(k){const s=ME();s[k]=e.target.type==='number'?+e.target.value:e.target.value}
  if(e.target.id==='bcap'){const v=+e.target.value;if(v>=1&&v<=40){S.b.slotCap=v;render();const c=document.getElementById('bcap');c.focus()}}
 });
