@@ -1610,15 +1610,35 @@ function kananaSay(text,delay=800,after){
  S.room.typing=true; if(S.screen==='room')render();
  setTimeout(()=>{S.room.typing=false;push({t:'text',from:'kanana',time:now(),text});if(after)after();if(S.screen==='room')render()},delay);
 }
-/* 하나 AI: hana/server.py 로 띄웠을 때만 동작. 실패하면 fallback(대사집) 문장 */
+/* 하나 AI: hana/server.py 로 띄웠을 때만 동작. 서버가 질문셋(hana/questions.json)으로 의도를 고르고
+   아래 사실(facts)만 근거로 답함. 실패하면 fallback(대사집) 문장 */
+function hanaFacts(){
+ const r=S.room, ids=r.route, i=Math.min(S.live.stamps,ids.length-1), p=P(ids[i]), n=r.members.length;
+ return {
+  weather:'내일 성수 낮 14도, 15시 전후 비 확률 60%',
+  next_place:`${i+1}번째 장소 ${p.name} — ${p.story}`,
+  start:`${r.start} (${r.when})`,
+  schedule:`${r.when} 출발 · 장소 ${ids.length}곳`,
+  members:`지금 ${n}명 / 최대 5명. ${n>=3?'확정됨':`${3-n}명 더 오면 확정. 일요일 09:00까지 3명이 안 되면 방 해산, 알림 감`}`,
+  route:ids.map((id,k)=>`${k+1}. ${P(id).name}`).join(', '),
+  settle_help:'"@하나 포토부스 8000원 정산"처럼 금액과 같이 부르면 1/N 정산 카드를 만들어 줌. 카카오페이로만 정산, 수수료 없음',
+  help:'다음 장소, 날씨, 만나는 곳, 일정, 인원, 루트 목록, 정산 방법을 물어보면 답해 줌'
+ };
+}
+function hanaFallback(t){
+ if(/정산/.test(t))return '금액도 같이 알려 주세요.\n예: @하나 포토부스 8000원 정산';
+ if(/날씨|비|우산/.test(t))return '내일 성수 날씨 14도, 15시 전후 비 확률 60%\n리마인, 우산 꼭 챙겨야 하는 거 알제?';
+ if(/다음|어디|장소/.test(t)){const ids=S.room.route,i=Math.min(S.live.stamps,ids.length-1),p=P(ids[i]);return /레코드숍/.test(p.name)?'다음은 레코드숍! 니 기억 안 나나? 팬싸한 곳 아이가. LP코너에 싸인 있으니까 꼭~ 함 봐라!':`다음은 ${i+1}번 ${p.name}이에요.\n${p.story}`}
+ return '어… 그건 뭔 말인지 잘 모르겠다 ㅎㅎ\n다음 장소나 날씨 같은 거 물어봐 주면 바로 알려줄게~';
+}
 function hanaAI(kind,text,fallback){
  const r=S.room, me=r.members.find(x=>x.me);
  r.typing=true; if(S.screen==='room')render();
- const body={kind,text,me:me?.nick,room:{title:r.title,status:r.status,members:r.members.map(x=>x.nick)},
+ const body={kind,text,me:me?.nick,facts:hanaFacts(),room:{title:r.title,status:r.status,members:r.members.map(x=>x.nick)},
   msgs:r.msgs.filter(m=>m.t==='text').slice(-10).map(m=>({from:m.from==='kanana'?'하나':m.from==='me'?me?.nick:m.from,text:m.text}))};
  const ac=new AbortController(); setTimeout(()=>ac.abort(),15000);
  fetch('/api/hana',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ac.signal})
-  .then(x=>x.ok?x.json():Promise.reject()).then(d=>d.text||Promise.reject())
+  .then(x=>x.ok?x.json():Promise.reject()).then(d=>{console.log('하나 의도:',d.intent);return d.text||Promise.reject()})
   .catch(()=>new Promise(res=>setTimeout(()=>res(fallback),800)))
   .then(t=>{r.typing=false;push({t:'text',from:'kanana',time:now(),text:t});if(S.screen==='room')render()});
 }
@@ -1640,10 +1660,7 @@ function handleSend(){
    else kananaSay(`${n}명이 ${won(Math.round(amt/n/10)*10)}원씩 정산할까요?\n대상에서 뺄 사람이 있으면 체크를 풀어 주세요.`,900,()=>{
     push({t:'settle',from:'kanana',time:now(),s:{title,amount:amt,status:'draft',targets:S.room.members.filter(x=>!x.me).map(x=>({nick:x.nick,on:true,paid:false}))}});
    });
-  } else if(/정산/.test(t)) kananaSay('금액도 같이 알려 주세요.\n예: @하나 포토부스 8000원 정산');
-  else if(/날씨|비|우산/.test(t)) kananaSay('내일 성수 날씨 14도, 15시 전후 비 확률 60%\n리마인, 우산 꼭 챙겨야 하는 거 알제?');
-  else if(/다음|어디|장소/.test(t)){const ids=S.room.route,i=Math.min(S.live.stamps,ids.length-1),p=P(ids[i]);kananaSay(/레코드숍/.test(p.name)?'다음은 레코드숍! 니 기억 안 나나? 팬싸한 곳 아이가. LP코너에 싸인 있으니까 꼭~ 함 봐라!':`다음은 ${i+1}번 ${p.name}이에요.\n${p.story}`)}
-  else hanaAI('chat',t,'저는 정해진 때와 부를 때만 말해요.\n이렇게 불러 보세요: 다음 장소, 날씨, "포토부스 8000원 정산"');
+  } else hanaAI('chat',t,hanaFallback(t));
  } else {
   if(!S.reacted){S.reacted=true;hanaAI('react',text,'오 진짜가? 반갑다 리마인~\n다른 분들은 우째 입덕했노?')}
   if(S.greeted||S.room.members.length<2)return;
@@ -1671,7 +1688,7 @@ const NOTES={
  'free':['처음엔 아무 장소도 고르지 않은 상태예요. 첫 장소를 누르면 가까운 곳을 이어 추천 루트 4곳을 잡아 줘요.','그다음부터는 장소를 더하거나 빼면 1번 출발지는 그대로 두고 최단 순서로 다시 정렬해요.','지도 핀이나 목록 어느 쪽을 눌러도 골라져요.'],
  'freeParty':['위 지도에 내 루트를 그리고, 루트 줄은 잘라서 보여 줘요. 화살표를 누르면 전체 루트가 펼쳐져요.','달력에서 날짜 → 시간을 고르면 장소가 2곳 이상 겹치는 파티만 남아요.','네모 칸은 내 루트 순번이에요. 초록 칸이 겹치는 장소예요. 파티를 고르면 아래 합류 버튼이 켜져요.'],
  'entry':['정해진 루트는 여기서 달력으로 날짜 → 시간을 골라요. 파티 합류는 시간이 정해져 있어 바로 보여 줘요.','닉네임은 자동 {형용사+명사}. 새로고침으로 다시 뽑아요.','선택 동의 설명은 오른쪽 화살표를 눌러야 팝업으로 보여요. 동의하고 입장을 누르면 노쇼 안내 팝업이 떠요.'],
- 'room-recruit':['신청하면 바로 입장해요. 5명이 찰 때까지 같은 방이에요.','하나는 대화를 계속 읽지 않고, 정해진 때와 @하나로 부를 때만 말해요.','예외: 방에서 처음 보낸 메시지(아이스브레이킹 답)에는 하나가 리액션해요. hana/server.py 로 띄우면 원이 말투 AI가, 아니면 대사집 문장이 답해요.','메시지를 보내 보세요. @하나 칩도 눌러 보세요.'],
+ 'room-recruit':['신청하면 바로 입장해요. 5명이 찰 때까지 같은 방이에요.','하나는 대화를 계속 읽지 않고, 정해진 때와 @하나로 부를 때만 말해요.','예외: 방에서 처음 보낸 메시지(아이스브레이킹 답)에는 하나가 리액션해요.','hana/server.py 로 띄우면 하나가 질문셋(hana/questions.json)으로 의도를 파악해 원이 말투로 답하고, 질문셋에 없으면 "뭔 말인지 모르겠다"고 센스 있게 답해요. 정산 카드는 AI 없이 만들어요. 서버가 없으면 대사집 문장이 답해요.','메시지를 보내 보세요. @하나 칩도 눌러 보세요.'],
  'room-vote':['D-1 참석 확인 카드: 미확인 시 자리가 해제돼요.','루트 순서 바꾸기 투표는 없어요. 정해진 루트는 순서 그대로 걸어요.'],
  'room-settle':['"@하나 ○○ 8000원 정산"이라고 부르면 1/N 정산 카드를 만들어요.','대상 체크를 풀면 1인 금액이 다시 계산돼요. 요청하면 완료 상태가 하나씩 올라와요.','카카오페이 정산은 수익원이 아니에요 (무료).'],
  'live':['스탬프 대신 리센느 원이 사진을 퍼즐 5조각으로 채워요. 못 채운 칸은 흐린 흑백으로 미리 보여요.','QR 스캔 → 퍼즐 조각 → 하나 세계관 해설 한 줄.','다 채우면 1회용 완주 인증 QR이 나와요.'],

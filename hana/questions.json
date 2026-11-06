@@ -1,0 +1,13 @@
+[
+ {"id": "weather", "name": "날씨", "examples": ["내일 날씨 어때?", "비 와?", "우산 챙겨야 돼?"], "fact": "weather"},
+ {"id": "next_place", "name": "다음 장소", "examples": ["다음 장소 어디야?", "이제 어디 가?", "다음 코스 뭐야?"], "fact": "next_place"},
+ {"id": "meeting", "name": "만나는 곳·출발 지점", "examples": ["어디서 만나?", "출발 지점 어디야?", "몇 번 출구야?"], "fact": "start"},
+ {"id": "schedule", "name": "일정·시간", "examples": ["몇 시 출발이야?", "몇 군데 가?", "언제 만나?"], "fact": "schedule"},
+ {"id": "members", "name": "인원·확정 여부", "examples": ["몇 명 모였어?", "확정됐어?", "방 없어지는 거 아니지?"], "fact": "members"},
+ {"id": "route", "name": "루트 장소 목록", "examples": ["오늘 어디어디 가?", "루트 알려줘", "장소 다 알려줘"], "fact": "route"},
+ {"id": "settle_help", "name": "정산 방법", "examples": ["정산 어떻게 해?", "돈 어떻게 나눠?", "더치페이 돼?"], "fact": "settle_help"},
+ {"id": "help", "name": "하나 사용법", "examples": ["뭐 할 수 있어?", "도움말", "너한테 뭐 물어봐?"], "fact": "help"},
+ {"id": "icebreak", "name": "자기소개·입덕 계기·최애 이야기", "examples": ["저는 Afterglow로 입덕했어요", "대구에서 올라가요", "처음이라 떨려요"], "fact": null},
+ {"id": "greeting", "name": "인사", "examples": ["안녕하세요", "반가워요", "잘 부탁해요"], "fact": null},
+ {"id": "identity", "name": "하나가 누구인지", "examples": ["너 진짜 하나야?", "AI야?", "사람이야?"], "fact": null}
+]
