@@ -1,0 +1,9 @@
+{
+  "name": "kakao-route-new",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  // 정적 파일은 저장소 루트 그대로 서빙 (.assetsignore 로 코드·설정 제외)
+  "assets": { "directory": ".", "binding": "ASSETS" },
+  "observability": { "enabled": true }
+}
