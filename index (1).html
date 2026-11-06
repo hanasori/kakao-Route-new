@@ -510,6 +510,16 @@ button.stop.on i{background:var(--y);color:var(--ink)}
 .keep .two button{display:flex;align-items:center;justify-content:center;gap:6px}
 .keep .two button:disabled{opacity:.45}
 .keep .two button.picked{opacity:1;box-shadow:0 0 0 2px var(--ink) inset}
+.keep .res-bar i{animation:grow .7s var(--ease)}
+@keyframes grow{from{width:0}}
+.convert{margin-top:14px;padding:14px;border-radius:12px;background:var(--ok-soft);animation:fade .4s .7s both}
+.cv-h{display:flex;gap:10px;align-items:center}
+.cv-h b{display:block;font-size:14.5px}
+.cv-h small{display:block;font-size:12px;color:var(--ok);font-weight:700;margin-top:2px}
+.cv-ic{width:34px;height:34px;border-radius:10px;background:var(--ok);color:#fff;display:grid;place-items:center;flex:none}
+.convert ul{margin:10px 0 12px;padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.7}
+.convert .btn{width:100%}
+.pin .ic.grp{background:var(--ok-soft);color:var(--ok)}
 .endhero .from{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ink2);margin-bottom:8px}
 .reco{display:flex;gap:10px;overflow-x:auto;padding:12px 16px 4px;scrollbar-width:none}
 .reco::-webkit-scrollbar{display:none}
@@ -1345,11 +1355,12 @@ function scrRoom(){
  const msgs=r.msgs.map(m=>{const h=msgHTML(m,last);last=m.from;return h}).join('')+(r.typing?`<div class="m k typing"><span class="av k">K</span><div class="col"><div class="ln"><div class="bub"><i></i><i></i><i></i></div></div></div></div>`:'');
  return `<section class="scr chat">
  ${hd(`${esc(r.short)}<small class="num">${r.members.length}</small>`,{back:true,right:`<button class="iconbtn" aria-label="검색">${ic('search',22)}</button><button class="iconbtn" aria-label="메뉴" data-act="toast" data-msg="방 정보 · 신고 · 나가기 (목업)">${ic('dots',22)}</button>`})}
- <div class="pin"><span class="ic">${ic('route',18,2)}</span><span class="t"><b class="num">${r.when} ${esc(r.title)}</b><small>${r.status==='recruiting'?`${3-r.members.length>0?3-r.members.length+'명 더 오면 확정':'확정'} · 출발 ${r.start}`:`출발 ${r.start}`}</small></span>${statusLabel(r)}</div>
+ ${r.group?`<div class="pin"><span class="ic grp">${ic('users',18,2)}</span><span class="t"><b>일반 그룹채팅</b><small class="num">${r.when.split(' ')[0]} 루트 함께 완주</small></span><span class="pill neutral">루트 종료</span></div>`
+ :`<div class="pin"><span class="ic">${ic('route',18,2)}</span><span class="t"><b class="num">${r.when} ${esc(r.title)}</b><small>${r.status==='recruiting'?`${3-r.members.length>0?3-r.members.length+'명 더 오면 확정':'확정'} · 출발 ${r.start}`:`출발 ${r.start}`}</small></span>${statusLabel(r)}</div>`}
  <div class="bd" id="chatbd">${msgs}</div>
- <div class="suggest">${['@카나나 다음 장소 어디야?','@카나나 포토부스 8000원 정산','@카나나 내일 날씨'].map(t=>`<button data-act="suggest" data-t="${esc(t)}">${esc(t)}</button>`).join('')}${r.status!=='recruiting'?`<button data-act="go" data-to="live">당일 진행 화면 →</button>`:''}</div>
- <div class="inbar"><button class="iconbtn" data-act="mapSheet" aria-label="현재 루트 지도">${ic('map',22)}</button>
-  <label class="field"><input id="msg" placeholder="메시지 입력" value="${esc(S.draft)}" autocomplete="off"><button class="atk" data-act="atk">@카나나</button></label>
+ ${r.group?'':`<div class="suggest">${['@카나나 다음 장소 어디야?','@카나나 포토부스 8000원 정산','@카나나 내일 날씨'].map(t=>`<button data-act="suggest" data-t="${esc(t)}">${esc(t)}</button>`).join('')}${r.status!=='recruiting'?`<button data-act="go" data-to="live">당일 진행 화면 →</button>`:''}</div>`}
+ <div class="inbar">${r.group?`<button class="iconbtn" data-act="toast" data-msg="사진 · 파일 보내기 (목업)" aria-label="첨부">${ic('plus',22)}</button>`:`<button class="iconbtn" data-act="mapSheet" aria-label="현재 루트 지도">${ic('map',22)}</button>`}
+  <label class="field"><input id="msg" placeholder="메시지 입력" value="${esc(S.draft)}" autocomplete="off">${r.group?'':'<button class="atk" data-act="atk">@카나나</button>'}</label>
   <button class="send" data-act="send" aria-label="보내기" ${S.draft.trim()?'':'disabled'}>${ic('send',20,2.4)}</button></div>
  </section>`;
 }
@@ -1474,6 +1485,11 @@ function scrEnd(){
     <button class="y ${k===true?'picked':''}" data-act="keep" data-v="1" ${k!=null?'disabled':''} aria-pressed="${k===true}">${k===true?ic('check',16,2.6):''}계속 둘래요</button>
    </div>
    ${k!=null?`<div class="res-bar" role="img" aria-label="방 유지 ${yes}/${total}"><i class="${yes>total/2?'ok':''}" style="width:${yes/total*100}%"></i></div>`:''}
+   ${k&&yes>total/2?`<div class="convert">
+    <div class="cv-h"><span class="cv-ic">${ic('bubble',18,2.2)}</span><span><b>일반 그룹채팅으로 바뀌었어요</b><small class="num">유지 ${yes}/${total} · 과반</small></span></div>
+    <ul><li>대화와 사진은 그대로 남아요</li><li>카나나·정산·지도 같은 루트 기능은 꺼져요</li><li>닉네임은 그대로, 카톡 프로필은 계속 비공개예요</li></ul>
+    <button class="btn sm" data-act="openGroup">그룹채팅 열기</button>
+   </div>`:''}
   </div>
   <div class="sec-h" style="padding-bottom:0"><h2>아직 안 가 본 루트</h2></div>
   <div class="reco">${['r2','r3','r4'].map(id=>{const r=R(id);const c=memberOf(r.tags[0])?.c||['#ccc','#999'];return `<button data-act="weekly" data-r="${id}" data-s="${r.sessions.find(s=>s.left>0).id}"><div class="thumb" style="background:${grad(c)}"></div><span class="pill ${r.kind}">${r.kind==='album'?'앨범 순서':'최애 갈림길'}</span><b style="margin-top:8px">${r.name}</b><small>${r.area} · ${nPlaces(r)}곳 · ${r.dur}</small></button>`}).join('')}</div>
@@ -1637,6 +1653,7 @@ function parseAmount(t){
 function handleSend(){
  const text=S.draft.trim(); if(!text)return;
  S.draft=''; push({t:'text',from:'me',time:now(),text});
+ if(S.room.group){if(/@카나나/.test(text))push({t:'sys',text:'카나나는 이 방을 나갔어요. 새 루트 동행방에서 불러 주세요.'});return}
  if(/@카나나/.test(text)){
   const t=text.replace(/@카나나/g,'').trim();
   const amt=parseAmount(t), n=S.room.members.length;
@@ -1679,7 +1696,7 @@ const NOTES={
  'room-vote':['D-1 참석 확인 카드: 미확인 시 자리가 해제돼요.','루트 순서 바꾸기 투표는 없어요. 정해진 루트는 순서 그대로 걸어요.'],
  'room-settle':['"@카나나 ○○ 8000원 정산"이라고 부르면 1/N 정산 카드를 만들어요.','대상 체크를 풀면 1인 금액이 다시 계산돼요. 요청하면 완료 상태가 하나씩 올라와요.','카카오페이 정산은 수익원이 아니에요 (무료).'],
  'live':['스탬프 대신 리센느 원이 사진을 퍼즐 5조각으로 채워요. 못 채운 칸은 흐린 흑백으로 미리 보여요.','QR 스캔 → 퍼즐 조각 → 카나나 세계관 해설 한 줄.','다 채우면 1회용 완주 인증 QR이 나와요.'],
- 'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.'],
+ 'end':['제목은 내 최애 멤버가 건네는 말투예요 (최애가 없으면 그룹 이름).','정산 요약 → 사진 → 익명 방 유지 투표 → 다음 루트 추천 순서예요.','유지 투표를 누르면 고른 버튼이 표시된 채로 아래에 결과 막대가 생기고, 과반이면 막대가 초록색으로 바뀌어요.','"계속 둘래요"로 과반이 되면 방이 일반 그룹채팅으로 전환돼요. 대화·사진은 남고, 카나나·정산·지도는 빠지고, 닉네임은 그대로예요.'],
  'b-ipdash':['회차 모집률·참가 팬·노쇼율·진행 중 협업을 한눈에 봐요.','팝업 종료가 30일 안이면 그 장소가 들어간 루트 수와 함께 경고해요.'],
  'b-find':['문장을 조건 칩으로 바꿔요. 검은 칩=태그(순서), 파란 칩=필터(걸러 냄).','칩을 지우거나 더하면 결과가 바로 바뀌어요. 못 알아들은 부분은 숨기지 않고 보여 줘요.','2~3곳을 담으면 도보 동선이 나와요. 다른 문장으로도 검색해 보세요.'],
  'b-space':['IP보유자가 \'루트에 넣을까?\'를 판단하는 화면이에요.','AI 태그는 근거와 함께, 협업 조건은 사장님이 입력한 것만 보여요.','팬 앱 공개 범위를 오른쪽에 같이 보여 줘요.'],
@@ -1850,6 +1867,17 @@ const ACT={
  scan:()=>{S.live.scanning=true;render();
   setTimeout(()=>{const ids=R('r1').places,i=S.live.stamps;S.live.scanning=false;S.live.stamps=Math.min(5,i+1);S.live.pop=i;S.live.line=P(ids[i]).story;render();setTimeout(()=>{S.live.pop=-1},600)},1500)},
  keep:d=>{S.keep=+d.v===1;render()},
+ openGroup:()=>{presetRoom('settle');const r=S.room,[m1,m2]=OTHERS;
+  r.msgs.filter(m=>m.t==='settle').forEach(m=>{m.s.status='req';m.s.targets.forEach(t=>t.paid=true)});
+  Object.assign(r,{group:true,short:'Afterglow 같이 걸은 사람들',status:'done'});
+  [{t:'date',text:'2026년 11월 7일 토요일'},
+   {t:'text',from:'kanana',time:'오후 6:20',text:'오늘 루트 완주 축하해요! 이 방을 계속 둘지 투표했어요.'},
+   {t:'sys',text:'유지 3/4 · 과반이 모여 일반 그룹채팅으로 바뀌었어요'},
+   {t:'sys',text:'루트가 끝나서 정산·지도·퍼즐 기능은 꺼졌어요. 대화와 사진은 그대로 남아요.'},
+   {t:'sys',text:'카나나님이 나갔어요'},
+   {t:'text',from:m1.nick,time:'오후 6:24',text:'방 안 없어져서 다행이에요 ㅠㅠ'},
+   {t:'text',from:m2.nick,time:'오후 6:25',text:'다음 루트도 이 멤버로 가요!!'}].forEach(push);
+  S.roomKey='end';go('room')},
  pkind:d=>{S.partner.kind=d.k;render()},
  ptag:d=>{const t=S.partner.tags,i=t.indexOf(d.id);i>=0?t.splice(i,1):t.push(d.id);render()},
  pplace:d=>{const p=S.partner.places,i=p.indexOf(d.id);if(i>=0)p.splice(i,1);else{if(p.length>=8)return;p.push(d.id)}S.partner.places=orderPlaces(p);render()},
